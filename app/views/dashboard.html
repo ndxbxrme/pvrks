@@ -1,0 +1,7 @@
+<h1>plaaaaaaagh</h1>
+<img ng-src="{{user.details.image}}" />
+<form name="orgForm" ng-submit="submitOrg()">
+    <input type="text" ng-model="$parent.orgName" />
+    <input type="submit" />
+</form>
+<div ng-repeat="org in orgs">{{org.name}} <img ng-src="{{org.users[0].image}}" title="{{org.users[0].name}}" /></div>

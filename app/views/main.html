@@ -1,0 +1,19 @@
+<div class="splash">
+  <div ng-if="user.details" ng-include="'/views/dashboard.html'" ng-controller="DashboardCtrl"></div>
+  <div class="overlay"></div>
+  <div class="banner text-center" ng-hide="user.details">
+    <h1>PΛRKS</h1>
+    <h2>Realtime Social Brainstorming</h2>
+    <a>-- Log In --</a>
+    <p>or</p>
+    <a>-- Sign Up --</a>
+    <p>or</p>
+    <a>-- Sign in with a social network --</a>
+    <div class="social" style="
+text-align: center;
+font-size: 1.5em;
+">
+      <a href="/api/twitter" target="_self" class="z ocial-twitter">twitter</a><a class="z ocial-facebook"></a><a class="z ocial-googleplus"></a><a class="z ocial-github"></a>
+    </div>
+  </div>
+</div>

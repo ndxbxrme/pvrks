@@ -1,0 +1,79 @@
+@import "pure";
+/*
+@import url(http://weloveiconfonts.com/api/?family=zocial);
+
+[class*="zocial-"]:before {
+  font-family: 'zocial', sans-serif;
+}
+*/
+
+body,html {
+  margin: 0; padding: 0;
+}
+body {
+  padding: 0px!important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/*
+.splash {
+  height: 100vh;
+  background: url(https://res.cloudinary.com/pvrks/image/upload/c_scale,w_1126/v1418396816/pvrks_xyzd7l.jpg);
+  background-size: cover;
+  background-position: center;
+  
+  .overlay {
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    z-index: -1;
+  }
+  
+  .banner {
+    position: absolute;
+    left: 50%; top: 50%; transform: translate(-50%,-50%);
+    color: #fff;
+    
+    h1 {
+      font-weight: 100;
+      font-size: 4em;
+      text-shadow: 0px 2px 0px rgba(0,0,0,0.5);
+      line-height: 0em;
+      opacity: 0.7;
+      
+      &:first-letter {
+        letter-spacing: -0.05em;
+      }
+    }
+    
+    h2 {
+      font-weight: 100;
+      opacity: 0.7;
+    }
+    
+    a {
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.1s all;
+      opacity: 0.7;
+    }
+    
+    a:hover {
+      opacity: 1.0;
+    }
+    
+    .social a {
+      margin: 0px 30px;
+      line-height: 3em;
+    }
+    
+    p {
+      opacity: 0.4; 
+    }
+  }
+}
+*/

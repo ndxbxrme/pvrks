@@ -1,0 +1,69 @@
+{
+    "ace": {
+        "@guessTabSize": "true",
+        "@newLineMode": "unix",
+        "@tabSize": "4",
+        "@useSoftTabs": "true"
+    },
+    "build": {
+        "@builder": "auto",
+        "@path": "/.c9/builders",
+        "@saveall": true
+    },
+    "find.nak": {
+        "@searchLimit": 100
+    },
+    "language": {
+        "@instanceHighlight": "true",
+        "@undeclaredVars": "true",
+        "@unusedFunctionArgs": "false",
+        "@warnLevel": "info"
+    },
+    "run": {
+        "@path": "/.c9/runners",
+        "configs": {
+            "@inited": "true",
+            "json()": {
+                "dist": {
+                    "command": "./server/app.js",
+                    "debug": true,
+                    "env": {
+                        "C9": "true",
+                        "MONGOHQ_URL": "$IP:27017/pvrks",
+                        "SESSION_SECRET": "aBORis03iuh£$asg",
+                        "TWITTER_CALLBACK": "https://pvrks-ndxbxrme-2.c9.io/api/twitter/callback",
+                        "TWITTER_KEY": "Vq3QAdkkm0ZsrHei8xSxxMIkB",
+                        "TWITTER_SECRET": "gtA05Qd68PhwaEIlQ1jCTbmrJrtOwRd4XyHUywf2FHhMkY3etJ"
+                    },
+                    "name": "dist",
+                    "runner": "Node.js (default)"
+                },
+                "grunt": {
+                    "command": "grunt cloud9",
+                    "debug": true,
+                    "default": true,
+                    "env": {
+                        "MONGOHQ_URL": "$IP:27017/pvrks",
+                        "SESSION_SECRET": "aBORis03iuh£$asg",
+                        "TWITTER_CALLBACK": "https://pvrks-ndxbxrme-2.c9.io/api/twitter/callback",
+                        "TWITTER_KEY": "Vq3QAdkkm0ZsrHei8xSxxMIkB",
+                        "TWITTER_SECRET": "gtA05Qd68PhwaEIlQ1jCTbmrJrtOwRd4XyHUywf2FHhMkY3etJ"
+                    },
+                    "name": "grunt",
+                    "runner": "Shell command"
+                },
+                "mongo": {
+                    "command": "./mongodc",
+                    "debug": true,
+                    "name": "mongo",
+                    "runner": "Shell command"
+                }
+            }
+        }
+    },
+    "share": {
+        "@app": false,
+        "@preview": false,
+        "@useOwnerSettings": false
+    }
+}
