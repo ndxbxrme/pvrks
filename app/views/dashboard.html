@@ -1,7 +1,37 @@
-<h1>plaaaaaaagh</h1>
-<img ng-src="{{user.details.image}}" />
+<h1>dashboard</h1>
+<img ng-src="{{user.details.image}}" /> {{user.details.name}}
+<h4>make an organisation</h4>
 <form name="orgForm" ng-submit="submitOrg()">
-    <input type="text" ng-model="$parent.orgName" />
+    <input type="text" ng-model="$parent.org.name" />
     <input type="submit" />
 </form>
-<div ng-repeat="org in orgs">{{org.name}} <img ng-src="{{org.users[0].image}}" title="{{org.users[0].name}}" /></div>
+<div ng-repeat="org in orgs">
+    <a href="org/{{org.slug}}">Go to organisation, {{org.name}}</a>
+</div>
+<h4>make a team</h4>
+<form name="teamForm" ng-submit="submitTeam()">
+    <select ng-model="$parent.team.org">
+        <option ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
+    </select>
+    <input type="text" ng-model="$parent.team.name" />
+    <input type="submit" />
+</form>
+<div ng-repeat="team in teams">
+    <a href="team/{{team.slug}}">Go to team, {{team.name}}</a>
+</div>
+<h4>make a session</h4>
+<form name="teamForm" ng-submit="submitSession()">
+    <select ng-model="$parent.sessionOrg">
+        <option ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
+    </select>
+    <select ng-model="$parent.sessionTeam">
+        <option ng-repeat="team in teams" value="{{team._id}}">{{team.name}}</option>
+    </select>
+    <input type="text" ng-model="$parent.sessionName" />
+    <input type="submit" />
+</form>
+<h4>accept an invite</h4>
+<form name="inviteForm" ng-submit="submitInvite()">
+    <input type="text" ng-model="$parent.inviteToken" />
+    <input type="submit" />
+</form>

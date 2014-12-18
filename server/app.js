@@ -11,7 +11,7 @@ var express = require('express'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
     http = require('http'),
-    socketio = require('socket.io');
+    Sockets = require('./sockets/sockets');
     
 mongoose.connect(process.env.MONGOHQ_URL);
 var mongoStore = new MongoStore({
@@ -37,11 +37,7 @@ app.set('port', process.env.C9 ? process.env.PORT : 23232)
 .use(flash());
 
 var server = http.createServer(app);
-var io = socketio.listen(server);
-
-io.on('connection', function(socket){
-    console.log('a user connected');
-})
+Sockets.setup(server);
 
 require('./config/passport')(passport);
 require('./routes.js')(app, passport);
@@ -49,4 +45,4 @@ require('./angular.js')(app);
 
 server.listen(app.get('port'), function(){
     console.log('api server listening on ' + app.get('port'));
-})
+});

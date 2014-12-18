@@ -28,14 +28,20 @@ module.exports = function(passport) {
           return done(null, false, req.flash('signupMessage', 'That email is already taken.')); 
         }
         else {
-          var newUser = new User();
-          newUser.local.email = email;
-          newUser.local.password = newUser.generateHash(password);
-          newUser.save(function(err){
-            if(err) {
-              throw err; 
-            }
-            return done(null, newUser);
+          var name = email.split('@')[0];
+          Toolkit.findSlug(User, name, '', function(slug){
+            var newUser = new User();
+            newUser.local.email = email;
+            newUser.local.password = newUser.generateHash(password);
+            newUser.name = name;
+            newUser.slug = slug;
+            newUser.image = '/images/koala.png';
+            newUser.save(function(err){
+              if(err) {
+                throw err; 
+              }
+              return done(null, newUser);
+            });
           });
         }
       });

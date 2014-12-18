@@ -1,0 +1,10 @@
+<h1>Team {{team.name}}</h1>
+<div><a ng-click="sendInvite()">Send Invite</a></div>
+<h2>{{inviteToken}}</h2>
+<div ng-repeat="user in roster.getRoster('team') | unique:'_id'">{{user.name}}</div>
+<h3>messages</h3>
+<form name="messageForm" ng-submit="sendMessage()">
+    <input type="text" ng-model="messageContent" />
+    <input type="submit" />
+</form>
+<div ng-repeat="message in message.getMessages('team')"><img ng-src="{{message.userimage}}" title="{{message.username}}" width="25px" /> {{message.content}}</div>

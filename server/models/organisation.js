@@ -10,7 +10,7 @@ var orgSchema = mongoose.Schema({
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
     users: [{
-        userId: mongoose.Schema.Types.ObjectId,
+        id: mongoose.Schema.Types.ObjectId,
         name: String,
         image: String,
         role: Number

@@ -7,12 +7,15 @@ var userSchema = mongoose.Schema({
     name: String,
     image: String,
     slug: String,
+    email: String,
     data: mongoose.Schema.Types.Mixed,
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
     local: {
         email: String,
-        password: String
+        password: String,
+        resetPasswordToken: String,
+        resetPasswordExpires: Date
     },
     twitter: {
         id: String,

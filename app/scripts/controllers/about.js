@@ -1,12 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name workspaceApp.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the workspaceApp
- */
+/*global angular:false*/
 angular.module('workspaceApp')
   .controller('AboutCtrl', function ($scope) {
     $scope.awesomeThings = [

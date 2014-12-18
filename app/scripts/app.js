@@ -1,13 +1,5 @@
 'use strict';
 /*global angular:false*/
-/**
- * @ngdoc overview
- * @name workspaceApp
- * @description
- * # workspaceApp
- *
- * Main module of the application.
- */
 angular
   .module('workspaceApp', [
     'ngAnimate',
@@ -15,14 +7,19 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angular.filter'
   ])
   .config(function ($routeProvider, $locationProvider) {
-    var checkLogin = function($q, $location, $http, User) {
+    var checkLogin = function($q, $location, $http, User, Socket, Alert) {
       var deferred = $q.defer();
       $http.get('/api/user')
       .success(function(user){
         if(user){
+          if(!User.details) {
+            Socket.emit('user', user);
+            Alert.log('Welcome back ' + user.name);
+          }
           User.details = user;
           deferred.resolve(user);
         }
@@ -39,10 +36,13 @@ angular
       });
       return deferred.promise;
     };
-    var softLogin = function($q, $http, User) {
+    var softLogin = function($q, $http, User, Socket) {
       var deferred = $q.defer();
       $http.get('/api/user')
       .success(function(user){
+        if(!User.details) {
+          Socket.emit('user', user);
+        }
         User.details = user;
         deferred.resolve(user);
       })
@@ -66,6 +66,16 @@ angular
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/org/:slug', {
+        templateUrl: 'views/org.html',
+        controller: 'OrgCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/team/:slug', {
+        templateUrl: 'views/team.html',
+        controller: 'TeamCtrl',
         resolve: {loggedIn:checkLogin}
       })
       .otherwise({

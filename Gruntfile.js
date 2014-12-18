@@ -93,7 +93,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               proxy,
-              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif|\\.jpg|\\.ttf|\\.woff|\\.swf$ /index.html [L]']),
+              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif|\\.jpg|\\.ttf|\\.woff|\\.otf|\\.swf$ /index.html [L]']),
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               proxy,
-              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif|\\.jpg|\\.ttf|\\.woff|\\.swf$ /index.html [L]']),
+              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif|\\.jpg|\\.ttf|\\.woff|\\.otf|\\.swf$ /index.html [L]']),
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(

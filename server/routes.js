@@ -1,14 +1,35 @@
 'use strict';
 
-var OrgCtrl = require('./controllers/organisation.js');
+var OrgCtrl = require('./controllers/organisation'),
+    TeamCtrl = require('./controllers/team'),
+    InviteCtrl = require('./controllers/invite'),
+    MessageCtrl = require('./controllers/message');
 
 module.exports = function(app, passport) {
     app.get('/api/user', isLoggedIn, function(req, res) {
-        res.json(req.user);
+        res.json({
+            _id:req.user._id,
+            name:req.user.name || req.user.local.email,
+            image:req.user.image
+        });
     });
     
     app.get('/api/organisations/user', isLoggedIn, OrgCtrl.findAllByUserId);
     app.post('/api/organisation/user', isLoggedIn, OrgCtrl.addOneByUserId);
+    app.get('/api/organisation/:slug', isLoggedIn, OrgCtrl.findOneBySlug);
+    
+    app.get('/api/teams/user', isLoggedIn, TeamCtrl.findAllByUserId);
+    app.post('/api/teams/user', isLoggedIn, TeamCtrl.addOneByUserId);
+    app.get('/api/team/:slug', isLoggedIn, TeamCtrl.findOneBySlug);
+    
+    app.post('/api/invite/send', isLoggedIn, InviteCtrl.sendInvite);
+    app.get('/api/invite/parse', isLoggedIn, InviteCtrl.parseInvite);
+    app.get('/api/invites/user', isLoggedIn, InviteCtrl.findAllByUserId);
+    app.post('/api/invite/accept', isLoggedIn, InviteCtrl.acceptInvite);
+    app.post('/api/invite/decline', isLoggedIn, InviteCtrl.declineInvite);
+    
+    app.post('/api/message/add', isLoggedIn, MessageCtrl.addMessage);
+    app.post('/api/messages', isLoggedIn, MessageCtrl.findAllById);
 
     //LOGIN AUTHENTICATE/FIRST SIGNUP
 

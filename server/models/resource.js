@@ -11,10 +11,10 @@ var resourceSchema = mongoose.Schema({
     tags: [String],
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
-    userId: mongoose.Schema.Types.ObjectId,
-    orgId: mongoose.Schema.Types.ObjectId,
-    teamId: mongoose.Schema.Types.ObjectId,
-    sessionId: mongoose.Schema.Types.ObjectId
+    user: mongoose.Schema.Types.ObjectId,
+    org: mongoose.Schema.Types.ObjectId,
+    team: mongoose.Schema.Types.ObjectId,
+    session: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);

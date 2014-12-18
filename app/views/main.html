@@ -4,15 +4,16 @@
   <div class="banner text-center" ng-hide="user.details">
     <h1>PΛRKS</h1>
     <h2>Realtime Social Brainstorming</h2>
-    <a>-- Log In --</a>
-    <p>or</p>
-    <a>-- Sign Up --</a>
-    <p>or</p>
+    <div class="login">
+      <form name="loginForm" novalidate ng-submit="login()">
+        <input type="text" ng-model="email" placeholder="Email" />
+        <input type="text" ng-model="password" placeholder="Password" />
+        <input type="submit" value="Log in" />
+        <input type="button" value="Sign up" ng-click="signup()" />
+      </form>
+    </div>
     <a>-- Sign in with a social network --</a>
-    <div class="social" style="
-text-align: center;
-font-size: 1.5em;
-">
+    <div class="social">
       <a href="/api/twitter" target="_self" class="z ocial-twitter">twitter</a><a class="z ocial-facebook"></a><a class="z ocial-googleplus"></a><a class="z ocial-github"></a>
     </div>
   </div>
