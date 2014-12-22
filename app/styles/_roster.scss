@@ -1,0 +1,12 @@
+.roster {
+    .item {
+        display: inline-block; 
+        margin: 1px;
+        
+        img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+    }
+}

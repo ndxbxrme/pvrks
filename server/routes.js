@@ -3,7 +3,9 @@
 var OrgCtrl = require('./controllers/organisation'),
     TeamCtrl = require('./controllers/team'),
     InviteCtrl = require('./controllers/invite'),
-    MessageCtrl = require('./controllers/message');
+    MessageCtrl = require('./controllers/message'),
+    ResourceCtrl = require('./controllers/resource'),
+    UserCtrl = require('./controllers/user');
 
 module.exports = function(app, passport) {
     app.get('/api/user', isLoggedIn, function(req, res) {
@@ -30,6 +32,12 @@ module.exports = function(app, passport) {
     
     app.post('/api/message/add', isLoggedIn, MessageCtrl.addMessage);
     app.post('/api/messages', isLoggedIn, MessageCtrl.findAllById);
+    
+    app.post('/api/resource/add', isLoggedIn, ResourceCtrl.addResource);
+    app.post('/api/resources', isLoggedIn, ResourceCtrl.findAllById);
+    
+    app.get('/api/user/:userId', isLoggedIn, UserCtrl.findOneById);
+    app.post('/api/user', isLoggedIn, UserCtrl.updateProfile);
 
     //LOGIN AUTHENTICATE/FIRST SIGNUP
 

@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var teamSchema = mongoose.Schema({
     name: String,
     image: String,
+    color: String,
     slug: String,
     data: mongoose.Schema.Types.Mixed,
     createdAt: {type: Date, default: Date.now},

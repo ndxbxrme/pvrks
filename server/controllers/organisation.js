@@ -24,21 +24,39 @@ module.exports = {
         }
         if(user) {
           Toolkit.findSlug(Org,req.body.name,user.slug,function(slug){
-            var newOrg = new Org();
-            newOrg.name = req.body.name;
-            newOrg.slug = slug;
-            newOrg.users.push({
-              id: req.user._id,
-              name: user.name,
-              image: user.image,
-              role: 0
-            });
-            newOrg.save(function(err){
-              if(err) {
-                throw err;
-              }
-              res.json(err);
-            });
+            if(req.body._id) {
+              Org.findOne({_id:req.body._id}) //todo check user is allowed to do this
+              .exec(function(err, org){
+                if(err) {
+                  throw err;
+                }
+                if(org.name!==req.body.name) {
+                  org.slug = slug;
+                  org.name = req.body.name;
+                }
+                org.image = req.body.image;
+                org.color = req.body.color;
+                org.save(function(err){
+                  res.json(err);
+                });
+              });
+            }
+            else {
+              var newOrg = new Org();
+              newOrg.name = req.body.name;
+              newOrg.slug = slug;
+              newOrg.image = req.body.image;
+              newOrg.color = req.body.color;
+              newOrg.users.push({
+                id: req.user._id,
+                name: user.name,
+                image: user.image,
+                role: 0
+              });
+              newOrg.save(function(err){
+                res.json(err);
+              });
+            }
           });
         }
         else {

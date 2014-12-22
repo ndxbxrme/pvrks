@@ -29,6 +29,9 @@
                     "debug": true,
                     "env": {
                         "C9": "true",
+                        "CLOUDINARY_KEY": "836442258745532",
+                        "CLOUDINARY_NAME": "parks-brainstorm",
+                        "CLOUDINARY_SECRET": "Z33uHAZ0o9Ils7Xg1EIJrNPMm0I",
                         "MONGOHQ_URL": "$IP:27017/pvrks",
                         "SESSION_SECRET": "aBORis03iuh£$asg",
                         "TWITTER_CALLBACK": "https://pvrks-ndxbxrme-2.c9.io/api/twitter/callback",
@@ -43,6 +46,9 @@
                     "debug": true,
                     "default": true,
                     "env": {
+                        "CLOUDINARY_KEY": "836442258745532",
+                        "CLOUDINARY_NAME": "parks-brainstorm",
+                        "CLOUDINARY_SECRET": "Z33uHAZ0o9Ils7Xg1EIJrNPMm0I",
                         "MONGOHQ_URL": "$IP:27017/pvrks",
                         "SESSION_SECRET": "aBORis03iuh£$asg",
                         "TWITTER_CALLBACK": "https://pvrks-ndxbxrme-2.c9.io/api/twitter/callback",

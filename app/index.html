@@ -9,6 +9,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+    <link rel="stylesheet" href="bower_components/minicolors/jquery.minicolors.css" />
+    <link rel="stylesheet" href="bower_components/gridster/dist/jquery.gridster.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <link rel="stylesheet" href="bower_components/humane/themes/libnotify.css">
@@ -20,13 +23,28 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <svg width="0" height="0" class="svg-filters">
+        <defs>
+            <filter id="shadow">
+               <feGaussianBlur in='SourceAlpha' stdDeviation='0.5' result='blur' />
+                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .5 0" result="blur"/>
+              <feMerge>
+                  <feMergeNode in='blur'/>
+                  <feMergeNode in='SourceGraphic'/>
+               </feMerge>
+            </filter>
+        </defs>
+    </svg>
     <a ng-click="logout()">Logout</a>
+    <a href="/profile">Profile</a>
     <!-- Add your site or application content here -->
     <div class="container">
       <div ng-view=""></div>
     </div>
 
 
+
+    
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        /*global ga:false*/
@@ -48,6 +66,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -57,8 +76,18 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/humane/humane.min.js"></script>
     <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/cloudinary_angular/js/angular.cloudinary.js"></script>
+    <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/snap.svg/dist/snap.svg-min.js"></script>
+    <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="bower_components/nicescroll/jquery.nicescroll.js"></script>
+    <script src="bower_components/minicolors/jquery.minicolors.js"></script>
+    <script src="bower_components/gridster/dist/jquery.gridster.js"></script>
+    <script src="bower_components/pleasejs/dist/Please.js"></script>
     <!-- endbower -->
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.angularjs.org/1.3.8/i18n/angular-locale_en-gb.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -74,11 +103,23 @@
         <script src="scripts/services/alert.js"></script>
         <script src="scripts/services/roster.js"></script>
         <script src="scripts/services/message.js"></script>
+        <script src="scripts/directives/resourceuploader.js"></script>
+        <script src="scripts/directives/messages.js"></script>
+        <script src="scripts/directives/message.js"></script>
+        <script src="scripts/directives/roster.js"></script>
+        <script src="scripts/services/resource.js"></script>
+        <script src="scripts/directives/resources.js"></script>
+        <script src="scripts/services/idea.js"></script>
+        <script src="scripts/controllers/profile.js"></script>
+        <script src="scripts/controllers/session.js"></script>
+        <script src="scripts/directives/imageuploader.js"></script>
+        <script src="scripts/directives/minicolors.js"></script>
+        <script src="scripts/directives/switch.js"></script>
+        <script src="scripts/directives/sessiongrid.js"></script>
+        <script src="scripts/controllers/teamsetup.js"></script>
+        <script src="scripts/controllers/orgsetup.js"></script>
+        <script src="scripts/controllers/sessionsetup.js"></script>
         <!-- endbuild -->
         
-        <script>
-          
-          var socket = io();
-        </script>
 </body>
 </html>

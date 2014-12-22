@@ -24,22 +24,41 @@ module.exports = {
       }
       if(user){
         Toolkit.findSlug(Team, req.body.name, user.slug, function(slug){
-          var newTeam = new Team();
-          newTeam.name = req.body.name;
-          newTeam.slug = slug;
-          newTeam.org = req.body.org;
-          newTeam.users.push({
-            id: req.user._id,
-            name: user.name,
-            image: user.image,
-            role: 0
-          });
-          newTeam.save(function(err){
-            if(err){
-              throw err;
-            }
-            res.json(err);
-          });
+          if(req.body._id) {
+            Team.findOne({_id:req.body._id}) //todo check user is allowed to do this
+            .exec(function(err, team){
+              if(err){
+                throw err;
+              }
+              if(team.name!==req.body.name) {
+                team.slug = slug;
+                team.name = req.body.name;
+              }
+              team.org = req.body.org;
+              team.image = req.body.image;
+              team.color = req.body.color;
+              team.save(function(err){
+                res.json(err);
+              });
+            });
+          }
+          else {
+            var newTeam = new Team();
+            newTeam.name = req.body.name;
+            newTeam.slug = slug;
+            newTeam.org = req.body.org;
+            newTeam.image = req.body.image;
+            newTeam.color = req.body.color;
+            newTeam.users.push({
+              id: req.user._id,
+              name: user.name,
+              image: user.image,
+              role: 0
+            });
+            newTeam.save(function(err){
+              res.json(err);
+            });
+          }
         });
       }
       else {

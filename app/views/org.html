@@ -1,2 +1,5 @@
-<p>{{slug}}</p>
-<div>{{org}}</div>
+<h1>Organization {{org.name}}</h1>
+<div><a ng-click="sendInvite()">Send Invite</a></div>
+<h2>{{inviteToken}}</h2>
+<div roster="org"></div>
+<div messages="org" mid="{{org._id}}"></div>

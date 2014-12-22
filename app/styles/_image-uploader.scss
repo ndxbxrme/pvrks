@@ -1,0 +1,35 @@
+.image-uploader {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    
+    svg {
+        opacity: 0.2;   
+    }
+    
+    .progress-bar {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 30px;
+        background: black;
+        z-index: 100;
+        
+        .status {
+            line-height: 30px;
+            color: #fff;
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 4;
+        }
+        
+        .progress {
+            background: green;
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+        }
+    }
+}

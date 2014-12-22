@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
 var userSchema = mongoose.Schema({
     name: String,
     image: String,
+    color: String,
+    side: Boolean,
     slug: String,
     email: String,
     data: mongoose.Schema.Types.Mixed,

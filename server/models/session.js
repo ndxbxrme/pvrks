@@ -5,7 +5,9 @@ var mongoose = require('mongoose');
 var sessionSchema = mongoose.Schema({
     name: String,
     image: String,
+    color: String,
     slug: String,
+    org: mongoose.Schema.Types.ObjectId,
     data: mongoose.Schema.Types.Mixed,
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},

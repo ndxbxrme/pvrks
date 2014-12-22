@@ -1,0 +1,27 @@
+<div class="msgContainer">
+    <h3>messages</h3>
+    <div class="scroll">
+        <div ng-repeat="msgGroup in message.getMessages(type)" class="msgGroup" ng-class="{msgRight:msgGroup.side}">
+            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{msgGroup.userimage}}.jpg" title="{{msgGroup.username}}"></img>
+            <div class="inner">
+                <svg width="100%" height="100%">
+                    <g fill="{{msgGroup.color}}" filter="url(#shadow)" ng-if="!msgGroup.side">
+                        <rect x="16%" width="84%" height="100%" rx="5" ry="5" />
+                        <path d="M 26 16 l 20 -5 0 10 z" />
+                    </g>
+                    <g fill="{{msgGroup.color}}" filter="url(#shadow)" ng-if="msgGroup.side">
+                        <rect x="0%" width="84%" height="100%" rx="5" ry="5" />
+                        <path d="M 205 16 l -20 -5 0 10 z" />
+                    </g>
+                </svg>
+                <div ng-repeat="message in msgGroup.messages" class="content" title="{{message.createdAt | date:'short'}}">{{message.content}}</div>
+            </div>
+        </div>
+    </div>
+    <span class="controls">
+        <form name="messageForm" ng-submit="sendMessage()">
+            <input type="text" ng-model="messageContent" />
+            <input type="submit" value="✉" />
+        </form>
+    </span>
+</div>

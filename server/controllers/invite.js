@@ -25,9 +25,9 @@ module.exports = {
       newInvite.validUntil = req.body.invite.validUntil || new Date().setDate(new Date().getDate() + 5);
       newInvite.recipientId = req.body.invite.recipientId;
       newInvite.recipientEmail = req.body.invite.recipientEmail;
-      newInvite.org = req.body.invite.org;
-      newInvite.team = req.body.invite.team;
-      newInvite.session = req.body.invite.session;
+      newInvite.org = req.body.invite.ids.org;
+      newInvite.team = req.body.invite.ids.team;
+      newInvite.session = req.body.invite.ids.session;
       newInvite.save(function(err,invite){
         if(err){
           throw err;
@@ -49,70 +49,70 @@ module.exports = {
     User.findOne(req.user._id)
     .exec(function(err, user){
       Invite.findOne({
-        _id:req.body.inviteToken,
+        _id:req.body.inviteToken.toString(),
         validUntil:{$gt:new Date()},
         noTokens:{$gt:0}
       })
       .exec(function(err,invite){
-        if(err) {
-          throw err;
-        }
-        if(invite){
-          var newUser = {
-            id:user._id,
-            name:user.name,
-            image:user.image,
-            role:invite.role
-          };
-          invite.acceptedAt = Date.now();
-          invite.noTokens--;
-          invite.acceptedBy.push(newUser);
-          invite.save();
-          if(invite.org.id) {
-            Org.findOne(invite.org.id)
-            .where({'users.id':{$ne:req.user._id}})
-            .exec(function(err, org){
-              if(err) {
-                throw err;
-              }
-              if(org) {
-                org.users.push(newUser);
-                org.updatedAt = Date.now();
-                org.save();
-              }
-            });
+        if(!err)
+        {
+          if(invite){
+            var newUser = {
+              id:user._id,
+              name:user.name,
+              image:user.image,
+              role:invite.role
+            };
+            invite.acceptedAt = Date.now();
+            invite.noTokens--;
+            invite.acceptedBy.push(newUser);
+            invite.save();
+            if(invite.org.id) {
+              Org.findOne(invite.org.id)
+              .where({'users.id':{$ne:req.user._id}})
+              .exec(function(err, org){
+                if(err) {
+                  throw err;
+                }
+                if(org) {
+                  org.users.push(newUser);
+                  org.updatedAt = Date.now();
+                  org.save();
+                }
+              });
+            }
+            if(invite.team.id) {
+              Team.findOne(invite.team.id)
+              .where({'users.id':{$ne:req.user._id}})
+              .exec(function(err, team){
+                if(err) {
+                  throw err;
+                }
+                if(team) {
+                  team.users.push(newUser);
+                  team.updatedAt = Date.now();
+                  team.save();
+                }
+              });
+            }
+            if(invite.session.id) {
+              Session.findOne(invite.session.id)
+              .where({'users.id':{$ne:req.user._id}})
+              .exec(function(err, session){
+                if(err) {
+                  throw err;
+                }
+                if(session) {
+                  session.users.push(newUser);
+                  session.updatedAt = Date.now();
+                  session.save();
+                }
+              });
+            }
           }
-          if(invite.team.id) {
-            Team.findOne(invite.team.id)
-            .where({'users.id':{$ne:req.user._id}})
-            .exec(function(err, team){
-              if(err) {
-                throw err;
-              }
-              if(team) {
-                team.users.push(newUser);
-                team.updatedAt = Date.now();
-                team.save();
-              }
-            });
+          else {
+            
           }
-          if(invite.session.id) {
-            Session.findOne(invite.session.id)
-            .where({'users.id':{$ne:req.user._id}})
-            .exec(function(err, session){
-              if(err) {
-                throw err;
-              }
-              if(session) {
-                session.users.push(newUser);
-                session.updatedAt = Date.now();
-                session.save();
-              }
-            });
-          }
-        }
-        else {
-          
         }
         res.json(invite);
       });

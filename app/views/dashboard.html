@@ -1,5 +1,6 @@
 <h1>dashboard</h1>
-<img ng-src="{{user.details.image}}" /> {{user.details.name}}
+<img class="thumbnail inline ng-isolate-scope" angle="20" format="jpg" 
+  ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_50,w_50/{{user.details.image}}.jpg"></img> {{user.details.name}}
 <h4>make an organisation</h4>
 <form name="orgForm" ng-submit="submitOrg()">
     <input type="text" ng-model="$parent.org.name" />

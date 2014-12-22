@@ -1,0 +1,111 @@
+.msgContainer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  border-left: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 0 10px 5px;
+  border-radius: 0 0 5px 0;
+  background: rgba(255,255,255,0.8);
+  
+    
+  h3 {
+    text-align: right;
+    position: fixed;
+    width: 230px;
+    height: 30px;
+    background: linear-gradient(180deg, #fff, #fff, #fff, #fff, transparent);
+    margin: 0;
+    top: 0; right: 0;
+    z-index: 200;
+  }  
+  
+  .scroll {
+    width: 230px;
+    height: 260px;
+    top: 0px;
+    left: 0px;
+    padding-top: 30px;
+  }
+  
+  .controls {
+    display: block;
+    position: relative;
+    margin-top: 3px;
+
+    
+    input[type="text"] {
+      line-height: 30px;
+      padding: 0 15px 0 5px;
+      border-radius: 5px;
+      outline: none;
+      font-size: 0.8em;
+      width: 95%;
+      box-shadow: inset 1px 2px 3px 0 rgba(0, 0, 0, 0.5);
+      border: none;
+      box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+      border-radius: 50%;
+      position: absolute;
+      top: -10px; right: -10px;
+      width: 50px; height: 50px;
+      background: linear-gradient(120deg, transparent, #aaa 40%), radial-gradient(50% 50%, ellipse farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 80%, #fff 86%, #fff 94%, rgba(0,0,0,0.2) 97%, rgba(0,0,0,0.2) 99%, transparent 100%) ;
+      border: none;
+      color: #fff;
+      box-shadow: 0px 0px 1px black;
+      cursor: pointer;
+      outline: none;
+      transition: 0.2s;
+      font-size: 30px;
+    }
+  }
+  
+  .msgGroup {
+    position:relative;
+    width: 230px;
+    margin: 3px 0px;
+    
+    img {
+      position: absolute;
+      top: 0px; left: 0px;
+      border-radius: 100%;
+    }
+    
+    .inner {
+      position: relative;
+      padding: 0.5em 0.5em 0 0.5em;
+      padding-left: 20%;
+      overflow: hidden;
+      
+      .content {
+        font-size: 0.8em;
+        padding-bottom: 0.5em;
+        vertical-align: text-top;
+      }
+      
+      svg {
+        position: absolute;
+        top: 0px; left: 0%;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.2;
+      }
+      &:hover svg {
+        fill: steelblue;
+      }
+    }
+    &.msgRight {
+       img {
+           left: auto;
+           right: 0;    
+       }
+       .inner {
+           padding-left: 4%;
+           padding-right: 20%;
+       }
+    }
+  }
+}

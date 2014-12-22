@@ -68,6 +68,14 @@ module.exports = {
     });
   },
   emitToAll: function(idKey, id, message, data) {
+    console.log('emitting ' + message)
     emitToAll(idKey, id, message, data);
+  },
+  updateUser: function(user) {
+    for(var f=0; f<sockets.length; f++) {
+      if(sockets[f].user && sockets[f].user._id === user._id) {
+        sockets[f].user = user;
+      }
+    }
   }
 };

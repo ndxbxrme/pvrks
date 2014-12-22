@@ -10,6 +10,8 @@ module.exports = {
     newMessage.userId = req.user._id;
     newMessage.username = req.user.name;
     newMessage.userimage = req.user.image;
+    newMessage.color = req.user.color;
+    newMessage.side = req.user.side;
     newMessage.pm = req.body.pm;
     newMessage.org = req.body.org;
     newMessage.team = req.body.team;
@@ -27,7 +29,7 @@ module.exports = {
     Message.find()
     .where(req.body.id)
     .limit(50)
-    .sort('-createdAt')
+    .sort('createdAt')
     .exec(function(err, messages){
       if(err){
         throw err;

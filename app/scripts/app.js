@@ -8,7 +8,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'angular.filter'
+    'angular.filter',
+    'cloudinary',
+    'angularFileUpload',
+	  'ngTagsInput'
   ])
   .config(function ($routeProvider, $locationProvider) {
     var checkLogin = function($q, $location, $http, User, Socket, Alert) {
@@ -68,14 +71,54 @@ angular
         controller: 'AboutCtrl',
         resolve: {loggedIn:checkLogin}
       })
+      .when('/org', {
+        templateUrl: 'views/orgsetup.html',
+        controller: 'OrgsetupCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/org/:slug/edit', {
+        templateUrl: 'views/orgsetup.html',
+        controller: 'OrgsetupCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
       .when('/org/:slug', {
         templateUrl: 'views/org.html',
         controller: 'OrgCtrl',
         resolve: {loggedIn:checkLogin}
       })
+      .when('/team', {
+        templateUrl: 'views/teamsetup.html',
+        controller: 'TeamsetupCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/team/:slug/edit', {
+        templateUrl: 'views/teamsetup.html',
+        controller: 'TeamsetupCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
       .when('/team/:slug', {
         templateUrl: 'views/team.html',
         controller: 'TeamCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/session', {
+        templateUrl: 'views/sessionsetup.html',
+        controller: 'SessionsetupCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/session/:slug/edit', {
+        templateUrl: 'views/sessionsetup.html',
+        controller: 'SessionsetupCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/session/:slug', {
+        templateUrl: 'views/session.html',
+        controller: 'SessionCtrl',
         resolve: {loggedIn:checkLogin}
       })
       .otherwise({

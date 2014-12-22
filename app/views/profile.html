@@ -1,0 +1,23 @@
+<h1>Profile</h1>
+<form name="profileForm" novalidate ng-submit="submit()">
+  <div>
+    <label>Name</label>
+    <input type="text" ng-model="profileUser.name" ng-blur="submit()" />
+  </div>
+  <div>
+    <label>Image</label>
+    <div image-uploader ng-model="profileUser.image" ng-change="submit()"></div>
+  </div>
+  <div>
+    <label>Email</label>
+    <input type="text" ng-model="profileUser.email" ng-blur="submit()" />
+  </div>
+  <div>
+    <label>Message side</label>
+    <div switch="" name="side" ng-model="profileUser.side" off="Left" on="Right" ng-change="submit()"></div>
+  </div>
+  <div>
+    <label>Color</label>
+    <input minicolors ng-model="profileUser.color" ng-blur="submit()" />
+  </div>
+</form>

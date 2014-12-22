@@ -1,0 +1,20 @@
+<h1 ng-hide="org._id">Make a team</h1>
+<h1 ng-show="org._id">Edit team {{team.name}}</h1>
+<form name="orgForm" novalidate ng-submit="submit(true)">
+  <div>
+    <label>Name</label>
+    <input type="text" ng-model="org.name" ng-blur="submit()" ng-disabled="role>1" />
+  </div>
+  <div>
+    <label>Image</label>
+    <div image-uploader ng-model="org.image" ng-change="submit()" disabled="{{role>1}}" ng-hide="role>1"></div>
+    <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{org.image}}.jpg" ng-show="role>1"></img>
+  </div>
+  <div>
+    <label>Color</label>
+    <input minicolors ng-model="org.color" ng-blur="submit()" ng-disabled="role>1"  />
+  </div>
+  <div ng-show="!org._id">
+    <input type="submit" value="Create" />
+  </div>
+</form>

@@ -12,11 +12,30 @@
     "angular-sanitize": "^1.3.0",
     "angular-touch": "^1.3.0",
     "humane": "~3.2.2",
-    "angular-filter": "~0.5.1"
+    "angular-filter": "~0.5.1",
+    "cloudinary_angular": "~0.0.4",
+    "ng-file-upload-shim": "~2.0.5",
+    "ng-file-upload": "~2.0.5",
+    "snap.svg": "~0.3.0",
+    "ng-tags-input": "~2.1.1",
+    "nicescroll": "~3.5.6",
+    "minicolors": "~2.1.9",
+    "gridster": "~0.5.6",
+    "jquery": "~2.1.3",
+    "pleasejs": "~0.4.2"
   },
   "overrides": {
     "socket.io-client": {
       "main": "./lib/socket.js"
+    },
+    "gridster": {
+      "main": [
+        "./dist/jquery.gridster.js",
+        "./dist/jquery.gridster.css"
+      ]
+    },
+    "pleasejs": {
+      "main": "./dist/Please.js"
     }
   },
   "devDependencies": {
