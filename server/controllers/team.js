@@ -73,6 +73,18 @@ module.exports = {
         throw err;
       }
       return res.json(team);
-    })
+    });
+  },
+  findAllTeamUsersById: function(req, res) {
+    Team.findOne({_id:req.params.id})
+    .exec(function(err, team){
+      if(err) {
+        throw err;
+      }
+      if(team) {
+        return res.json(team.users);
+      }
+      return res.json([]);
+    });
   }
 };

@@ -35,8 +35,11 @@
             </filter>
         </defs>
     </svg>
-    <a ng-click="logout()">Logout</a>
-    <a href="/profile">Profile</a>
+    <div class="nav" ng-show="user.details">
+      <a href="#" ng-click="logout()">Logout</a>
+      <a href="/">Dashboard</a>
+      <a href="/profile">Profile</a>
+    </div>
     <!-- Add your site or application content here -->
     <div class="container">
       <div ng-view=""></div>
@@ -85,10 +88,12 @@
     <script src="bower_components/minicolors/jquery.minicolors.js"></script>
     <script src="bower_components/gridster/dist/jquery.gridster.js"></script>
     <script src="bower_components/pleasejs/dist/Please.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
     <!-- endbower -->
+    <!-- endbuild -->
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.angularjs.org/1.3.8/i18n/angular-locale_en-gb.js"></script>
-    <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -110,6 +115,7 @@
         <script src="scripts/services/resource.js"></script>
         <script src="scripts/directives/resources.js"></script>
         <script src="scripts/services/idea.js"></script>
+        <script src="scripts/services/invite.js"></script>
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/controllers/session.js"></script>
         <script src="scripts/directives/imageuploader.js"></script>
@@ -119,6 +125,8 @@
         <script src="scripts/controllers/teamsetup.js"></script>
         <script src="scripts/controllers/orgsetup.js"></script>
         <script src="scripts/controllers/sessionsetup.js"></script>
+        <script src="scripts/directives/resource.js"></script>
+        <script src="scripts/directives/unitgrid.js"></script>
         <!-- endbuild -->
         
 </body>

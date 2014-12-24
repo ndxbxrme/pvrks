@@ -1,23 +1,58 @@
+@keyframes HASNEW {
+  0% {transform: scale(1.0)}
+  50% {transform: scale(1.1)}
+}
 .msgContainer {
   position: fixed;
-  right: 0;
+  left: 100%;
   top: 0;
   border-left: 1px solid #f0f0f0;
   border-bottom: 1px solid #f0f0f0;
   padding: 0 0 10px 5px;
   border-radius: 0 0 5px 0;
   background: rgba(255,255,255,0.8);
+  box-sizing: border-box;
+  transition: 0.2s transform;
   
+  &.hasNew .handle  {
+    animation: HASNEW 2s linear infinite;
+  }
+  
+  &.open .handle  {
+    animation: none;
+  }
+  
+  &.open {
+    transform: translateX(-100%);
+  }
+  
+  
+ .handle {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    font-size: 3em;
+    color: #ccc;
+    padding: 10px 10px 0 0;
+    cursor: pointer;
+    transition: 0.1s transform;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  } 
     
   h3 {
     text-align: right;
-    position: fixed;
+    position: absolute;
     width: 230px;
     height: 30px;
     background: linear-gradient(180deg, #fff, #fff, #fff, #fff, transparent);
     margin: 0;
     top: 0; right: 0;
     z-index: 200;
+    font-size: 0.8em;
+    padding-top: 8px;
   }  
   
   .scroll {
@@ -36,7 +71,7 @@
     
     input[type="text"] {
       line-height: 30px;
-      padding: 0 15px 0 5px;
+      padding: 0 31px 0 5px;
       border-radius: 5px;
       outline: none;
       font-size: 0.8em;

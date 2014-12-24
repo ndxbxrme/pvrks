@@ -25,8 +25,9 @@ module.exports = function(app, passport) {
     app.get('/api/team/:slug', isLoggedIn, TeamCtrl.findOneBySlug);
     
     app.post('/api/invite/send', isLoggedIn, InviteCtrl.sendInvite);
-    app.get('/api/invite/parse', isLoggedIn, InviteCtrl.parseInvite);
-    app.get('/api/invites/user', isLoggedIn, InviteCtrl.findAllByUserId);
+    app.get('/api/invite/parse/:inviteId', InviteCtrl.parseInvite);
+    app.get('/api/invite/remember/:inviteId', InviteCtrl.rememberInvite);
+    app.post('/api/invites/user', isLoggedIn, InviteCtrl.findAllByUserId);
     app.post('/api/invite/accept', isLoggedIn, InviteCtrl.acceptInvite);
     app.post('/api/invite/decline', isLoggedIn, InviteCtrl.declineInvite);
     
@@ -38,6 +39,10 @@ module.exports = function(app, passport) {
     
     app.get('/api/user/:userId', isLoggedIn, UserCtrl.findOneById);
     app.post('/api/user', isLoggedIn, UserCtrl.updateProfile);
+    
+    app.get('/api/users/team/:id', isLoggedIn, TeamCtrl.findAllTeamUsersById);
+    app.get('/api/users/org/:id', isLoggedIn, OrgCtrl.findAllOrgUsersById);
+    //app.get('/api/users/session/:slug', isLoggedIn, SessionCtrl.findAllSessionUsersById);
 
     //LOGIN AUTHENTICATE/FIRST SIGNUP
 
@@ -48,8 +53,8 @@ module.exports = function(app, passport) {
     }));
 
     app.post('/api/login', passport.authenticate('local-login', {
-        successRedirect: '/api/user',
-        failureRedirect: '/api/user',
+        successRedirect: '/',
+        failureRedirect: '/login',
         failureFlash: true
     }));
 
@@ -58,7 +63,7 @@ module.exports = function(app, passport) {
     }));
 
     app.get('/api/twitter/callback', passport.authenticate('twitter', {
-        successRedirect: '/home',
+        successRedirect: '/',
         failureRedirect: '/login'
     }));
 
@@ -67,8 +72,8 @@ module.exports = function(app, passport) {
         //send flash message
     });
     app.post('/api/connect/local', passport.authorize('local-signup', {
-        successRedirect: '/api/user',
-        failureRedirect: '/api/user',
+        successRedirect: '/',
+        failureRedirect: '/login',
         failureFlash: true
     }));
 
@@ -83,7 +88,7 @@ module.exports = function(app, passport) {
         user.local.email = undefined;
         user.local.password = undefined;
         user.save(function(err) {
-            res.redirect('api/user');
+            res.redirect('/profile');
         });
     });
 
@@ -96,7 +101,7 @@ module.exports = function(app, passport) {
     });
     app.get('/api/logout', function(req, res) {
         req.logout();
-        res.redirect('/api/user');
+        res.redirect('/');
     });
 
     function isLoggedIn(req, res, next) {

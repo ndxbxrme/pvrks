@@ -142,6 +142,7 @@ angular.module('workspaceApp')
             image: scope.result.public_id,
             resourceId: scope.result.public_id,
             resourceType: scope.result.resource_type,
+            secureUrl: scope.result.secure_url,
             tags: scope.tags,
             ids: {}
           };

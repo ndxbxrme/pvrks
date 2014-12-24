@@ -37,7 +37,7 @@ module.exports = {
     });
   },
   parseInvite: function(req, res){
-    Invite.findOne(req.body.inviteToken)
+    Invite.findOne({_id:req.params.inviteId})
     .exec(function(err,invite){
       if(err) {
         throw err;
@@ -45,11 +45,15 @@ module.exports = {
       res.json(invite);
     });
   },
+  rememberInvite: function(req, res){
+    res.cookie('invite', req.params.inviteId, {maxAge:60 * 60 * 1000});
+    res.send('ok');
+  },
   acceptInvite: function(req, res){
     User.findOne(req.user._id)
     .exec(function(err, user){
       Invite.findOne({
-        _id:req.body.inviteToken.toString(),
+        _id:req.body._id.toString(),
         validUntil:{$gt:new Date()},
         noTokens:{$gt:0}
       })
@@ -67,6 +71,7 @@ module.exports = {
             invite.noTokens--;
             invite.acceptedBy.push(newUser);
             invite.save();
+            res.clearCookie('invite');
             if(invite.org.id) {
               Org.findOne(invite.org.id)
               .where({'users.id':{$ne:req.user._id}})
@@ -120,7 +125,7 @@ module.exports = {
   },
   declineInvite: function(req, res){
     Invite.findOne({
-      _id:req.body.inviteToken,
+      _id:req.body._id,
       validUntil:{$gt:new Date()}
     })
     .exec(function(err,invite){
@@ -130,13 +135,17 @@ module.exports = {
       if(invite){   
         invite.declinedAt = Date.now();
         invite.save();
+        res.clearCookie('invite');
       }
       res.json(invite);
     });
   },
   findAllByUserId: function(req, res){
+    if(req.body.inviteId) {
+      res.cookie('invite', req.body.inviteId, {maxAge:60 * 60 * 1000});
+    }
     Invite.find({
-      recipientId: req.user._id,
+      recipientId: req.body.userId,
       acceptedAt: {$exists:false},
       declinedAt: {$exists:false},
       validUntil:{$gt:new Date()},
@@ -147,7 +156,30 @@ module.exports = {
       if(err) {
         throw err;
       }
-      res.json(invites);
+      if(!invites) {
+        invites = [];
+      }
+      if(req.cookies.invite || req.body.inviteId) {
+        Invite.findOne({
+          _id:req.cookies.invite || req.body.inviteId,
+          acceptedAt: {$exists:false},
+          declinedAt: {$exists:false},
+          validUntil:{$gt:new Date()},
+          noTokens: {$gt:0}
+        })
+        .exec(function(err, invite){
+          if(err) {
+            throw err;
+          }
+          if(invite) {
+            invites.push(invite);
+          }
+          return res.json(invites);
+        })
+      }
+      else {
+        return res.json(invites);
+      }
     })
   }
 };

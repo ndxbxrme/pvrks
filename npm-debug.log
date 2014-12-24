@@ -1,0 +1,189 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ubuntu/.nvm/v0.10.33/bin/node',
+1 verbose cli   '/home/ubuntu/.nvm/v0.10.33/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json workspace@0.0.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/home/ubuntu/workspace',
+6 verbose install   [ 'async',
+6 verbose install     'bcrypt-nodejs',
+6 verbose install     'body-parser',
+6 verbose install     'cloudinary',
+6 verbose install     'compression',
+6 verbose install     'connect-flash',
+6 verbose install     'connect-mongo',
+6 verbose install     'cookie-parser',
+6 verbose install     'express',
+6 verbose install     'express-session',
+6 verbose install     'gzippo',
+6 verbose install     'mongoose',
+6 verbose install     'morgan',
+6 verbose install     'passport',
+6 verbose install     'passport-local',
+6 verbose install     'passport-twitter',
+6 verbose install     'pleasejs',
+6 verbose install     'socket.io',
+6 verbose install     'underscore.string',
+6 verbose install     'connect-modrewrite',
+6 verbose install     'grunt',
+6 verbose install     'grunt-autoprefixer',
+6 verbose install     'grunt-concurrent',
+6 verbose install     'grunt-connect-proxy',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-contrib-compass',
+6 verbose install     'grunt-contrib-concat',
+6 verbose install     'grunt-contrib-connect',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-contrib-cssmin',
+6 verbose install     'grunt-contrib-htmlmin',
+6 verbose install     'grunt-contrib-imagemin',
+6 verbose install     'grunt-contrib-jshint',
+6 verbose install     'grunt-contrib-uglify',
+6 verbose install     'grunt-contrib-watch',
+6 verbose install     'grunt-develop',
+6 verbose install     'grunt-filerev',
+6 verbose install     'grunt-google-cdn',
+6 verbose install     'grunt-karma',
+6 verbose install     'grunt-newer',
+6 verbose install     'grunt-ng-annotate',
+6 verbose install     'grunt-svgmin',
+6 verbose install     'grunt-usemin',
+6 verbose install     'grunt-wiredep',
+6 verbose install     'jasmine-core',
+6 verbose install     'jshint-stylish',
+6 verbose install     'karma',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'load-grunt-tasks',
+6 verbose install     'time-grunt' ] ]
+7 info preinstall workspace@0.0.0
+8 warn package.json karma-phantomjs-launcher@0.1.4 No README data
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping morgan@^1.5.0 /home/ubuntu/workspace
+11 verbose already installed skipping passport@^0.2.1 /home/ubuntu/workspace
+12 verbose already installed skipping passport-local@^1.0.0 /home/ubuntu/workspace
+13 verbose already installed skipping passport-twitter@^1.0.2 /home/ubuntu/workspace
+14 verbose already installed skipping pleasejs@^0.4.2 /home/ubuntu/workspace
+15 verbose already installed skipping socket.io@^1.2.1 /home/ubuntu/workspace
+16 verbose already installed skipping underscore.string@^2.4.0 /home/ubuntu/workspace
+17 verbose already installed skipping connect-modrewrite@^0.7.9 /home/ubuntu/workspace
+18 verbose already installed skipping grunt@^0.4.1 /home/ubuntu/workspace
+19 verbose already installed skipping grunt-autoprefixer@^0.7.3 /home/ubuntu/workspace
+20 verbose already installed skipping grunt-concurrent@^0.5.0 /home/ubuntu/workspace
+21 verbose cache add [ 'grunt-connect-proxy@@0.1.10', null ]
+22 verbose cache add name=undefined spec="grunt-connect-proxy@@0.1.10" args=["grunt-connect-proxy@@0.1.10",null]
+23 verbose parsed url { protocol: null,
+23 verbose parsed url   slashes: null,
+23 verbose parsed url   auth: null,
+23 verbose parsed url   host: null,
+23 verbose parsed url   port: null,
+23 verbose parsed url   hostname: null,
+23 verbose parsed url   hash: null,
+23 verbose parsed url   search: null,
+23 verbose parsed url   query: null,
+23 verbose parsed url   pathname: 'grunt-connect-proxy@@0.1.10',
+23 verbose parsed url   path: 'grunt-connect-proxy@@0.1.10',
+23 verbose parsed url   href: 'grunt-connect-proxy@@0.1.10' }
+24 verbose already installed skipping grunt-contrib-clean@^0.5.0 /home/ubuntu/workspace
+25 verbose cache add name="grunt-connect-proxy" spec="@0.1.10" args=["grunt-connect-proxy","@0.1.10"]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: '@0.1.10',
+26 verbose parsed url   path: '@0.1.10',
+26 verbose parsed url   href: '@0.1.10' }
+27 verbose addNamed [ 'grunt-connect-proxy', '@0.1.10' ]
+28 verbose addNamed [ null, null ]
+29 verbose already installed skipping grunt-contrib-compass@^0.7.2 /home/ubuntu/workspace
+30 silly lockFile 650af186-grunt-connect-proxy-0-1-10 grunt-connect-proxy@@0.1.10
+31 verbose lock grunt-connect-proxy@@0.1.10 /home/ubuntu/.npm/650af186-grunt-connect-proxy-0-1-10.lock
+32 verbose already installed skipping grunt-contrib-concat@^0.4.0 /home/ubuntu/workspace
+33 verbose already installed skipping grunt-contrib-connect@^0.7.1 /home/ubuntu/workspace
+34 verbose already installed skipping grunt-contrib-copy@^0.5.0 /home/ubuntu/workspace
+35 verbose already installed skipping grunt-contrib-cssmin@^0.9.0 /home/ubuntu/workspace
+36 verbose already installed skipping grunt-contrib-htmlmin@^0.3.0 /home/ubuntu/workspace
+37 verbose already installed skipping grunt-contrib-imagemin@^0.8.1 /home/ubuntu/workspace
+38 verbose already installed skipping grunt-contrib-jshint@^0.10.0 /home/ubuntu/workspace
+39 info addNameTag [ 'grunt-connect-proxy', '@0.1.10' ]
+40 verbose already installed skipping grunt-contrib-uglify@^0.4.0 /home/ubuntu/workspace
+41 verbose already installed skipping grunt-contrib-watch@^0.6.1 /home/ubuntu/workspace
+42 verbose already installed skipping grunt-develop@^0.4.0 /home/ubuntu/workspace
+43 verbose already installed skipping grunt-filerev@^0.2.1 /home/ubuntu/workspace
+44 verbose already installed skipping grunt-google-cdn@^0.4.0 /home/ubuntu/workspace
+45 verbose already installed skipping grunt-karma@^0.9.0 /home/ubuntu/workspace
+46 verbose already installed skipping grunt-newer@^0.7.0 /home/ubuntu/workspace
+47 verbose already installed skipping grunt-ng-annotate@^0.4.0 /home/ubuntu/workspace
+48 verbose already installed skipping grunt-svgmin@^0.4.0 /home/ubuntu/workspace
+49 verbose already installed skipping grunt-usemin@^2.1.1 /home/ubuntu/workspace
+50 verbose already installed skipping grunt-wiredep@^1.7.0 /home/ubuntu/workspace
+51 verbose already installed skipping jasmine-core@^2.1.3 /home/ubuntu/workspace
+52 verbose already installed skipping jshint-stylish@^0.2.0 /home/ubuntu/workspace
+53 verbose request where is /grunt-connect-proxy
+54 verbose request registry https://registry.npmjs.org/
+55 verbose request id 1643208e5d2bba7c
+56 verbose url raw /grunt-connect-proxy
+57 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-connect-proxy' ]
+58 verbose url resolved https://registry.npmjs.org/grunt-connect-proxy
+59 verbose request where is https://registry.npmjs.org/grunt-connect-proxy
+60 info trying registry request attempt 1 at 13:32:23
+61 verbose etag "1QJHVTTER826INCZV7YBWV8EO"
+62 http GET https://registry.npmjs.org/grunt-connect-proxy
+63 verbose already installed skipping karma@^0.12.28 /home/ubuntu/workspace
+64 verbose already installed skipping karma-jasmine@^0.3.2 /home/ubuntu/workspace
+65 verbose already installed skipping karma-phantomjs-launcher@^0.1.4 /home/ubuntu/workspace
+66 verbose already installed skipping load-grunt-tasks@^0.4.0 /home/ubuntu/workspace
+67 verbose already installed skipping time-grunt@^0.3.1 /home/ubuntu/workspace
+68 verbose already installed skipping async@^0.9.0 /home/ubuntu/workspace
+69 verbose already installed skipping bcrypt-nodejs@0.0.3 /home/ubuntu/workspace
+70 verbose already installed skipping body-parser@^1.10.0 /home/ubuntu/workspace
+71 verbose already installed skipping cloudinary@^1.1.0 /home/ubuntu/workspace
+72 verbose already installed skipping compression@^1.2.2 /home/ubuntu/workspace
+73 verbose already installed skipping connect-flash@^0.1.1 /home/ubuntu/workspace
+74 verbose already installed skipping connect-mongo@^0.4.1 /home/ubuntu/workspace
+75 verbose already installed skipping cookie-parser@^1.3.3 /home/ubuntu/workspace
+76 verbose already installed skipping express@^4.10.5 /home/ubuntu/workspace
+77 verbose already installed skipping express-session@^1.9.3 /home/ubuntu/workspace
+78 verbose already installed skipping gzippo@^0.2.0 /home/ubuntu/workspace
+79 verbose already installed skipping mongoose@^3.8.20 /home/ubuntu/workspace
+80 http 304 https://registry.npmjs.org/grunt-connect-proxy
+81 silly registry.get cb [ 304,
+81 silly registry.get   { date: 'Mon, 22 Dec 2014 13:32:23 GMT',
+81 silly registry.get     server: 'Apache',
+81 silly registry.get     via: '1.1 varnish',
+81 silly registry.get     'last-modified': 'Mon, 22 Dec 2014 13:32:24 GMT',
+81 silly registry.get     'cache-control': 'max-age=60',
+81 silly registry.get     etag: '"1QJHVTTER826INCZV7YBWV8EO"',
+81 silly registry.get     age: '0',
+81 silly registry.get     'x-served-by': 'cache-ams4120-AMS',
+81 silly registry.get     'x-cache': 'HIT',
+81 silly registry.get     'x-cache-hits': '1',
+81 silly registry.get     'x-timer': 'S1419255143.809004,VS0,VE373',
+81 silly registry.get     vary: 'Accept',
+81 silly registry.get     'content-length': '0',
+81 silly registry.get     'keep-alive': 'timeout=10, max=50',
+81 silly registry.get     connection: 'Keep-Alive' } ]
+82 verbose etag https://registry.npmjs.org/grunt-connect-proxy from cache
+83 silly lockFile 650af186-grunt-connect-proxy-0-1-10 grunt-connect-proxy@@0.1.10
+84 silly lockFile 650af186-grunt-connect-proxy-0-1-10 grunt-connect-proxy@@0.1.10
+85 error notarget No compatible version found: grunt-connect-proxy@'@0.1.10'
+85 error notarget Valid install targets:
+85 error notarget ["0.1.11","0.1.0","0.1.1","0.1.2","0.1.3","0.1.4","0.1.5","0.1.6","0.1.7","0.1.8","0.1.10","0.1.11"]
+85 error notarget
+85 error notarget This is most likely not a problem with npm itself.
+85 error notarget In most cases you or one of your dependencies are requesting
+85 error notarget a package version that doesn't exist.
+86 error System Linux 3.14.13-c9
+87 error command "/home/ubuntu/.nvm/v0.10.33/bin/node" "/home/ubuntu/.nvm/v0.10.33/bin/npm" "install"
+88 error cwd /home/ubuntu/workspace
+89 error node -v v0.10.33
+90 error npm -v 1.4.28
+91 error code ETARGET
+92 verbose exit [ 1, true ]

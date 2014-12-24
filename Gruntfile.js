@@ -431,8 +431,15 @@ module.exports = function (grunt) {
       'develop',
       'concurrent:server',
       'autoprefixer',
-      'connect:test',
-      'watch'
+      'connect:test:keepalive',
+      //'watch'
+    ]);
+  });
+  
+  grunt.registerTask('css', 'compass + autoprefixer', function(target){
+    grunt.task.run([
+      'compass',
+      'autoprefixer'
     ]);
   });
 

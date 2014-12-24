@@ -1,8 +1,13 @@
 <h1>Team {{team.name}}</h1>
-<div><a ng-click="sendInvite()">Send Invite</a></div>
-<h2>{{inviteToken}}</h2>
+<a ng-click="sendInvite()">Send Invite</a>
+<div ng-show="inviteToken">
+  <h2>{{inviteToken}}<br />https://pvrks-ndxbxrme-2.c9.io/?{{inviteToken}}</h2>
+</div>
 <div roster="team"></div>
 <div messages="team" mid="{{team._id}}"></div>
 <div resources="team" rid="{{team._id}}"></div>
 <div resource-uploader="team" rid="{{team._id}}" orgid="{{team.org}}"></div>
+<div class="allUsers">
+  <div ng-repeat="user in users">{{ user.name }}</div>
+</div>
 <br /><br /><br /><br /><br /><br /><br /><br />

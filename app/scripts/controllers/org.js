@@ -1,12 +1,12 @@
 'use strict';
 /*global angular:false*/
 angular.module('workspaceApp')
-  .controller('OrgCtrl', function ($scope,$route,$http,Socket,Alert) {
+  .controller('OrgCtrl', function ($scope,$route,$http,User,Alert) {
     $scope.slug = $route.current.params.slug;
     $http.get('/api/organisation/' + $route.current.params.slug)
     .success(function(org){
       $scope.org = org;
-      Socket.emit('ids', {
+      User.setIds({
         org: org._id,
         team: undefined,
         session: undefined

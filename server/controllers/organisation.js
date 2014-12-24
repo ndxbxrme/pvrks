@@ -72,5 +72,17 @@ module.exports = {
       }
       return res.json(org);
     })
+  },
+  findAllOrgUsersById: function(req, res) {
+    Org.findOne({_id:req.params.id})
+    .exec(function(err, org){
+      if(err) {
+        throw err;
+      }
+      if(org) {
+        return res.json(org.users);
+      }
+      return res.json([]);
+    });
   }
 };

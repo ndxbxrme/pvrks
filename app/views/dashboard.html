@@ -1,27 +1,41 @@
 <h1>dashboard</h1>
 <img class="thumbnail inline ng-isolate-scope" angle="20" format="jpg" 
   ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_50,w_50/{{user.details.image}}.jpg"></img> {{user.details.name}}
-<h4>make an organisation</h4>
-<form name="orgForm" ng-submit="submitOrg()">
-    <input type="text" ng-model="$parent.org.name" />
-    <input type="submit" />
-</form>
-<div ng-repeat="org in orgs">
-    <a href="org/{{org.slug}}">Go to organisation, {{org.name}}</a>
+<div class="invites" ng-show="invites.length>0">
+    <h4>invites</h4>
+    <div class="item" ng-repeat="invite in invites">
+        <p>You have been invited to join</p>
+        <h4 ng-show="invite.team.name">Team {{invite.team.name}}</h4>
+        <h4 ng-show="invite.org.name">Organization {{invite.org.name}}</h4>
+        <h4 ng-show="invite.session.name">Session {{invite.session.name}}</h4>
+        <input type="button" ng-click="acceptInvite(invite)" value="Accept" class="accept" />
+        <input type="button" ng-click="declineInvite(invite)" value="Decline" class="decline" />
+    </div>
 </div>
-<h4>make a team</h4>
-<form name="teamForm" ng-submit="submitTeam()">
-    <select ng-model="$parent.team.org">
-        <option ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
-    </select>
-    <input type="text" ng-model="$parent.team.name" />
-    <input type="submit" />
-</form>
-<div ng-repeat="team in teams">
-    <a href="team/{{team.slug}}">Go to team, {{team.name}}</a>
+<div class="orgs" ng-show="orgs.length > 0">
+    <h4>organizations i blong to</h4>
+    <div ng-repeat="org in orgs" class="item">
+        <a href="org/{{org.slug}}">
+            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{org.image}}.jpg"></img>
+            <div class="name"><h3>{{org.name}}</h3></div>
+            <div class="color-band" style="background-color:{{org.color}}"></div>
+        </a>
+    </div>
+    <div class="item"><a href="/org" class="add">+</a></div>
 </div>
-<h4>make a session</h4>
-<form name="teamForm" ng-submit="submitSession()">
+<div class="teams" ng-show="teams.length > 0">
+    <h4>teams i'm in</h4>
+    <div ng-repeat="team in teams" class="item">
+        <a href="team/{{team.slug}}">
+            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{team.image}}.jpg"></img>
+            <div class="name"><h3>{{team.name}}</h3></div>
+            <div class="color-band" style="background-color:{{team.color}}"></div>
+        </a>
+    </div>
+    <div class="item"><a href="/team" class="add">+</a></div>
+</div>
+<form name="teamForm" ng-submit="submitSession()" ng-hide="true">
+    <h4>make a session</h4>
     <select ng-model="$parent.sessionOrg">
         <option ng-repeat="org in orgs" value="{{org._id}}">{{org.name}}</option>
     </select>

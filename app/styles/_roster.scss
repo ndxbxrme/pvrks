@@ -2,11 +2,19 @@
     .item {
         display: inline-block; 
         margin: 1px;
+        animation: RESOPEN 0.2s linear;
         
         img {
             width: 32px;
             height: 32px;
             border-radius: 50%;
+            opacity: 0.4;
+        }
+        
+        &.online {
+            img {
+                opacity: 1;
+            }
         }
     }
 }

@@ -11,14 +11,17 @@ angular
     'angular.filter',
     'cloudinary',
     'angularFileUpload',
-	  'ngTagsInput'
+	  'ngTagsInput',
+	  'ui.sortable'
   ])
   .config(function ($routeProvider, $locationProvider) {
     var checkLogin = function($q, $location, $http, User, Socket, Alert) {
       var deferred = $q.defer();
       $http.get('/api/user')
       .success(function(user){
+        console.log('hey');
         if(user){
+          console.log(User.details);
           if(!User.details) {
             Socket.emit('user', user);
             Alert.log('Welcome back ' + user.name);
@@ -43,6 +46,8 @@ angular
       var deferred = $q.defer();
       $http.get('/api/user')
       .success(function(user){
+        console.log('ho');
+        console.log(User.details);
         if(!User.details) {
           Socket.emit('user', user);
         }

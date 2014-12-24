@@ -1,5 +1,14 @@
-<div class="msgContainer">
-    <h3>messages</h3>
+<div class="msgContainer" ng-class="{open:open,hasNew:message.hasNew(type)}">
+    <span class="handle" ng-click="open=!open;message.resetNew(type)">
+        <span class="icon-mail" ng-hide="open"></span>
+        <span class="icon-arrow-right" ng-show="open"></span>
+    </span>
+    <h3>    
+        <span ng-show="type==='org'">Organization</span>
+        <span ng-show="type==='team'">Team</span>
+        <span ng-show="type==='session'">Session</span>
+        Chat
+    </h3>
     <div class="scroll">
         <div ng-repeat="msgGroup in message.getMessages(type)" class="msgGroup" ng-class="{msgRight:msgGroup.side}">
             <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{msgGroup.userimage}}.jpg" title="{{msgGroup.username}}"></img>

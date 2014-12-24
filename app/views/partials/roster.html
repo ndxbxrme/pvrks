@@ -1,5 +1,10 @@
 <div class="roster">
-  <h3>Who's online now</h3>
-  <div ng-repeat="user in roster.getRoster(type) | unique:'_id'" class="item"><img class="thumbnail inline ng-isolate-scope" angle="20" format="jpg" 
+  <h3>
+    <span ng-show="type==='team'">Team</span>
+    <span ng-show="type==='organization'">Organization</span>
+    <span ng-show="type==='session'">Session</span>
+    Members
+  </h3>
+  <div ng-repeat="user in roster.getAllUsers(type) | unique:'_id' | orderBy:['-online','name']" ng-class="{online:user.online}" class="item"><img class="thumbnail inline ng-isolate-scope" angle="20" format="jpg" 
   ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_32,w_32/{{user.image}}.jpg" title="{{user.name}}"></img></div>
 </div>

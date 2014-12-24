@@ -1,0 +1,9 @@
+<div>
+  <a ng-href="{{resource.secureUrl}}" target="_blank">
+    <img ng-if="resource.resourceType==='image'" class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{resource.image}}.jpg"></img>
+    <div ng-if="resource.resourceType==='raw'" class="raw">
+      <div ng-show="resource.image.indexOf('.txt')!==-1"><span class="icon-libreoffice"></span></div>
+      <div ng-show="resource.image.indexOf('.doc')!==-1"><span class="icon-file-word"></span></div>
+    </div>
+  </a>
+</div>

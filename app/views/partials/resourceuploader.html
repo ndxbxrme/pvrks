@@ -1,4 +1,4 @@
-<div class="file-uploader" ng-class="{out:out,dragover:dragover}">
+<div class="file-uploader" ng-class="{out:resourcesOut,dragover:dragover}">
   <div class="clickscreen" ng-click="out?close():true"></div>
   <div class="dropper" ng-file-drop="onFileSelect($files)"
       ng-file-drag-over-class="dragOverClass($event)" ng-click="$event.stopPropagation()">
@@ -11,7 +11,7 @@
       </span>
       <h1 ng-click="open()">yo guys, upload some shizzle</h1>
       <div class="upload-target" ng-file-select="onFileSelect($files)" data-multiple="false" onclick="this.value = null" data-morph-active="m 28,18 4,0 0,4 -4,0 z m 0,-8 4,0 0,4 -4,0 z M 26,4 26,0 c 3.313,0 6,2.686 6,6 L 28,6 C 28,4.896 27.106,4 26,4 z m -2.067797,14.542373 -5.288135,0 0,5.084746 c 0,1.406075 -1.181899,2.542373 -2.644068,2.542373 -1.459525,0 -2.644068,-1.136449 -2.644068,-2.542373 l 0,-5.084746 -5.2881354,0 c -1.459524,0 -2.6440678,-1.136441 -2.6440678,-2.542373 0,-1.40339 1.184547,-2.542373 2.6440678,-2.542373 l 5.2881354,0 0,-5.0847456 c 0,-1.4033899 1.184543,-2.5423729 2.644068,-2.5423729 1.462169,0 2.644068,1.138983 2.644068,2.5423729 l 0,5.0847456 5.288135,0 c 1.462168,0 2.644068,1.138983 2.644068,2.542373 0,1.405932 -1.181898,2.542373 -2.644068,2.542373 z M 18,0 l 4,0 0,4 -4,0 z m -8,0 4,0 0,4 -4,0 z M 0,26 4,26 c 0,1.106 0.896,2 2,2 l 0,4 C 2.686,32 0,29.313 0,26 z M 4,6 0,6 C 0,2.686 2.686,0 6,0 L 6,4 C 4.896,4 4,4.896 4,6 z m 0,8 -4,0 0,-4 4,0 z m 0,8 -4,0 0,-4 4,0 z m 10,10 -4,0 0,-4 4,0 z m 8,0 -4,0 0,-4 4,0 z m 6,-6 4,0 c 0,3.313 -2.687,6 -6,6 l 0,-4 c 1.106,0 2,-0.894 2,-2 z">
-        <img class="thumbnail inline ng-isolate-scope" angle="20" format="jpg" 
+        <img class="thumbnail inline ng-isolate-scope" ng-show="result" 
 ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{result.public_id}}.jpg"></img>
         <div class="progress-bar">
           <div ng-show="uploading" class="progress" style="width: {{progress}}%" ng-init="progress=0"></div>

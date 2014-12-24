@@ -8,7 +8,8 @@
  * Controller of the workspaceApp
  */
 angular.module('workspaceApp')
-  .controller('MainCtrl', function ($scope,$http,User) {
+  .controller('MainCtrl', function ($scope,$http,$window,User,Socket,Invite) {
+    Invite.rememberInvite($window.location.search);
     $scope.login = function login() {
       $http.post('/api/login', {
         email: $scope.email,
@@ -16,6 +17,9 @@ angular.module('workspaceApp')
       })
       .success(function(user){
         User.details = user;
+        console.log('emitting');
+        console.dir(user);
+        Socket.emit('user', user);
       });
     };
     $scope.signup = function signup() {
@@ -25,6 +29,12 @@ angular.module('workspaceApp')
       })
       .success(function(user){
         User.details = user;
+        console.log('emitting');
+        console.dir(user);
+        Socket.emit('user', user);
+      })
+      .error(function(err){
+        console.log(err);
       });
     };
   });

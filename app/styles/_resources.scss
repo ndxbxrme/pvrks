@@ -1,12 +1,29 @@
+@keyframes RESOPEN {
+    0% { transform: scale(0)}
+    100% { transform: scale(1)}
+}
+
 .resources {
+    .search {
+        margin-bottom: 20px;
+    }
     .item {
         display: inline-block; 
         position: relative;
         overflow: hidden;
+        width: 150px;
+        animation: RESOPEN 0.2s linear;
+        transition: transform 0.1s;
+        cursor: pointer;
         
         h4 {
             text-align: center;   
             margin: 0px;
+        }
+        
+        a {
+            text-decoration: none;
+            outline: none;
         }
         
         .user {
@@ -32,9 +49,21 @@
                 line-height: 0;
             }
         }
-        
-        &:hover .user {
-            transform: translateY(0);    
+        .raw {
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 4em;
+            line-height: 150px;
+            text-decoration: none !important;
+            color: #ccc;
+        }
+        &:hover {
+            transform: translateY(-10px);
+            .user {
+                transform: translateY(0);    
+            }
         }
     }
 }

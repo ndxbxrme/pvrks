@@ -8,6 +8,7 @@ var resourceSchema = mongoose.Schema({
     type: String,
     resourceType: String,
     resourceId: String,
+    secureUrl: String,
     url: String,
     content: String,
     slug: String,

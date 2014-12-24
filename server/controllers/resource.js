@@ -10,6 +10,7 @@ module.exports = {
       var newResource = new Resource();
       newResource.name = req.body.name;
       newResource.image = req.body.image;
+      newResource.secureUrl = req.body.secureUrl;
       newResource.type = req.body.type;
       newResource.resourceType = req.body.resourceType;
       newResource.resourceId = req.body.resourceId;

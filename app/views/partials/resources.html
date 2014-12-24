@@ -1,16 +1,19 @@
-<div class="resources">
+<div class="resources" ng-init="orderBy='-createdAt'">
   <h3>
     <span ng-show="type==='org'">Organization</span>
     <span ng-show="type==='team'">Team</span>
     <span ng-show="type==='session'">Session</span>
     Resources
   </h3>
-  <div ng-repeat="resource in resources.getResources(type)" class="item">
+  <div class="search">
+    <input type="text" ng-model="search" placeholder="Search" />
+  </div>
+  <div ng-repeat="resource in resources.getResources(type) | orderBy:orderBy | filter:search" class="item">
     <div class="user">
       <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{resource.userimage}}.jpg"></img>
       <p>{{resource.username}}</p>
     </div>
-    <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{resource.image}}.jpg"></img>
+    <div resource=""></div>
     <h4>{{resource.name}}</h4>
   </div>
 </div>
