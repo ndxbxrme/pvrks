@@ -17,7 +17,7 @@ angular.module('workspaceApp')
             var color = d3.scale.category20();
             var force = d3.layout.force()
             .gravity(0.02)
-            .friction(0.6)
+            //.friction(0.6)
             .charge(0)
             force.start();
             
@@ -39,6 +39,7 @@ angular.module('workspaceApp')
                 .data(scope.nodes.slice(1))
                 .enter().append('div')
                 .html(function(d){return d.content; })
+                .style('max-width', function(d){ return (d.content.length>100 ? '200' : '100') + 'px'})
                 .each(function(d){d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20; console.log(d.radius)})
                 .style('opacity', 0)
                 .transition()
@@ -51,6 +52,8 @@ angular.module('workspaceApp')
                 .data(scope.nodes.slice(1))
                 .enter().append('circle')
                 .style('stroke', function(d, i) { return d.color;})
+                .style('fill', function(d){ return d.color;})
+                .style('fill-opacity', 0.2)
                 .attr('r', 0)
                 .transition()
                 .ease("elastic")
@@ -84,7 +87,7 @@ angular.module('workspaceApp')
             function collide(alpha) {
               var quadtree = d3.geom.quadtree(scope.nodes);
               return function(d) {
-                var r = d.radius + 12 + 6,
+                var r = d.radius + 120,
                     nx1 = d.x - r,
                     nx2 = d.x + r,
                     ny1 = d.y - r,

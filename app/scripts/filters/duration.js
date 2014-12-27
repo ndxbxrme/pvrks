@@ -6,7 +6,8 @@ angular.module('workspaceApp')
       if(type==='largest') {
         var r = /([0-9]+) ([a-z]+)/.exec(iD.formatDuration(input));
         if(r) {
-          return (+r[1] + 1) + ' ' + r[2] + (r[1]==='1' ? 's':'');
+          return r[1] + ' ' + r[2];
+          //return (+r[1] + 1) + ' ' + r[2] + (r[1]==='1' ? 's':'');
         }
         else {
           return '...';

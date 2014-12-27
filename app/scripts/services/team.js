@@ -1,8 +1,9 @@
 'use strict';
 /*global angular:factory*/
 angular.module('workspaceApp')
-  .factory('Team', function ($http, $timeout) {
+  .factory('Team', function ($http, $timeout,$q) {
     var _teams = [];
+    var _team;
     var updateTeams = function updateTeams(teams){
       $timeout(function(){
         _teams = teams;
@@ -20,6 +21,9 @@ angular.module('workspaceApp')
         if(!updated){
           _teams.push(team);
         }
+        if(_team && _team._id===team._id) {
+          _team = team;
+        }
       });
     };
     return {
@@ -28,12 +32,25 @@ angular.module('workspaceApp')
         .success(function(teams){
           updateTeams(teams);
         });
-        return;
+      },
+      fetchTeamBySlug: function(slug){
+        var defer = $q.defer();
+        $http.get('/api/team/' + slug)
+        .success(function(team){
+          $timeout(function(){
+            _team = team;
+            defer.resolve(team);
+          })
+        });
+        return defer.promise;
       },
       updateTeams: updateTeams,
       getTeams: function() {
         return _teams;
       },
-      updateTeam: updateTeam
+      updateTeam: updateTeam,
+      getTeam: function() {
+        return _team;
+      }
     };
   });

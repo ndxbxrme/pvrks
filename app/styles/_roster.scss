@@ -11,7 +11,9 @@
             opacity: 0.4;
         }
         
-        &.online {
+    }
+    .online {
+        .item {
             img {
                 opacity: 1;
             }

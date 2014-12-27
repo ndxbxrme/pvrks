@@ -6,10 +6,10 @@
     Session in progress
     <h3>next: {{nextStartTime | date:'short'}}</h3>
     <h1>{{currentUnit.name}}</h1>
-    <div class="idea-bubbles" idea-bubbles="ideas.getIdeas()"></div>
+    <div class="idea-bubbles" idea-bubbles="Idea.getIdeas()"></div>
   </div>
-  <div ng-show="waitingToStart">Waiting to start... {{countdown}}</div>
-  <div ng-show="finished">Session finished {{countdown}} ago</div>
+  <div ng-show="session.epochStart > now">Waiting to start... {{countdown}}</div>
+  <div ng-show="session.epochEnd < now">Session finished {{countdown}} ago</div>
   <div idea-modal="ideaOpen" session-id="{{session._id}}" unit-id="{{currentUnit._id}}"></div>
   <a ng-click="sendInvite()">Send Invite</a>
   <div ng-show="inviteToken">

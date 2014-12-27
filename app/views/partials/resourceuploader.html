@@ -1,4 +1,4 @@
-<div class="file-uploader" ng-class="{out:resourcesOut,dragover:dragover}">
+<div class="file-uploader" ng-class="{out:out,dragover:dragover}">
   <div class="clickscreen" ng-click="out?close():true"></div>
   <div class="dropper" ng-file-drop="onFileSelect($files)"
       ng-file-drag-over-class="dragOverClass($event)" ng-click="$event.stopPropagation()">

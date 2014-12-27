@@ -28,6 +28,11 @@ angular.module('workspaceApp')
     tick();
 
     $scope.acceptInvite = function(invite){
+      if(!invite) {
+        invite = {
+          _id:$scope.inviteToken
+        }
+      }
       $http.post('/api/invite/accept', invite).success(function(){
         $scope.inviteToken = undefined;
         loadData();

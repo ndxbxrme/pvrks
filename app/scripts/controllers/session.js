@@ -1,36 +1,40 @@
 'use strict';
 /*global angular:false, iD:false*/
 angular.module('workspaceApp')
-  .controller('SessionCtrl', function ($scope, $route, $http, User, Socket, $timeout, Idea, Alert) {
+  .controller('SessionCtrl', function ($scope, $route, $http, User, Socket, $timeout, Idea, Alert, Session) {
     $scope.slug = $route.current.params.slug;
-    $scope.ideas = Idea;
+    $scope.Idea = Idea;
     function load() {
       if($scope.slug){
-        $http.get('/api/session/' + $scope.slug)
-        .success(function(session){
+        Session.fetchSessionBySlug($route.current.params.slug)
+        .then(function(session){
           if(session) {
             Socket.setIds({
               org: undefined,
               team: undefined,
               session: session._id
             });
-            $scope.session = session;
-            $scope.session.epochDate = Date.parse(session.startDate);
-            checkUnit();
-            angular.forEach(session.users, function(user){
-              if(user.id===User.details._id) {
-                $scope.role = user.role;
-              }
-            });
-            tick();
           }
         });
       }
-      $http.get('/api/organisations/user')
-      .success(function(orgs){
-        $scope.orgs = orgs;
-      });
     }
+    $scope.$watch(function(){
+      return Session.getSession();
+    }, function(n){
+      console.log(n);
+      if(!n){
+        return;
+      }
+      $scope.session = n;
+      $scope.session.epochDate = Date.parse(n.startDate);
+      checkUnit();
+      angular.forEach(n.users, function(user){
+        if(user.id===User.details._id) {
+          $scope.role = user.role;
+        }
+      });
+      tick();      
+    });
     load();
     $scope.now = Date.now();
     function checkUnit() {
@@ -47,6 +51,7 @@ angular.module('workspaceApp')
           break;
         }
       }
+      $scope.done = false;
       if(!$scope.nextStartTime) {
         $scope.nextStartTime = new Date($scope.session.epochDate + durationTally);
         $scope.done = true;

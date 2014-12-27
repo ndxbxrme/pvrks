@@ -6,7 +6,9 @@
     z-index: -1;
     circle {
         stroke-width: 3px;
-        fill: none;
+        &:hover {
+            fill-opacity: 0.6;
+        }
     }
     
     div {

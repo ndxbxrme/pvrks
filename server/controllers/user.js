@@ -43,29 +43,23 @@ module.exports = {
           image: req.body.image || ''
         }
       ).exec();
-      Team.update({
-        'users.id':req.body._id
-      }, {
-        'users.name': req.body.name,
-        'users.image': req.body.image
-      }, {
-        multi: true
+      Team.update({'users': {$elemMatch: {id:req.body._id}}}, {
+        $set: {
+          'users.$.name': req.body.name,
+          'users.$.image': req.body.image
+        }
       }).exec();
-      Org.update({
-        'users.id':req.body._id
-      }, {
-        'users.name': req.body.name,
-        'users.image': req.body.image
-      }, {
-        multi: true
+      Org.update({'users': {$elemMatch: {id:req.body._id}}}, {
+        $set: {
+          'users.$.name': req.body.name,
+          'users.$.image': req.body.image
+        }
       }).exec();
-      Session.update({
-        'users.id':req.body._id
-      }, {
-        'users.name': req.body.name,
-        'users.image': req.body.image
-      }, {
-        multi: true
+      Session.update({'users': {$elemMatch: {id:req.body._id}}}, {
+        $set: {
+          'users.$.name': req.body.name,
+          'users.$.image': req.body.image
+        }
       }).exec();
       Idea.update({
         userId: req.body._id
