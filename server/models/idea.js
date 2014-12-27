@@ -16,9 +16,11 @@ var ideaSchema = mongoose.Schema({
     userId: mongoose.Schema.Types.ObjectId,
     username: String,
     userimage: String,
+    color: String,
     org: mongoose.Schema.Types.ObjectId,
     team: mongoose.Schema.Types.ObjectId,
-    session: mongoose.Schema.Types.ObjectId
+    session: mongoose.Schema.Types.ObjectId,
+    unit: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Idea', ideaSchema);

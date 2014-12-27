@@ -5,7 +5,9 @@ var OrgCtrl = require('./controllers/organisation'),
     InviteCtrl = require('./controllers/invite'),
     MessageCtrl = require('./controllers/message'),
     ResourceCtrl = require('./controllers/resource'),
-    UserCtrl = require('./controllers/user');
+    UserCtrl = require('./controllers/user'),
+    SessionCtrl = require('./controllers/session'),
+    IdeaCtrl = require('./controllers/idea');
 
 module.exports = function(app, passport) {
     app.get('/api/user', isLoggedIn, function(req, res) {
@@ -24,6 +26,10 @@ module.exports = function(app, passport) {
     app.post('/api/teams/user', isLoggedIn, TeamCtrl.addOneByUserId);
     app.get('/api/team/:slug', isLoggedIn, TeamCtrl.findOneBySlug);
     
+    app.get('/api/sessions/user', isLoggedIn, SessionCtrl.findAllByUserId);
+    app.get('/api/session/:slug', isLoggedIn, SessionCtrl.findOneBySlug);
+    app.post('/api/session/user', isLoggedIn, SessionCtrl.addOneByUserId);
+    
     app.post('/api/invite/send', isLoggedIn, InviteCtrl.sendInvite);
     app.get('/api/invite/parse/:inviteId', InviteCtrl.parseInvite);
     app.get('/api/invite/remember/:inviteId', InviteCtrl.rememberInvite);
@@ -34,6 +40,9 @@ module.exports = function(app, passport) {
     app.post('/api/message/add', isLoggedIn, MessageCtrl.addMessage);
     app.post('/api/messages', isLoggedIn, MessageCtrl.findAllById);
     
+    app.post('/api/idea/add', isLoggedIn, IdeaCtrl.addIdea);
+    app.post('/api/ideas', isLoggedIn, IdeaCtrl.findAllById);
+    
     app.post('/api/resource/add', isLoggedIn, ResourceCtrl.addResource);
     app.post('/api/resources', isLoggedIn, ResourceCtrl.findAllById);
     
@@ -42,6 +51,7 @@ module.exports = function(app, passport) {
     
     app.get('/api/users/team/:id', isLoggedIn, TeamCtrl.findAllTeamUsersById);
     app.get('/api/users/org/:id', isLoggedIn, OrgCtrl.findAllOrgUsersById);
+    app.get('/api/users/session/:id', isLoggedIn, SessionCtrl.findAllSessionUsersById);
     //app.get('/api/users/session/:slug', isLoggedIn, SessionCtrl.findAllSessionUsersById);
 
     //LOGIN AUTHENTICATE/FIRST SIGNUP

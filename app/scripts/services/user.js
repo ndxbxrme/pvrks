@@ -8,7 +8,7 @@
  * Factory in the workspaceApp.
  */
 angular.module('workspaceApp')
-  .factory('User', function (Socket, Roster) {
+  .factory('User', function () {
     var isLoggedIn = false;
     var details;
     var message;
@@ -19,11 +19,6 @@ angular.module('workspaceApp')
       details:details,
       message:message,
       invite:invite,
-      ids:ids,
-      setIds:function(_ids){
-        ids = _ids;
-        Roster.setIds(ids);
-        Socket.emit('ids', ids);
-      }
+      ids:ids
     };
   });

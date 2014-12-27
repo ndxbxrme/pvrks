@@ -1,31 +1,31 @@
 'use strict';
 /*global angular:false*/
 angular.module('workspaceApp')
-  .controller('DashboardCtrl', function ($scope, $http, $window, Socket, User, Alert) {
-    User.setIds({
+  .controller('DashboardCtrl', function ($scope, $http, $window, $timeout, Socket, User, Alert, Session, Team, Org) {
+    Socket.setIds({
       org:undefined,
       team:undefined,
       session:undefined
     });
+    $scope.Session = Session;
+    $scope.Team = Team;
+    $scope.Org = Org;
     var loadData = function loadData(){
-      $http.get('/api/organisations/user')
-      .success(function(orgs){
-        $scope.orgs = orgs;
-      });
-      $http.get('/api/teams/user')
-      .success(function(teams){
-        $scope.teams = teams;
-      });
       $http.post('/api/invites/user', {
         userId:User.details._id,
         inviteId:$window.location.search.replace('?','')
       })
       .success(function(invites) {
         $scope.invites = invites;
-      })
+      });
     };
     loadData();
 
+    function tick(){
+      $scope.now = Date.now();
+      $timeout(tick, 1000);
+    }
+    tick();
 
     $scope.acceptInvite = function(invite){
       $http.post('/api/invite/accept', invite).success(function(){

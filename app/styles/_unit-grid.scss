@@ -30,11 +30,10 @@
             .inner {
                 width: 100%;
                 height: 100%;
-                background: #220875;
                 transition: width 0.2s;
             }
             
-            &:hover {
+            &:hover:not(.ui-sortable-helper) {
                 
                 .inner {
                     width: 80%;
@@ -56,10 +55,16 @@
                     text-align: right;
                     line-height: 30px;
                     text-decoration: none;
-                    padding-right: 20px;
+                    padding-right: 10px;
                     box-sizing: border-box;
                     transition: 0.1s;
                     color: #000;
+                    font-size: 0.8em;
+                    
+                    span {
+                        opacity: 0.2;
+                        margin-left: 4px;
+                    }
                 }
                 a:first-of-type {
                     border-bottom: 1px solid #ccc;
@@ -75,25 +80,12 @@
             }
             .right {
                 float: right;
-                margin: 10px;
+                margin: 6px 6px 0px 0px;
+                text-align: right;
             }
         }
         
-        .destination .inner {
-            background-color: #72bfbc;
-        }
-        .gather .inner {
-            background-color: #9b72bf;
-        }
-        .generate .inner {
-            background-color: #a7bf72;
-        }
-        .filter .inner {
-            background-color: #bf7276;
-        }
-        .action .inner {
-            background-color: #be72bf;
-        }
+
     }
     .add {
         position: absolute;
@@ -104,12 +96,13 @@
         text-align: center;
         border: 3px solid #ccc;
         border-radius: 10px;
+        cursor: pointer;
         
         span {
             width: 40px;
             height: 40px;
             border: 3px solid #ccc;
-            font-size: 60px;
+            font-size: 30px;
             line-height: 40px;
             font-weight: 900;
             border: 3px solid #ccc;
@@ -119,6 +112,102 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            transition: 0.2s;
+        }
+        
+        &:hover {
+            span {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
         }
     }
+}
+
+
+.clickscreen {
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 100%; height: 100%;
+    background: white;
+    opacity: 0.6;
+}
+
+.unit-grid .destination .inner {
+    background-color: #72bfbc;
+}
+.unit-grid .gather .inner {
+    background-color: #9b72bf;
+}
+.unit-grid .generate .inner {
+    background-color: #a7bf72;
+}
+.unit-grid .filter .inner {
+    background-color: #bf7276;
+}
+.unit-grid .action .inner {
+    background-color: #be72bf;
+}
+
+.break {
+    height: 45px !important;
+    
+    .inner {
+        background-color: #ccc;
+    }
+    .buttons {
+        a {
+            line-height: 22px!important;
+        }
+    }
+}
+
+.unit-selector {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    
+    .units {
+        position: absolute;
+        top: 50%; left: 50%;
+        width: 100%;
+        transform: translate(-50%,-50%);
+        perspective: 300px;
+        
+        h3 {
+            margin: 0;
+        }
+        .item {
+            width: 200px;
+            height: 200px!important;
+            display: inline-block;
+            line-height: 200px;
+            margin-bottom: 4px;
+            position: relative;
+            transition: 0.1s;
+            cursor: pointer;
+            animation: ROTOPEN .2s linear;
+            
+            .inner {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0; left: 0;
+            }
+            
+            &:hover {
+                transform: translateY(-10px);
+            }
+        }
+    }
+}
+.unit-editor {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+}
+@keyframes ROTOPEN {
+    0% { transform: rotateX(90deg)}
+    100% { transform: rotateX(0deg)}
 }

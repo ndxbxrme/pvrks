@@ -1,7 +1,4 @@
-@keyframes HASNEW {
-  0% {transform: scale(1.0)}
-  50% {transform: scale(1.1)}
-}
+
 .msgContainer {
   position: fixed;
   left: 100%;
@@ -31,11 +28,13 @@
     position: absolute;
     top: 0;
     right: 100%;
-    font-size: 3em;
-    color: #ccc;
     padding: 10px 10px 0 0;
     cursor: pointer;
     transition: 0.1s transform;
+    
+    & span {
+      transition: none;
+    }
     
     &:hover {
       transform: scale(1.1);

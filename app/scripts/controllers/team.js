@@ -1,13 +1,13 @@
 'use strict';
 /*global angular:false*/
 angular.module('workspaceApp')
-  .controller('TeamCtrl', function ($scope,$route,$http,Alert,User) {
+  .controller('TeamCtrl', function ($scope,$route,$http,Alert,Socket) {
     $scope.slug = $route.current.params.slug;
     $scope.team = undefined;
     $http.get('/api/team/' + $route.current.params.slug)
     .success(function(team){
       $scope.team = team;
-      User.setIds({
+      Socket.setIds({
         org: undefined,
         team: team._id,
         session: undefined

@@ -1,10 +1,14 @@
-.orgs, .teams {
+.orgs, .teams, .sessions {
     .item {
         display: inline-block;
         position: relative;
         height: 140px;
         transition: transform 0.1s;
         cursor: pointer;
+        
+        &.alert {
+            animation: HASNEW 2s linear infinite;
+        }
         
         img {
             opacity: 0.3;
@@ -26,6 +30,10 @@
             bottom: 10px; left: 0; right: 0;
             height: 20px;
             background-color: #f00;
+            font-size: 0.8em;
+            line-height: 20px;
+            padding-left: 10px;
+            color: #fff;
         }
         
         .add {

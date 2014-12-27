@@ -12,9 +12,24 @@
         <input type="button" ng-click="declineInvite(invite)" value="Decline" class="decline" />
     </div>
 </div>
-<div class="orgs" ng-show="orgs.length > 0">
+<div class="sessions" ng-show="Session.getSessions().length>0">
+    <h4>sessions</h4>
+    <div ng-repeat="session in Session.getSessions()" class="item" ng-class="{waiting:session.epochStart > now,'in-progress':session.epochStart > now&&session.epochEnd < now,'finished':session.epochEnd < now, alert:now > session.epochStart - 60 * 1000 && now < session.epochStart}">
+        <a href="session/{{session.slug}}">
+            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{session.image}}.jpg"></img>
+            <div class="name"><h3>{{session.name}}</h3></div>
+            <div class="color-band" style="background-color:{{session.color}}">
+                <div ng-show="session.epochStart > now" class="status">Starts in {{session.epochStart - now | duration:'largest'}}</div>
+                <div ng-show="session.epochStart < now&&session.epochEnd > now" class="status">In progress ({{session.epochEnd - now | duration:'largest'}} left)</div>
+                <div ng-show="session.epochEnd < now" class="status">Finished ({{now - session.epochEnd | duration:'largest'}} ago)</div>
+            </div>
+        </a>
+    </div>
+    <div class="item"><a href="/session" class="add">+</a></div>
+</div>
+<div class="orgs" ng-show="Org.getOrgs().length > 0">
     <h4>organizations i blong to</h4>
-    <div ng-repeat="org in orgs" class="item">
+    <div ng-repeat="org in Org.getOrgs()" class="item">
         <a href="org/{{org.slug}}">
             <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{org.image}}.jpg"></img>
             <div class="name"><h3>{{org.name}}</h3></div>
@@ -23,9 +38,9 @@
     </div>
     <div class="item"><a href="/org" class="add">+</a></div>
 </div>
-<div class="teams" ng-show="teams.length > 0">
+<div class="teams" ng-show="Team.getTeams().length > 0">
     <h4>teams i'm in</h4>
-    <div ng-repeat="team in teams" class="item">
+    <div ng-repeat="team in Team.getTeams()" class="item">
         <a href="team/{{team.slug}}">
             <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{team.image}}.jpg"></img>
             <div class="name"><h3>{{team.name}}</h3></div>
@@ -46,7 +61,7 @@
     <input type="submit" />
 </form>
 <h4>accept an invite</h4>
-<form name="inviteForm" ng-submit="submitInvite()">
+<form name="inviteForm" ng-submit="acceptInvite()">
     <input type="text" ng-model="$parent.inviteToken" />
     <input type="submit" />
 </form>

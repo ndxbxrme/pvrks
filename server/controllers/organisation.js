@@ -2,7 +2,8 @@
 
 var Org = require('../models/organisation'),
   User = require('../models/user'),
-  Toolkit = require('../toolkit');
+  Toolkit = require('../toolkit'),
+  Sockets = require('../sockets/sockets');
 
 module.exports = {
   findAllByUserId: function(req, res) {
@@ -36,7 +37,8 @@ module.exports = {
                 }
                 org.image = req.body.image;
                 org.color = req.body.color;
-                org.save(function(err){
+                org.save(function(err, org){
+                  Sockets.emitToUsers(org.users, 'org', org);
                   res.json(err);
                 });
               });

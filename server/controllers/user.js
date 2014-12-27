@@ -71,7 +71,8 @@ module.exports = {
         userId: req.body._id
       },{
         username: req.body.name,
-        userimage: req.body.image
+        userimage: req.body.image,
+        color: req.body.color
       }, {
         multi: true
       }).exec();

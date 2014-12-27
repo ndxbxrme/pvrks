@@ -11,7 +11,10 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
     <link rel="stylesheet" href="bower_components/minicolors/jquery.minicolors.css" />
-    <link rel="stylesheet" href="bower_components/gridster/dist/jquery.gridster.css" />
+    <link rel="stylesheet" href="bower_components/froala/css/froala_editor.min.css" />
+    <link rel="stylesheet" href="bower_components/froala/css/froala_content.min.css" />
+    <link rel="stylesheet" href="bower_components/froala/css/froala_style.min.css" />
+    <link rel="stylesheet" href="bower_components/froala/css/font-awesome.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <link rel="stylesheet" href="bower_components/humane/themes/libnotify.css">
@@ -86,15 +89,24 @@
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="bower_components/nicescroll/jquery.nicescroll.js"></script>
     <script src="bower_components/minicolors/jquery.minicolors.js"></script>
-    <script src="bower_components/gridster/dist/jquery.gridster.js"></script>
     <script src="bower_components/pleasejs/dist/Please.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/froala/js/froala_editor.min.js"></script>
+    <script src="bower_components/froala/js/plugins/block_styles.min.js"></script>
+    <script src="bower_components/froala/js/plugins/colors.min.js"></script>
+    <script src="bower_components/froala/js/plugins/media_manager.min.js"></script>
+    <script src="bower_components/froala/js/plugins/tables.min.js"></script>
+    <script src="bower_components/froala/js/plugins/video.min.js"></script>
+    <script src="bower_components/froala/js/plugins/font_family.min.js"></script>
+    <script src="bower_components/froala/js/plugins/font_size.min.js"></script>
+    <script src="bower_components/froala/js/plugins/char_counter.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.angularjs.org/1.3.8/i18n/angular-locale_en-gb.js"></script>
-
+    <script src="https://rawgit.com/ndxbxrme/7218e26562f65b7ff98d/raw/d45a10f92e1e2865759ff19835975de52b85f263/interpret-date.js"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
@@ -121,12 +133,21 @@
         <script src="scripts/directives/imageuploader.js"></script>
         <script src="scripts/directives/minicolors.js"></script>
         <script src="scripts/directives/switch.js"></script>
-        <script src="scripts/directives/sessiongrid.js"></script>
         <script src="scripts/controllers/teamsetup.js"></script>
         <script src="scripts/controllers/orgsetup.js"></script>
         <script src="scripts/controllers/sessionsetup.js"></script>
         <script src="scripts/directives/resource.js"></script>
         <script src="scripts/directives/unitgrid.js"></script>
+        <script src="scripts/directives/interpretdate.js"></script>
+        <script src="scripts/filters/duration.js"></script>
+        <script src="scripts/directives/duration.js"></script>
+        <script src="scripts/services/toolkit.js"></script>
+        <script src="scripts/directives/ideabubbles.js"></script>
+        <script src="scripts/directives/ideamodal.js"></script>
+        <script src="scripts/directives/ideainput.js"></script>
+        <script src="scripts/services/session.js"></script>
+        <script src="scripts/services/team.js"></script>
+        <script src="scripts/services/org.js"></script>
         <!-- endbuild -->
         
 </body>

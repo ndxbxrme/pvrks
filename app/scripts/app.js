@@ -15,18 +15,23 @@ angular
 	  'ui.sortable'
   ])
   .config(function ($routeProvider, $locationProvider) {
-    var checkLogin = function($q, $location, $http, User, Socket, Alert) {
+    var firstFetch = true;
+    var checkLogin = function($q, $location, $http, User, Socket, Alert, Session, Team, Org) {
       var deferred = $q.defer();
       $http.get('/api/user')
       .success(function(user){
-        console.log('hey');
         if(user){
-          console.log(User.details);
           if(!User.details) {
             Socket.emit('user', user);
             Alert.log('Welcome back ' + user.name);
           }
           User.details = user;
+          if(firstFetch) {
+            firstFetch = false;
+            Session.fetchSessions();
+            Team.fetchTeams();
+            Org.fetchOrgs();
+          }
           deferred.resolve(user);
         }
         else {
@@ -42,16 +47,20 @@ angular
       });
       return deferred.promise;
     };
-    var softLogin = function($q, $http, User, Socket) {
+    var softLogin = function($q, $http, User, Socket, Session, Team, Org) {
       var deferred = $q.defer();
       $http.get('/api/user')
       .success(function(user){
-        console.log('ho');
-        console.log(User.details);
         if(!User.details) {
           Socket.emit('user', user);
         }
         User.details = user;
+        if(firstFetch) {
+          firstFetch = false;
+          Session.fetchSessions();
+          Team.fetchTeams();
+          Org.fetchOrgs();
+        }
         deferred.resolve(user);
       })
       .error(function(){

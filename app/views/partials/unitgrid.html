@@ -1,0 +1,48 @@
+  <div class="unit-grid">
+    <ul ui-sortable="{update:update()}" ng-model="session.units">
+      <li ng-repeat="unit in session.units" class="{{unit.type}}">
+        <div class="buttons">
+          <a href="#" ng-click="edit(unit)">Edit<span class="icon-menu"></span></a>
+          <a href="#" ng-click="remove(unit)">Remove<span class="icon-remove"></span></a>
+        </div>
+        <div class="inner">
+          <h3>{{unit.name}}</h3>
+          <div class="right">
+            <div class="time">{{times[$index] | date:'shortTime'}}</div>
+            <div class="duration">{{unit.duration | duration}}</div>
+          </div>
+        </div>
+      </li>            
+    </ul>{{session.endDate | date:'short'}}
+    <h3 ng-show="session.totalDuration" class="text-center">Total duration {{session.totalDuration | duration}}</h3>
+    <div class="add" ng-click="add()" style="top: {{items.length * (70 + 14)}}px"><span class="icon-plus"></span></div>
+    <div class="clickscreen" ng-show="unitSelectorOut || unitEditorOut"></div>
+    <div class="unit-selector" ng-show="unitSelectorOut" ng-click="unitSelectorOut=false">
+      <div class="units">
+          <div class="item destination" ng-click="addUnit('destination')"><span class="inner"><h3>Set destination</h3></span></div>
+        <div class="item gather" ng-click="addUnit('gather')"><span class="inner"><h3>Gather resources</h3></span></div>
+        <div class="item generate" ng-click="addUnit('generate')"><span class="inner"><h3>Generate ideas</h3></span></div>
+        <div class="item filter" ng-click="addUnit('filter')"><span class="inner"><h3>Sort and filter</h3></span></div>
+        <div class="item action" ng-click="addUnit('action')"><span class="inner"><h3>Plan of action</h3></span></div>
+        <div class="item break" ng-click="addUnit('break')"><span class="inner"><h3>Break</h3></span></div>
+      </div>
+    </div>
+    <div class="unit-editor" ng-show="unitEditorOut">
+      <div class="inner">
+        <form name="unitForm" novalidate ng-submit="unitEditorSubmit()">
+          <div>
+            <label>Name</label>
+            <input type="text" ng-model="newUnit.name" />
+          </div>
+          <div>
+            <label>Duration</label>
+            <input type="text" duration ng-model="newUnit.duration" />
+            <h3>{{newUnit.duration | duration}}</h3>
+          </div>
+          <div>
+            <input type="submit" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

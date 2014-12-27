@@ -1,0 +1,24 @@
+.session {
+  .percentage {
+    position: fixed;
+    top: 0; left: 0;
+    height: 10px;
+    transition: 0.5s linear;
+    z-index: 200;
+  }
+}
+.destination .percentage {
+    background-color: #72bfbc;
+}
+.gather .percentage {
+    background-color: #9b72bf;
+}
+.generate .percentage {
+    background-color: #a7bf72;
+}
+.filter .percentage {
+    background-color: #bf7276;
+}
+.action .percentage {
+    background-color: #be72bf;
+}

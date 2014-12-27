@@ -1,67 +1,74 @@
 'use strict';
 /*global angular:false, Please:false*/
 angular.module('workspaceApp')
-  .controller('SessionsetupCtrl', function ($scope, $route, $http, User, Alert) {
+  .controller('SessionsetupCtrl', function ($scope, $route, $http, $filter, $timeout, User, Toolkit, Alert) {
+    var basicSession = [
+      {
+        type:'destination',
+        name:'Set destination',
+        duration: 3 * 60 * 1000
+      },
+      {
+        type:'gather',
+        name:'Gather resources',
+        duration: 3 * 60 * 1000
+      },
+      {
+        type:'generate',
+        name:'Generate ideas',
+        duration: 3 * 60 * 1000
+      },
+      {
+        type:'filter',
+        name:'Sort and filter',
+        duration: 3 * 60 * 1000
+      },
+      {
+        type:'action',
+        name:'Plan of action',
+        duration: 3 * 60 * 1000
+      }
+    ];  
+       $scope.times = [];
+        $scope.newUnit = {};
     $scope.slug = $route.current.params.slug;
     function load() {
-      $http.get('/api/session/' + $scope.slug)
-      .success(function(session){
-        if(session) {
-          $scope.session = session;
-          angular.forEach(session.users, function(user){
-            if(user.id===User.details._id) {
-              $scope.role = user.role;
-            }
-          });
-        }
-        else {
-          $scope.session = {
-            color: Please.make_color()
-          };
-        }
-      });
+      if($scope.slug){
+        $http.get('/api/session/' + $scope.slug)
+        .success(function(session){
+          if(session) {
+            $scope.session = session;
+            Toolkit.calcTimes($scope);
+            angular.forEach(session.users, function(user){
+              if(user.id===User.details._id) {
+                $scope.role = user.role;
+              }
+            });
+          }
+          else {
+            $scope.session = {
+              color: Please.make_color(),
+              units: basicSession
+            };
+          }
+        });
+      }
+      else {
+        $scope.session = {
+          color: Please.make_color(),
+          units: basicSession
+        };
+      }
       $http.get('/api/organisations/user')
       .success(function(orgs){
         $scope.orgs = orgs;
       });
     }
     load();
-
-    $scope.units = [
-      {
-        type:'destination',
-        name:'Set destination',
-        startTime:'2:30pm',
-        duration:'30mins'
-      },
-      {
-        type:'gather',
-        name:'Gather resources',
-        startTime:'2:30pm',
-        duration:'30mins'
-      },
-      {
-        type:'generate',
-        name:'Generate ideas',
-        startTime:'2:30pm',
-        duration:'30mins'
-      },
-      {
-        type:'filter',
-        name:'Sort and filter',
-        startTime:'2:30pm',
-        duration:'30mins'
-      },
-      {
-        type:'action',
-        name:'Plan of action',
-        startTime:'2:30pm',
-        duration:'30mins'
-      }
-    ];    
+  
     $scope.submit = function(create){
       if(create || $scope.session._id) {
-        $http.post('/api/teams/user', $scope.session).success(function(){
+        $http.post('/api/session/user', $scope.session).success(function(){
           Alert.log('Session updated');
         });
       }

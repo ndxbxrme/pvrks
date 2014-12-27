@@ -13,6 +13,18 @@ var emitToAll = function emitToAll(idKey, id, message, data) {
     callback();
   });
 };
+var emitToUsers = function emitToUsers(users, message, data) {
+  console.dir(users);
+  users.forEach(function(user){
+    sockets.forEach(function(socket){
+      console.log(socket.user);
+      if(socket.user && socket.user._id===user.id.toString()) {
+        console.log('emitting ' + message);
+        socket.emit(message, data);
+      }
+    });
+  });
+};
 var updateRosters = function updateRosters(ids, prevs) {
   var rosters = {
     orgUsers: [],
@@ -68,8 +80,12 @@ module.exports = {
     });
   },
   emitToAll: function(idKey, id, message, data) {
-    console.log('emitting ' + message)
+    console.log('emitting ' + message);
     emitToAll(idKey, id, message, data);
+  },
+  emitToUsers: function(users, message, data) {
+    console.log('emitting to users');
+    emitToUsers(users, message, data);
   },
   updateUser: function(user) {
     for(var f=0; f<sockets.length; f++) {

@@ -1,0 +1,11 @@
+<div class="idea-modal" ng-class="{open:ideaOpen}">
+  <form name="ideaForm" ng-submit="sendIdea()">
+    <div class="inner">
+      <div idea-input="" ng-model="idea.content" class="idea-input" />
+      <div class="controls">
+        <a class="button" ng-click="sendIdea()"><span class="icon-arrow-right2"></span></a>
+        <a class="button" ng-click="closeIdea()"><span class="icon-close"></span></a>
+      </div>
+    </div>
+  </form>
+</div>

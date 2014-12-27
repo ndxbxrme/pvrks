@@ -1,5 +1,6 @@
 <h1 ng-hide="session._id">Make a session</h1>
 <h1 ng-show="session._id">Edit session {{session.name}}</h1>
+<div><a href="session/{{session.slug}}">Go to session</a></div>
 <div class="sessionLeft">
   <form name="sessionForm" novalidate ng-submit="submit(true)">
     <div>
@@ -21,6 +22,11 @@
       <label>Color</label>
       <input minicolors ng-model="session.color" ng-blur="submit()" ng-disabled="role>1"  />
     </div>
+    <div>
+      <label>Date/Time (eg 7 aug, 2pm)</label>
+      <input type="text" interpret-date="" ng-model="session.startDate" ng-blur="submit()"/>
+      <h3>{{session.startDate | date:'short'}}</h3>
+    </div>
     
     <div ng-show="!session._id">
       <input type="submit" value="Create" />
@@ -28,23 +34,6 @@
   </form>
 </div>
 <div class="sessionRight">
-  <div class="unit-grid">
-    <ul ui-sortable ng-model="units">
-      <li ng-repeat="unit in units" class="{{unit.type}}">
-        <div class="buttons">
-          <a href="#">Edit</a>
-          <a href="#">Remove</a>
-        </div>
-        <div class="inner">
-          <h3>{{unit.name}}</h3>
-          <div class="right">
-            <div class="time">{{unit.startTime}}</div>
-            <div class="duration">{{unit.duration}}</div>
-          </div>
-        </div>
-      </li>            
-    </ul>        
-    <div class="add" ng-click="add()" style="top: {{items.length * (70 + 14)}}px"><span>+</span></div>
-  </div>
+  <div unit-grid=""></div>
 </div>
   

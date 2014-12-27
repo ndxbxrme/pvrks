@@ -24,6 +24,12 @@
         "configs": {
             "@inited": "true",
             "json()": {
+                "CSS": {
+                    "command": "grunt css",
+                    "debug": true,
+                    "name": "CSS",
+                    "runner": "Shell command"
+                },
                 "dist": {
                     "command": "./server/app.js",
                     "debug": true,

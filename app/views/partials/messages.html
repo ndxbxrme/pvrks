@@ -1,7 +1,7 @@
 <div class="msgContainer" ng-class="{open:open,hasNew:message.hasNew(type)}">
     <span class="handle" ng-click="open=!open;message.resetNew(type)">
-        <span class="icon-mail" ng-hide="open"></span>
-        <span class="icon-arrow-right" ng-show="open"></span>
+        <span class="button icon-bubble" ng-hide="open"></span>
+        <span class="button icon-arrow-right2" ng-show="open"></span>
     </span>
     <h3>    
         <span ng-show="type==='org'">Organization</span>
