@@ -23,6 +23,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-home:before {
+	content: "\e63a";
+}
 .icon-pencil:before {
 	content: "\e600";
 }
@@ -56,6 +59,9 @@
 .icon-tag:before {
 	content: "\e62b";
 }
+.icon-address-book:before {
+	content: "\e645";
+}
 .icon-clock:before {
 	content: "\e60a";
 }
@@ -67,6 +73,9 @@
 }
 .icon-bubbles:before {
 	content: "\e62c";
+}
+.icon-users:before {
+	content: "\e646";
 }
 .icon-lock:before {
 	content: "\e62d";
@@ -82,6 +91,12 @@
 }
 .icon-bars:before {
 	content: "\e60f";
+}
+.icon-trophy:before {
+	content: "\e647";
+}
+.icon-mug:before {
+	content: "\e648";
 }
 .icon-meter2:before {
 	content: "\e62f";
@@ -135,7 +150,7 @@
 	content: "\e639";
 }
 .icon-close:before {
-	content: "\e63a";
+	content: "\e64a";
 }
 .icon-checkmark:before {
 	content: "\e63b";
@@ -188,6 +203,9 @@
 .icon-twitter:before {
 	content: "\e603";
 }
+.icon-feed:before {
+	content: "\e649";
+}
 .icon-github:before {
 	content: "\e604";
 }
@@ -227,6 +245,12 @@
 .icon-chrome:before {
 	content: "\e625";
 }
+.icon-link:before {
+	content: "\e64b";
+}
 .icon-light-bulb:before {
 	content: "\e642";
+}
+.icon-info2:before {
+	content: "\e64c";
 }

@@ -27,6 +27,10 @@ angular.module('workspaceApp')
       });
     };
     return {
+      clearData: function(){
+        _orgs = [];
+        _org = undefined;
+      },
       fetchOrgs: function(){
         $http.get('/api/organisations/user')
         .success(function(orgs){

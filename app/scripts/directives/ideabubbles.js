@@ -1,27 +1,36 @@
 'use strict';
 /*global angular:false, d3:false*/
 angular.module('workspaceApp')
-.directive('ideaBubbles', function($timeout){
+.directive('ideaBubbles', function($timeout, $filter, Idea, Session){
     return {
         restrict: 'AE',
-        scope: {
-            nodes: '=ideaBubbles'  
+        scope: { 
         },
         link: function(scope, elem, attrs) {
-            scope.$watch('nodes', function(n){
-                update();
+            Idea.fetchIdeas();
+            scope.$watch(function(){return Idea.updated();}, function(n, o){
+                if(n!==o) {
+                    scope.nodes = Idea.getIdeas();
+                    update();
+                }
             },true);
+            scope.$parent.$watch('ideaSearch', function(n){
+                /*if(!n) {
+                    return;
+                }*/
+                scope.nodes = $filter('filter')(Idea.getIdeas(), n);
+                update();
+            });
             
             var initialSetup = true; //bubble delay on first load
             
-            var color = d3.scale.category20();
             var force = d3.layout.force()
             .gravity(0.02)
-            //.friction(0.6)
-            .charge(0)
-            force.start();
+            .friction(0.9)
+            .charge(90);
+            //force.start();
             
-            var drag = force.drag().on("dragstart", dragstart);;
+            var drag = force.drag().on("dragstart", dragstart);
             
             var body = d3.select(elem[0]);
             var svg = body.append('svg')
@@ -31,16 +40,41 @@ angular.module('workspaceApp')
                 
             }
             
+            function getMaxWidth(content) {
+                if(content.length < 100) {
+                    return '0';
+                }
+                if(content.length < 200) {
+                    return '100';
+                }
+                if(content.length < 300) {
+                    return '200';
+                }
+                if(content.length < 400) {
+                    return '300';
+                }
+                if(content.length < 500) {
+                    return '400';
+                }
+                return '500';
+            }
+            
             function update() {
                 var width = elem[0].offsetWidth;
                 var height = elem[0].offsetHeight;
                 var divs = body
                 .selectAll('div')
-                .data(scope.nodes.slice(1))
-                .enter().append('div')
+                .data(scope.nodes, function(d){return d._id;});
+                
+                divs.exit()
+                .transition().ease('ease-out')
+                .duration(100)
+                .style('opacity',0).remove();
+                
+                divs.enter().append('div')
                 .html(function(d){return d.content; })
-                .style('max-width', function(d){ return (d.content.length>100 ? '200' : '100') + 'px'})
-                .each(function(d){d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20; console.log(d.radius)})
+                .style('min-width', function(d){ return getMaxWidth(d.content) + 'px'})
+                .each(function(d){d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20;})
                 .style('opacity', 0)
                 .transition()
                 .ease('elastic')
@@ -48,9 +82,17 @@ angular.module('workspaceApp')
                 .duration(750)
                 .style('opacity', 1);
                 
-                var node = svg.selectAll('circle')
-                .data(scope.nodes.slice(1))
-                .enter().append('circle')
+                
+                var nodes = svg.selectAll('circle')
+                .data(scope.nodes, function(d){return d._id;});
+                
+                nodes.exit()
+                .transition()
+                .ease('ease-out').duration(100)
+                .attr('r', 0)
+                .remove();
+                
+                nodes.enter().append('circle')
                 .style('stroke', function(d, i) { return d.color;})
                 .style('fill', function(d){ return d.color;})
                 .style('fill-opacity', 0.2)
@@ -63,11 +105,13 @@ angular.module('workspaceApp')
                 svg.selectAll('circle').call(drag);
                 
                 
-                force.nodes(scope.nodes)
+                
+                force.nodes(scope.nodes, function(d){return d._id;})
                 .size([width, height]);
                 force.start();
                 
             }
+            //update();
             $timeout(function(){
                 initialSetup = false;
             }, 3000);

@@ -1,7 +1,7 @@
 'use strict';
 /*global angular:false, Please:false*/
 angular.module('workspaceApp')
-  .controller('SessionsetupCtrl', function ($scope, $route, $http, $filter, $timeout, User, Toolkit, Alert) {
+  .controller('SessionsetupCtrl', function ($scope, $route, $http, $filter, $timeout, User, Toolkit, Alert, Session, Nav) {
     var basicSession = [
       {
         type:'destination',
@@ -44,12 +44,18 @@ angular.module('workspaceApp')
                 $scope.role = user.role;
               }
             });
+            Nav.pageTitle = 'Edit session ' + session.name;
+            Nav.titleUrl = '/session/' + session.slug;
+            Nav.color = session.color;
           }
           else {
             $scope.session = {
               color: Please.make_color(),
               units: basicSession
             };
+            Nav.pageTitle = 'Create a session';
+            Nav.titleUrl = '/session/';
+            Nav.color = $scope.session.color;
           }
         });
       }
@@ -69,6 +75,7 @@ angular.module('workspaceApp')
     $scope.submit = function(create){
       if(create || $scope.session._id) {
         $http.post('/api/session/user', $scope.session).success(function(){
+          Session.fetchSessions();
           Alert.log('Session updated');
         });
       }

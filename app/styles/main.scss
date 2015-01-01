@@ -1,6 +1,5 @@
 @import "pure",
         "icomoon",
-        "keyframes",
         "file-uploader",
         "image-uploader",
         "messages",
@@ -11,7 +10,13 @@
         "unit-grid",
         "session",
         "idea-bubbles",
-        "idea-modal";
+        "idea-modal",
+        "keyframes",
+        "nav",
+        "invite-modal",
+        "session-resources";
+        
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,200);
 /*
 @import url(http://weloveiconfonts.com/api/?family=zocial);
 
@@ -40,7 +45,7 @@
       }
 
 body,html {
-  margin: 10px; padding: 0;
+  margin: 0px; padding: 0;
 }
 body {
   padding: 0px!important;
@@ -51,9 +56,17 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'AmburegulRegular'; 
+  font-family: 'Raleway', arial, verdana, helvetica, sans-serif; 
   font-weight: normal; 
   font-style: normal; 
+  letter-spacing: 0.05em;
+}
+
+.container {
+  padding-top: 4em;
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /*

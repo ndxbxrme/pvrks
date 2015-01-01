@@ -27,6 +27,10 @@ angular.module('workspaceApp')
       });
     };
     return {
+      clearData: function(){
+        _teams = [];
+        _team = undefined;
+      },
       fetchTeams: function(){
         $http.get('/api/teams/user')
         .success(function(teams){

@@ -7,6 +7,9 @@ angular.module('workspaceApp')
     socket.on('rosters', function(data){
       Roster.setRoster(data);
     });
+    socket.on('updateRoster', function(type){
+      Roster.doReload(type);
+    });
     socket.on('message', function(message){
       Message.addMessage(message);
     });
@@ -14,6 +17,7 @@ angular.module('workspaceApp')
       Resource.addResource(resource);
     });
     socket.on('idea', function(idea){
+      console.log('ey');
       Idea.addIdea(idea);
     });
     socket.on('bsession', function(session){

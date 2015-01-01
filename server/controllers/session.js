@@ -70,33 +70,36 @@ module.exports = {
           }
           else {
             console.log('adding' + slug);
-            var newSession = new Session();
-            newSession.name = req.body.name;
-            newSession.slug = slug;
-            newSession.org = req.body.org;
-            newSession.image = req.body.image;
-            newSession.color = req.body.color;
-            newSession.startDate = req.body.startDate;
-            newSession.endDate = req.body.endDate;
-            newSession.epochStart = new Date(req.body.startDate).getTime();
-            newSession.epochEnd = new Date(req.body.endDate).getTime();
-            newSession.totalDuration = req.body.totalDuration;
-            newSession.units= req.body.units;
-            /*req.body.units.forEach(function(unit){
-              newSession.units.push({
-                type: unit.type,
-                name: unit.name,
-                duration: unit.duration
+            Toolkit.randomImage(req.body.image, function(image){
+              var newSession = new Session();
+              newSession.name = req.body.name;
+              newSession.slug = slug;
+              newSession.org = req.body.org;
+              newSession.image = image;
+              newSession.color = req.body.color;
+              newSession.startDate = req.body.startDate;
+              newSession.endDate = req.body.endDate;
+              newSession.epochStart = new Date(req.body.startDate).getTime();
+              newSession.epochEnd = new Date(req.body.endDate).getTime();
+              newSession.totalDuration = req.body.totalDuration;
+              newSession.units= req.body.units;
+              /*req.body.units.forEach(function(unit){
+                newSession.units.push({
+                  type: unit.type,
+                  name: unit.name,
+                  duration: unit.duration
+                });
+              });*/
+              newSession.users.push({
+                id: req.user._id,
+                name: user.name,
+                image: user.image,
+                slug: user.slug,
+                role: 0
               });
-            });*/
-            newSession.users.push({
-              id: req.user._id,
-              name: user.name,
-              image: user.image,
-              role: 0
-            });
-            newSession.save(function(err){
-              res.json(err);
+              newSession.save(function(err){
+                res.json(err);
+              });
             });
           }
         });

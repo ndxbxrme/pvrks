@@ -1,34 +1,28 @@
 'use strict';
-/*global angular:false*/
+/*global angular:false, Snap:false, mina:false*/
 angular.module('workspaceApp')
-  .directive('ideaModal', function (Idea) {
+  .directive('ideaModal', function (Idea, Session) {
     return {
       templateUrl: '/views/partials/ideamodal.html',
       restrict: 'EA',
       replace: true,
-      scope: {
-        sessionId: '@',
-        unitId: '@',
-        ideaOpen: '=ideaModal'
-      },
-      link: function postLink(scope, element, attrs) {
-        scope.$watch('sessionId', function(n){
-          if(!n) {
-            return;
-          }
-          Idea.fetchIdeas({session:n});
-        });
+      scope: {},
+      link: function postLink(scope, elem, attrs) {
+        scope.Idea = Idea;
         scope.sendIdea = function sendIdea() {
-          Idea.sendIdea({
-            content: scope.idea.content,
-            session: scope.sessionId,
-            unit: scope.unitId
-          });
+          if(scope.idea && scope.idea.content && scope.idea.content.replace(/<p><br><\/p>/gi,'')){
+            Idea.sendIdea({
+              content: scope.idea.content.replace(/<p><br><\/p>/gi,''),
+              session: Session.getSession()._id,
+              unit: Session.getUnit()._id,
+              type: Session.getUnit().type
+            });
+          }
           scope.idea = undefined;
-          scope.ideaOpen = false;
+          Idea.modalOpen = false;
         };
         scope.closeIdea = function closeIdea() {
-          scope.ideaOpen = false;
+          Idea.modalOpen = false;
         };
       }
     };

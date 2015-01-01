@@ -1,7 +1,7 @@
 'use strict';
 /*global angular:false, Please:false*/
 angular.module('workspaceApp')
-  .controller('TeamsetupCtrl', function ($scope, $route, $http, User, Alert) {
+  .controller('TeamsetupCtrl', function ($scope, $route, $http, User, Alert, Team, Nav) {
     $scope.slug = $route.current.params.slug;
     function load() {
       $http.get('/api/team/' + $scope.slug)
@@ -13,11 +13,17 @@ angular.module('workspaceApp')
               $scope.role = user.role;
             }
           });
+          Nav.pageTitle = 'Editing team ' + team.name;
+          Nav.titleUrl = '/team/' + team.slug;
+          Nav.color = team.color;
         }
         else {
+          Nav.pageTitle = 'Add a team ';
+          Nav.titleUrl = '/team/';
           $scope.team = {
             color: Please.make_color()
           };
+          Nav.color = $scope.team.color;
         }
       });
       $http.get('/api/organisations/user')
@@ -30,6 +36,7 @@ angular.module('workspaceApp')
     $scope.submit = function(create){
       if(create || $scope.team._id) {
         $http.post('/api/teams/user', $scope.team).success(function(){
+          Team.fetchTeams();
           Alert.log('Team updated');
         });
       }

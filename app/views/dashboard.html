@@ -1,8 +1,5 @@
-<h1>dashboard</h1>
-<img class="thumbnail inline ng-isolate-scope" angle="20" format="jpg" 
-  ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_50,w_50/{{user.details.image}}.jpg"></img> {{user.details.name}}
 <div class="invites" ng-show="invites.length>0">
-    <h4>invites</h4>
+    <h4 class="text-center">invites</h4>
     <div class="item" ng-repeat="invite in invites">
         <p>You have been invited to join</p>
         <h4 ng-show="invite.team.name">Team {{invite.team.name}}</h4>
@@ -12,42 +9,51 @@
         <input type="button" ng-click="declineInvite(invite)" value="Decline" class="decline" />
     </div>
 </div>
+<div class="newUser" ng-show="Session.getSessions().length===0 && Org.getOrgs().length===0 && Team.getTeams().length===0 && invites.length>0">looks like you're new here</div>
 <div class="sessions" ng-show="Session.getSessions().length>0">
-    <h4>sessions</h4>
-    <div ng-repeat="session in Session.getSessions()" class="item" ng-class="{waiting:session.epochStart > now,'in-progress':session.epochStart > now&&session.epochEnd < now,'finished':session.epochEnd < now, alert:now > session.epochStart - 60 * 1000 && now < session.epochStart}">
-        <a href="session/{{session.slug}}">
-            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{session.image}}.jpg"></img>
-            <div class="name"><h3>{{session.name}}</h3></div>
-            <div class="color-band" style="background-color:{{session.color}}">
-                <div ng-show="session.epochStart > now" class="status">Starts in {{session.epochStart - now | duration:'largest'}}</div>
-                <div ng-show="session.epochStart < now&&session.epochEnd > now" class="status">In progress ({{session.epochEnd - now | duration:'largest'}} left)</div>
-                <div ng-show="session.epochEnd < now" class="status">Finished ({{now - session.epochEnd | duration:'largest'}} ago)</div>
-            </div>
-        </a>
+    <h4 class="text-center">sessions</h4>
+    <div class="inner">
+        <div ng-repeat="session in Session.getSessions()" class="item animateMe" ng-class="{waiting:session.epochStart > now,'in-progress':session.epochStart > now&&session.epochEnd < now,'finished':session.epochEnd < now, alert:now > session.epochStart - 60 * 1000 && now < session.epochStart}">
+            <a href="session/{{session.slug}}">
+                <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{session.image}}.jpg"></img>
+                <div class="name"><h3>{{session.name}}</h3></div>
+                <div class="color-band" style="background-color:{{session.color}}">
+                    <div ng-show="session.epochStart > now" class="status">Starts in {{session.epochStart - now | duration:'largest'}}</div>
+                    <div ng-show="session.epochStart < now&&session.epochEnd > now" class="status">In progress ({{session.epochEnd - now | duration:'largest'}} left)</div>
+                    <div ng-show="session.epochEnd < now" class="status">Finished ({{now - session.epochEnd | duration:'largest'}} ago)</div>
+                </div>
+            </a>
+        </div>
+        <div class="item"><a href="/session" class="add button"><span class="icon-plus"></span></a></div>
     </div>
-    <div class="item"><a href="/session" class="add">+</a></div>
 </div>
 <div class="orgs" ng-show="Org.getOrgs().length > 0">
-    <h4>organizations i blong to</h4>
-    <div ng-repeat="org in Org.getOrgs()" class="item">
-        <a href="org/{{org.slug}}">
-            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{org.image}}.jpg"></img>
-            <div class="name"><h3>{{org.name}}</h3></div>
-            <div class="color-band" style="background-color:{{org.color}}"></div>
-        </a>
+    <h4 class="text-center">organizations i belong to</h4>
+    <div class="inner">
+        <div ng-repeat="org in Org.getOrgs()" class="item animateMe">
+            <a href="org/{{org.slug}}">
+                <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{org.image}}.jpg"></img>
+                <div class="name"><h3>{{org.name}}</h3></div>
+                <div class="color-band" style="background-color:{{org.color}}"></div>
+            </a>
+        </div>
+        <div class="item"><a href="/org" class="add button"><span class="icon-plus"></span></a></div>
     </div>
-    <div class="item"><a href="/org" class="add">+</a></div>
 </div>
 <div class="teams" ng-show="Team.getTeams().length > 0">
-    <h4>teams i'm in</h4>
-    <div ng-repeat="team in Team.getTeams()" class="item">
-        <a href="team/{{team.slug}}">
-            <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{team.image}}.jpg"></img>
-            <div class="name"><h3>{{team.name}}</h3></div>
-            <div class="color-band" style="background-color:{{team.color}}"></div>
-        </a>
+    <h4 class="text-center">teams i'm in</h4>
+    <div class="inner">
+        <div ng-repeat="team in Team.getTeams()" class="item animateMe">
+            <a href="team/{{team.slug}}">
+                <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_140,w_220/{{team.image}}.jpg"></img>
+                <div class="name"><h3>{{team.name}}</h3></div>
+                <div class="color-band" style="background-color:{{team.color}}">
+                    <div class="status">{{team.users.length}} {{team.users.length===1 ? 'user':'users'}}</div>
+                </div>
+            </a>
+        </div>
+        <div class="item"><a href="/team" class="add button"><span class="icon-plus"></span></a></div>
     </div>
-    <div class="item"><a href="/team" class="add">+</a></div>
 </div>
 <form name="teamForm" ng-submit="submitSession()" ng-hide="true">
     <h4>make a session</h4>

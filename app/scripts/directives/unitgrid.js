@@ -25,7 +25,6 @@ angular.module('workspaceApp')
           else {
             Toolkit.calcTimes(scope);
             scope.submit();
-            console.log('unit change' + n);
           }
         }, true);
         
@@ -67,7 +66,6 @@ angular.module('workspaceApp')
         };
         
         scope.close = function() {
-          console.log('hey');
         };
       }
     };

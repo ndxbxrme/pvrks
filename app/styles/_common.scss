@@ -47,23 +47,88 @@
     }
 }
 
-.button {
+a {
+    text-decoration: none;
+    outline: none!important;
+}
+
+.button, .profile-btn {
   display: inline-block;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  background: none;
-  border: 4px solid black;
-  font-size: 2.5em;
-  line-height: 50px!important;
-  font-weight: 900;
+  background: rgba(255,255,255,0.9);
+  border: 2.5px solid #ccc;
+  font-size: 2.1em;
+  font-weight: 100;
   text-align: center;
-  outline: none;
-  opacity: 0.3;
+  outline: 0 !important;
   cursor: pointer;
   transition: 0.2s;
+  color: #ccc;
+  box-sizing: border-box;
+  overflow: hidden;
+  vertical-align: top;
+  position: relative;
+  img {
+      opacity: 0.6;
+  }
   
-  &:hover {
-    opacity: 0.6;
+  span {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  &:hover, &:active, &:focus {
+    color: #666;
+    border-color: #666;
+    img {
+        opacity: 1;
+    }
+  }
+}
+
+
+.modal-container {
+  position: fixed;
+  top: 100%; left: 0;
+  width: 100%; height: 100%;
+  z-index: 4500;
+  transition: top 0.2s;
+
+  .clickscreen {
+    background: black;
+    position: fixed;
+    top: 100%; left: 0; bottom: 0; right: 0;
+    opacity: 0;
+    transition: 0s 0.2s top, 0.2s opacity;
+  }
+  
+  &.open {
+    top: 0;
+    .clickscreen {
+      top: 0;
+      opacity: 0.2;
+      transition: 0s top, 1s opacity;
+    }
+  }
+}
+
+.morph-shape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+  
+  path {
+    stroke: black;
+    stroke-width: 0.1px;
+  }
+  svg {
+    fill: rgba(255,255,255,0.95);
   }
 }

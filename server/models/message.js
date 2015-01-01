@@ -8,6 +8,7 @@ var messageSchema = mongoose.Schema({
     userId: mongoose.Schema.Types.ObjectId,
     username: String,
     userimage: String,
+    userslug: String,
     color: String,
     side: Boolean,
     createdAt: {type: Date, default: Date.now},

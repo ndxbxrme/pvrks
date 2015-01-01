@@ -1,7 +1,7 @@
 'use strict';
 /*global angular:false*/
 angular.module('workspaceApp')
-  .controller('OrgCtrl', function ($scope,$route,$http,Socket,Alert,Org) {
+  .controller('OrgCtrl', function ($scope,$route,$http,Socket,Alert,Org,Nav,Resource) {
     $scope.slug = $route.current.params.slug;
     $scope.Org = Org;
     Org.fetchOrgBySlug($route.current.params.slug)
@@ -11,6 +11,12 @@ angular.module('workspaceApp')
         team: undefined,
         session: undefined
       });
+      Nav.pageTitle = 'Organization ' + org.name;
+      Nav.titleUrl = '/org/' + org.slug + '/edit';
+      Nav.color = org.color;
+      Resource.currentType = 'org';
+      Resource.currentId = org._id;
+      Resource.fetchResources({org:org._id}, 'org');
     });
     
     $scope.sendInvite = function sendInvite(){

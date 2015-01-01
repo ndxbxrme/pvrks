@@ -1,19 +1,34 @@
 <div class="resources" ng-init="orderBy='-createdAt'">
-  <h3>
-    <span ng-show="type==='org'">Organization</span>
-    <span ng-show="type==='team'">Team</span>
-    <span ng-show="type==='session'">Session</span>
+  <h3 style="float:left">
+    <span ng-show="Resource.currentType==='org'">Organization</span>
+    <span ng-show="Resource.currentType==='team'">Team</span>
+    <span ng-show="Resource.currentType==='session'">Session</span>
     Resources
   </h3>
-  <div class="search">
+  <div class="search" style="float: right">
     <input type="text" ng-model="search" placeholder="Search" />
   </div>
-  <div ng-repeat="resource in resources.getResources(type) | orderBy:orderBy | filter:search" class="item">
-    <div class="user">
-      <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{resource.userimage}}.jpg"></img>
-      <p>{{resource.username}}</p>
+  <div style="clear: left">
+    <div class="item animateMe">
+      <div class="inner add" ng-click="Resource.modalOpen=true" tooltip="Add a resource">
+        <a class="button"><span class="icon-plus"></span></a>
+      </div>
+    </div><div ng-repeat="resource in Resource.getResources(Resource.currentType) | orderBy:orderBy | filter:search" class="item animateMe">
+      <div class="inner">
+        <div class="user">
+          <img class="thumbnail inline" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{resource.userimage}}.jpg"></img>
+          <p>{{resource.username}}</p>
+        </div>
+        <div resource=""></div>
+        <h4>{{resource.name}}</h4>
+      </div>
+      <div class="controls" ng-show="resource.userId===User.details._id">
+        <a href="/resource/{{resource._id}}" class="details">Edit</a>
+        <a class="delete">Delete</a>
+      </div>
+      <div class="controls" ng-hide="resource.userId===User.details._id">
+        <a href="/resource/{{resource._id}}" class="details">Details</a>
+      </div>
     </div>
-    <div resource=""></div>
-    <h4>{{resource.name}}</h4>
   </div>
 </div>

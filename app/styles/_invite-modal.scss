@@ -1,0 +1,17 @@
+.invite-modal {
+  width: 700px; height: 100%;
+  position: absolute;
+  top: 0; left: 50%;
+  min-height: 200px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  
+  .inner {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    pointer-events: all;
+    padding: 0 40px;
+  }
+}

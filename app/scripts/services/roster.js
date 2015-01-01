@@ -74,6 +74,15 @@ angular.module('workspaceApp')
             doReload(key);
           }
         }
-      }
+      },
+      clear: function(){
+        for(var key in rosters) {
+          rosters[key] = [];
+        }
+        for(var key in allUsers) {
+          allUsers[key] = [];
+        }
+      },
+      doReload: doReload
     };
   });

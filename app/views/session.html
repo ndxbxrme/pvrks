@@ -1,20 +1,55 @@
-<div class="session {{currentUnit.type}}">
-  <div class="percentage" style="width: {{percentage}}%"></div>
-  <h1>{{session.name}} <a ng-href="/session/{{session.slug}}/edit" ng-show="role < 1">edit</a></h1>
-  <div>{{session.startDate | date:'short'}}</div>
-  <div ng-if="inprogress">
-    Session in progress
-    <h3>next: {{nextStartTime | date:'short'}}</h3>
-    <h1>{{currentUnit.name}}</h1>
-    <div class="idea-bubbles" idea-bubbles="Idea.getIdeas()"></div>
+<div class="session {{Session.getUnit().type}}">
+  <div class="percentage" style="width: {{Session.percentage()}}%"></div>
+  <div ng-if="Session.inprogress()">
+    <div ng-if="Session.getUnit().type==='destination'">
+      <div ng-if="Session.getSession().role===0" ng-include="'/views/session/destinationdirector.html'"></div>
+      <div ng-if="Session.getSession().role===1" ng-include="'/views/session/destinationmanager.html'"></div>
+      <div ng-if="Session.getSession().role===2" ng-include="'/views/session/destinationuser.html'"></div>
+      <h3>This is where we decide what we want go get out of this session</h3>
+    </div>
+    <div ng-if="Session.getUnit().type==='gather'">
+      <div ng-if="Session.getSession().role===0" ng-include="'/views/session/gatherdirector.html'"></div>
+      <div ng-if="Session.getSession().role===1" ng-include="'/views/session/gathermanager.html'"></div>
+      <div ng-if="Session.getSession().role===2" ng-include="'/views/session/gatheruser.html'"></div>
+      <h3>This is where we gather resources</h3>
+    </div>
+    <div ng-if="Session.getUnit().type==='generate'">
+      <div ng-if="Session.getSession().role===0" ng-include="'/views/session/generatedirector.html'"></div>
+      <div ng-if="Session.getSession().role===1" ng-include="'/views/session/generatemanager.html'"></div>
+      <div ng-if="Session.getSession().role===2" ng-include="'/views/session/generateuser.html'"></div>
+    </div>
+    <div ng-if="Session.getUnit().type==='filter'">
+      <div ng-if="Session.getSession().role===0" ng-include="'/views/session/filterdirector.html'"></div>
+      <div ng-if="Session.getSession().role===1" ng-include="'/views/session/filtermanager.html'"></div>
+      <div ng-if="Session.getSession().role===2" ng-include="'/views/session/filteruser.html'"></div>
+      <h3>This is where we filter and sort the ideas generated previously</h3>
+    </div>
+    <div ng-if="Session.getUnit().type==='action'">
+      <div ng-if="Session.getSession().role===0" ng-include="'/views/session/actiondirector.html'"></div>
+      <div ng-if="Session.getSession().role===1" ng-include="'/views/session/actionmanager.html'"></div>
+      <div ng-if="Session.getSession().role===2" ng-include="'/views/session/actionuser.html'"></div>
+      <h3>This is where we reflect on the session and make a plan to put our ideas into action</h3>
+    </div>
+    <div ng-if="Session.getUnit().type==='break'">
+      <h2 class="text-center">Take a break guys</h2>
+      <div ng-if="Session.getSession().role===0" ng-include="'/views/session/breakdirector.html'"></div>
+      <div ng-if="Session.getSession().role===1" ng-include="'/views/session/breakmanager.html'"></div>
+      <div ng-if="Session.getSession().role===2" ng-include="'/views/session/breakuser.html'"></div>
+    </div>
   </div>
-  <div ng-show="session.epochStart > now">Waiting to start... {{countdown}}</div>
-  <div ng-show="session.epochEnd < now">Session finished {{countdown}} ago</div>
-  <div idea-modal="ideaOpen" session-id="{{session._id}}" unit-id="{{currentUnit._id}}"></div>
-  <a ng-click="sendInvite()">Send Invite</a>
-  <div ng-show="inviteToken">
-    <h2>{{inviteToken}}<br />https://pvrks-ndxbxrme-2.c9.io/?{{inviteToken}}</h2>
-  </div>{{ideaOpen}}
-  <a class="button" ng-click="ideaOpen=true"><span class="icon-light-bulb"></span></a>
-  <div messages="session" mid="{{session._id}}"></div>
+  <div ng-show="Session.pending()">
+    <div ng-if="Session.getSession().role===0" ng-include="'/views/session/pendingdirector.html'"></div>
+    <div ng-if="Session.getSession().role===1" ng-include="'/views/session/pendingmanager.html'"></div>
+    <div ng-if="Session.getSession().role===2" ng-include="'/views/session/pendinguser.html'"></div>
+    <h3>Waiting for the session to start</h3>
+    <a ng-click="sendInvite()">Send Invite</a>
+    <p>{{inviteToken}}</p>
+  </div>
+  <div ng-show="Session.finished()">
+    <div ng-if="Session.getSession().role===0" ng-include="'/views/session/finisheddirector.html'"></div>
+    <div ng-if="Session.getSession().role===1" ng-include="'/views/session/finishedmanager.html'"></div>
+    <div ng-if="Session.getSession().role===2" ng-include="'/views/session/finisheduser.html'"></div>
+    <h3>Session is over</h3>
+  </div>
+  <div messages="session" mid="{{Session.getSession()._id}}"></div>
 </div>

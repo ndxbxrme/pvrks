@@ -21,6 +21,15 @@ module.exports = {
       res.json(user);
     });
   },
+  findOneBySlug: function(req, res) {
+    User.findOne({slug:req.params.slug})
+    .exec(function(err, user){
+      if(err) {
+        throw err;
+      }
+      res.json(user);
+    });
+  },
   updateProfile: function(req, res) {
     //get slug if neccesarry
     //update profile
@@ -46,26 +55,30 @@ module.exports = {
       Team.update({'users': {$elemMatch: {id:req.body._id}}}, {
         $set: {
           'users.$.name': req.body.name,
-          'users.$.image': req.body.image
+          'users.$.image': req.body.image,
+          'users.$.slug': req.body.slug
         }
-      }).exec();
+      }, {multi:true}).exec();
       Org.update({'users': {$elemMatch: {id:req.body._id}}}, {
         $set: {
           'users.$.name': req.body.name,
-          'users.$.image': req.body.image
+          'users.$.image': req.body.image,
+          'users.$.slug': req.body.slug
         }
-      }).exec();
+      }, {multi:true}).exec();
       Session.update({'users': {$elemMatch: {id:req.body._id}}}, {
         $set: {
           'users.$.name': req.body.name,
-          'users.$.image': req.body.image
+          'users.$.image': req.body.image,
+          'users.$.slug': req.body.slug
         }
-      }).exec();
+      }, {multi:true}).exec();
       Idea.update({
         userId: req.body._id
       },{
         username: req.body.name,
         userimage: req.body.image,
+        userslug: req.body.slug,
         color: req.body.color
       }, {
         multi: true
@@ -92,6 +105,7 @@ module.exports = {
       },{
         username: req.body.name,
         userimage: req.body.image,
+        userslug: req.body.slug,
         color: req.body.color,
         side: req.body.side
       }, {
@@ -101,7 +115,8 @@ module.exports = {
         userId: req.body._id
       },{
         username: req.body.name,
-        userimage: req.body.image
+        userimage: req.body.image,
+        userslug: req.body.slug
       }, {
         multi: true
       }).exec();

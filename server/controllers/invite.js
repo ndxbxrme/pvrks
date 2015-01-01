@@ -4,7 +4,8 @@ var Invite = require('../models/invite'),
     User = require('../models/user'),
     Org = require('../models/organisation'),
     Team = require('../models/team'),
-    Session = require('../models/session');
+    Session = require('../models/session'),
+    Sockets = require('../sockets/sockets');
 
 module.exports = {
   sendInvite: function(req, res){
@@ -65,6 +66,7 @@ module.exports = {
               id:user._id,
               name:user.name,
               image:user.image,
+              slug:user.slug,
               role:invite.role
             };
             invite.acceptedAt = Date.now();
@@ -83,6 +85,7 @@ module.exports = {
                   org.users.push(newUser);
                   org.updatedAt = Date.now();
                   org.save();
+                  Sockets.emitToUsers(org.users, 'updateRoster', 'org');
                 }
               });
             }
@@ -97,6 +100,7 @@ module.exports = {
                   team.users.push(newUser);
                   team.updatedAt = Date.now();
                   team.save();
+                  Sockets.emitToUsers(team.users, 'updateRoster', 'team');
                 }
               });
             }
@@ -111,6 +115,7 @@ module.exports = {
                   session.users.push(newUser);
                   session.updatedAt = Date.now();
                   session.save();
+                  Sockets.emitToUsers(session.users, 'updateRoster', 'session');
                 }
               });
             }

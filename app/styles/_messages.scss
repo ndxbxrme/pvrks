@@ -2,33 +2,47 @@
 .msgContainer {
   position: fixed;
   left: 100%;
-  top: 0;
-  border-left: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 0 0 10px 5px;
-  border-radius: 0 0 5px 0;
-  background: rgba(255,255,255,0.8);
+  top: -45px;
+  padding: 45px 20px;
   box-sizing: border-box;
   transition: 0.2s transform;
+  z-index: 3005;
   
-  &.hasNew .handle  {
-    animation: HASNEW 2s linear infinite;
+  .morph-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    
+    svg {
+      stroke: black;
+      stroke-width: 0.1px;
+      fill: rgba(255,255,255,0.95);
+      pointer-events: none;
+    }
   }
   
-  &.open .handle  {
+  &.hasNew .handle span:before  {
+    animation: HASNEW 6s linear infinite;
+    transform-origin: 50%;
+  }
+  
+  &.open .handle span:before  {
     animation: none;
   }
   
   &.open {
-    transform: translateX(-100%);
+    transform: translateX(-250px);
   }
   
   
  .handle {
     position: absolute;
-    top: 0;
+    top: 45px;
     right: 100%;
-    padding: 10px 10px 0 0;
+    padding: 1em 1em 0 0;
     cursor: pointer;
     transition: 0.1s transform;
     
@@ -48,7 +62,7 @@
     height: 30px;
     background: linear-gradient(180deg, #fff, #fff, #fff, #fff, transparent);
     margin: 0;
-    top: 0; right: 0;
+    top: 45px; right: 20px;
     z-index: 200;
     font-size: 0.8em;
     padding-top: 8px;
@@ -81,18 +95,21 @@
     }
     
     input[type="submit"] {
-      border-radius: 50%;
       position: absolute;
       top: -10px; right: -10px;
       width: 50px; height: 50px;
-      background: linear-gradient(120deg, transparent, #aaa 40%), radial-gradient(50% 50%, ellipse farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 80%, #fff 86%, #fff 94%, rgba(0,0,0,0.2) 97%, rgba(0,0,0,0.2) 99%, transparent 100%) ;
-      border: none;
-      color: #fff;
-      box-shadow: 0px 0px 1px black;
-      cursor: pointer;
-      outline: none;
-      transition: 0.2s;
-      font-size: 30px;
+    	font-family: 'icomoon';
+    	speak: none;
+    	font-style: normal;
+    	font-weight: normal;
+    	font-variant: normal;
+    	text-transform: none;
+    	line-height: 1;
+    	
+    
+    	/* Better Font Rendering =========== */
+    	-webkit-font-smoothing: antialiased;
+    	-moz-osx-font-smoothing: grayscale;      
     }
   }
   

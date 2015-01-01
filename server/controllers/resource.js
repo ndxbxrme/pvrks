@@ -12,6 +12,7 @@ module.exports = {
       newResource.image = req.body.image;
       newResource.secureUrl = req.body.secureUrl;
       newResource.type = req.body.type;
+      newResource.url = req.body.url;
       newResource.resourceType = req.body.resourceType;
       newResource.resourceId = req.body.resourceId;
       newResource.slug = slug;
@@ -20,6 +21,7 @@ module.exports = {
       newResource.userId = req.user._id;
       newResource.username = req.user.name;
       newResource.userimage = req.user.image;
+      newResource.userslug = req.user.slug;
       newResource.org = req.body.ids.org;
       newResource.team = req.body.ids.team;
       newResource.session = req.body.ids.session;
@@ -30,7 +32,7 @@ module.exports = {
         console.log('i want to emit');
         Sockets.emitToAll(req.body.type, req.body.ids[req.body.type], 'resource', resource);
         res.send('ok');
-      })
+      });
       
     });
   },
@@ -44,6 +46,6 @@ module.exports = {
         throw err;
       }
       res.json(resources);
-    })
+    });
   }
-}
+};

@@ -6,71 +6,56 @@ angular.module('workspaceApp')
       restrict: 'AE',
       replace: true,
       templateUrl: '/views/partials/resourceuploader.html',
-      scope: {
-        type: '@resourceUploader',
-        rid: '@',
-        orgid: '@'
-      },
+      scope: {},
       link: function postLink(scope, elem, attrs) {
-        scope.out = false;
-        var shape = elem[0].querySelector('.morph-shape');
-        var s = Snap(shape.querySelector('svg'));
-        console.log(s);
-        var path = s.select('path');
-        var paths = {
-          reset: path.attr('d'),
-          active: shape.getAttribute('data-morph-active')
-        };
-        
-        var uploadTarget = elem[0].querySelector('.upload-target');
-        var us = Snap(uploadTarget.querySelector('svg'));
-        var uPath = us.select('path');
-        var uPaths = {
-          reset: uPath.attr('d'),
-          active: uploadTarget.getAttribute('data-morph-active')
-        };
+        scope.Resource = Resource;
 
-        function doAnimate() {
-          path.stop().animate({
-            'path': paths.active
-          }, 150, mina.easeout, function() {
-            path.stop().animate({
-              'path': paths.reset
-            }, 800, mina.elastic);
-          });
-          uPath.stop().animate({
-            'path': uPaths.active
-          }, 150, mina.easeout, function() {
-            uPath.stop().animate({
-              'path': uPaths.reset
-            }, 800, mina.elastic);
-          });
-        }
+
+
         window.addEventListener("dragover", function(e) {
           e = e || event;
+          //console.log(e);
           e.preventDefault();
           e.dataTransfer.dropEffect = 'copy';
-          if (!scope.out) {
-            scope.out = true;
+          if (!Resource.modalOpen) {
+            Resource.modalOpen = true;
+            console.log(e);
             scope.$apply();
-            doAnimate();
           }
         }, false);
         /*window.addEventListener('dragleave', function(e) {
           e = e || event;
           e.preventDefault();
-          if (scope.out) {
-            scope.out = false;
+          if (Resource.modalOpen) {
+            Resource.modalOpen = false;
             scope.$apply();
             doAnimate();
           }
         });*/
-        window.addEventListener("drop", function(e) {
+        elem[0].addEventListener("drop", function(e) {
+          var url = e.dataTransfer.getData("url") ||e.dataTransfer.getData("text/uri-list");
+          var text = e.dataTransfer.getData("Text");
+          if(url) {
+            scope.uploading = true;
+            scope.processing = true;
+            scope.status = "Processing resource";
+            Resource.sendUrlResource(url)
+            .then(function(result){
+              scope.result = result;
+              scope.type = 'webpage';
+              scope.url = url;
+              scope.uploading = false;
+              scope.processing = false;
+            });
+          }
+          else if(text) {
+            
+          }
           e = e || event;
           e.preventDefault();
         }, false);
         scope.onFileSelect = function($files) {
-          if(!scope.uploading) {
+          if(!scope.uploading && $files[0]) {
             scope.uploading = true;
             var file = $files[0]; // we're not interested in multiple file uploads here
             scope.upload = $upload.upload({
@@ -93,26 +78,39 @@ angular.module('workspaceApp')
                     photo: scope.title
                   }
                 };
-                console.log(data);
                 scope.result = data;
-                scope.uploading = false;
+                console.log(data);
+                if(data.resource_type==='raw') {
+                  //get screenshot
+                  Resource.sendUrlResource(data.url)
+                  .then(function(result){
+                    scope.result.public_id = result.public_id;
+                    scope.result.resource_type = 'rawImage';
+                    scope.type = 'image';
+                    scope.uploading = false;
+                  });
+                }
+                else {
+                  scope.type = 'image';
+                  scope.uploading = false;
+                }
               });
             });
           }
         };
         scope.close = function close(){
-          if(scope.out) {
+          if(Resource.modalOpen) {
             $timeout(function(){
-              scope.out = false;
-              doAnimate();
+              Resource.modalOpen = false;
+              //doAnimate();
             });
           }
         };
         scope.open = function close(){
-          if(!scope.out) {
+          if(!Resource.modalOpen) {
             $timeout(function(){
-              scope.out = true;
-              doAnimate();
+              Resource.modalOpen = true;
+              //doAnimate();
             });
           }
         };
@@ -138,7 +136,8 @@ angular.module('workspaceApp')
         scope.sendResource = function sendResource() {
           var obj = {
             name: scope.name,
-            type: scope.type,
+            url: scope.url,
+            type: Resource.currentType,
             image: scope.result.public_id,
             resourceId: scope.result.public_id,
             resourceType: scope.result.resource_type,
@@ -146,12 +145,15 @@ angular.module('workspaceApp')
             tags: scope.tags,
             ids: {}
           };
-          obj.ids.orgid = scope.orgid;
-          obj.ids[scope.type] = scope.rid;
+          obj.ids.orgid = Resource.orgId;
+          obj.ids[Resource.currentType] = Resource.currentId;
           Resource.sendResource(obj);
-          scope.name = undefined;
-          scope.tags = undefined;
-          scope.result = undefined;
+          $timeout(function(){
+            scope.name = undefined;
+            scope.tags = undefined;
+            scope.result = undefined;
+            scope.progress = undefined;
+          });
           scope.close();
           Alert.log('Resource added');
         };

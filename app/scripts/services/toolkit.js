@@ -4,7 +4,6 @@ angular.module('workspaceApp')
   .factory('Toolkit', function () {
     return {
       calcTimes: function(scope){
-        console.log('hello');
         if(scope.session && scope.session.startDate){
           scope.session.totalDuration = 0;
           var date = new Date(scope.session.startDate);

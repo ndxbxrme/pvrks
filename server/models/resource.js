@@ -19,9 +19,12 @@ var resourceSchema = mongoose.Schema({
     userId: mongoose.Schema.Types.ObjectId,
     username: String,
     userimage: String,
+    userslug: String,
     org: mongoose.Schema.Types.ObjectId,
     team: mongoose.Schema.Types.ObjectId,
-    session: mongoose.Schema.Types.ObjectId
+    session: mongoose.Schema.Types.ObjectId,
+    unit: mongoose.Schema.Types.ObjectId,
+    parentId: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);

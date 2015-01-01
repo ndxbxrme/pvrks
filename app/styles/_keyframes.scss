@@ -1,4 +1,40 @@
 @keyframes HASNEW {
-  0% {transform: scale(1.0)}
-  50% {transform: scale(1.1)}
+  0% {transform: rotateY(0deg)}
+  20% {transform: rotateY(360deg)}
+  100% {transform: rotateY(360deg)}
 }
+
+@keyframes UPLOADING {
+  0% {transform: rotateY(0deg)}
+  50% {transform: rotateY(360deg)}
+  100% {transform: rotateY(360deg)}
+}
+
+
+/*.item.ng-enter,
+ .item.ng-leave {
+ transition: 2s linear all;
+ -webkit-transition: 2s linear all;
+ }
+ .item.ng-enter {
+ opacity: 0;
+ color: green;
+ }
+ .item.ng-enter.ng-enter-active {
+ opacity: 1;
+ color: black;
+ }
+ .item.ng-leave {}
+ .item.ng-leave.ng-leave-active {
+ opacity:0;
+ }*/
+ 
+ .item.ng-enter {
+   animation: fadeInRight 0.3s;
+ }
+ .item.ng-leave {
+   animation: fadeOut 0s;
+ }
+ .item.ng-enter-stagger {
+   animation-delay: 0.05s;
+ }

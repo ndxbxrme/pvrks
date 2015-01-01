@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="bower_components/froala/css/froala_content.min.css" />
     <link rel="stylesheet" href="bower_components/froala/css/froala_style.min.css" />
     <link rel="stylesheet" href="bower_components/froala/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="bower_components/tooltipster/css/tooltipster.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <link rel="stylesheet" href="bower_components/humane/themes/libnotify.css">
@@ -38,15 +40,16 @@
             </filter>
         </defs>
     </svg>
-    <div class="nav" ng-show="user.details">
-      <a href="#" ng-click="logout()">Logout</a>
-      <a href="/">Dashboard</a>
-      <a href="/profile">Profile</a>
-    </div>
+    <div nav=""></div>
     <!-- Add your site or application content here -->
+    
     <div class="container">
       <div ng-view=""></div>
     </div>
+    <div resource-uploader=""></div>
+    <div idea-modal=""></div>
+    <div invite-modal=""></div>
+    <div session-resources=""></div>
 
 
 
@@ -102,11 +105,14 @@
     <script src="bower_components/froala/js/plugins/font_family.min.js"></script>
     <script src="bower_components/froala/js/plugins/font_size.min.js"></script>
     <script src="bower_components/froala/js/plugins/char_counter.min.js"></script>
+    <script src="bower_components/ngAnimate-animate.css/animate.js"></script>
+    <script src="bower_components/tooltipster/js/jquery.tooltipster.min.js"></script>
+    <script src="bower_components/underscore.string/lib/underscore.string.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.angularjs.org/1.3.8/i18n/angular-locale_en-gb.js"></script>
-    <script src="https://rawgit.com/ndxbxrme/7218e26562f65b7ff98d/raw/d45a10f92e1e2865759ff19835975de52b85f263/interpret-date.js"></script>
+    <script src="scripts/tools/interpret-date.js"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
@@ -148,6 +154,17 @@
         <script src="scripts/services/session.js"></script>
         <script src="scripts/services/team.js"></script>
         <script src="scripts/services/org.js"></script>
+        <script src="scripts/services/nav.js"></script>
+        <script src="scripts/directives/nav.js"></script>
+        <script src="scripts/directives/invitemodal.js"></script>
+        <script src="scripts/directives/morph.js"></script>
+        <script src="scripts/directives/tooltip.js"></script>
+        <script src="scripts/controllers/resource.js"></script>
+        <script src="scripts/controllers/resources.js"></script>
+        <script src="scripts/controllers/sessionresources.js"></script>
+        <script src="scripts/controllers/sessionbreak.js"></script>
+        <script src="scripts/controllers/sessionpending.js"></script>
+        <script src="scripts/directives/sessionresources.js"></script>
         <!-- endbuild -->
         
 </body>

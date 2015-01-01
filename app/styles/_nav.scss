@@ -1,0 +1,40 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #fff, #fff, #fff, #fff, #fff, transparent);
+  z-index: 3000;
+  
+  .inner {
+    padding: 1em;
+  }
+  
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0; 
+    transition: margin 0.6s;
+    
+    &.hasSubtitle {
+      margin-top: -0.5em;
+    }
+    
+    a {
+      color: inherit;
+      border-bottom: 1px solid #eee;
+      padding: 4px;
+    }
+    
+    span {
+      position: absolute;
+      top: 120%;
+      left: 50%;
+      white-space: nowrap;
+      font-size: 75%;
+      transform: translateX(-50%);
+    }
+  }
+}

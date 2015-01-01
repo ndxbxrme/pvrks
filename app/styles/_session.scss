@@ -3,8 +3,8 @@
     position: fixed;
     top: 0; left: 0;
     height: 10px;
-    transition: 0.5s linear;
-    z-index: 200;
+    transition: 0.1s linear;
+    z-index: 3002;
   }
 }
 .destination .percentage {
@@ -21,4 +21,13 @@
 }
 .action .percentage {
     background-color: #be72bf;
+}
+.break .percentage {
+    background-color: #ccc;
+}
+
+.break {
+    .insession.unit-grid {
+        margin: 0 auto;
+    }
 }

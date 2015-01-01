@@ -14,6 +14,7 @@ var teamSchema = mongoose.Schema({
         id: mongoose.Schema.Types.ObjectId,
         name: String,
         image: String,
+        slug: String,
         role: Number
     }],
     org: mongoose.Schema.Types.ObjectId

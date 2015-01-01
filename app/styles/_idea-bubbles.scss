@@ -3,7 +3,8 @@
     height: 100%;
     position: absolute;
     top: 0; left: 0;
-    z-index: -1;
+    z-index: 300;
+    overflow: hidden;
     circle {
         stroke-width: 3px;
         &:hover {
@@ -12,6 +13,8 @@
     }
     
     div {
+        font-family: 'Raleway';
+        font-weight: bold;
         position: absolute;
         transform: translate(-50%, -50%);
         font-size: 1.0em;

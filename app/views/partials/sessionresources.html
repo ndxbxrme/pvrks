@@ -1,0 +1,54 @@
+<div class="modal-container" ng-class="{open:Resource.libraryOpen}">
+  <div class="clickscreen" ng-click="close()"></div>
+  <div class="library-modal">
+    <div class="inner">
+      <div morph="{{Resource.libraryOpen}}"></div>
+      <div class="centered">
+        <div class="vertical">
+          <div class="tabs">
+            <span ng-click="type='org'" ng-class="{selected:type==='org'}">Organizations</span>
+            <span ng-click="type='team'" ng-class="{selected:type==='team'}">Teams</span>
+            <span ng-click="type='session'" ng-class="{selected:type==='session'}">Sessions</span>
+          </div>
+          <div class="parent-selector" ng-if="type==='session'">
+            <div class="item" ng-repeat="session in Session.getSessions() | filter" ng-class="{selected:Resource.currentId===session._id}" ng-click="selectParent(session._id,'session')">
+              <img class="thumbnail inline" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_60,w_100/{{session.image}}.jpg"></img>
+              <div class="name">{{session.name}}</div>
+            </div>
+          </div>
+          <div class="parent-selector" ng-if="type==='team'">
+            <div class="item" ng-repeat="team in Team.getTeams()" ng-class="{selected:Resource.currentId===team._id}" ng-click="selectParent(team._id,'team')">
+              <img class="thumbnail inline" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_60,w_100/{{team.image}}.jpg"></img>
+              <div class="name">{{team.name}}</div>
+            </div>
+          </div>
+          <div class="parent-selector" ng-if="type==='org'">
+            <div class="item" ng-repeat="org in Org.getOrgs()" ng-class="{selected:Resource.currentId===org._id}" ng-click="selectParent(org._id,'org')">
+              <img class="thumbnail inline" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_60,w_100/{{org.image}}.jpg"></img>
+              <div class="name">{{org.name}}</div>
+            </div>
+          </div>
+          <div class="item-container">
+            <div ng-repeat="resource in Resource.getResources(type) | orderBy:orderBy | filter:search" class="item animateMe">
+              <div class="item-inner">
+                <div class="user">
+                  <img class="thumbnail inline" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{resource.userimage}}.jpg"></img>
+                  <p>{{resource.username}}</p>
+                </div>
+                <div resource=""></div>
+                <h4>{{resource.name}}</h4>
+              </div>
+              <div class="controls" ng-show="resource.userId===User.details._id">
+                <a href="/resource/{{resource._id}}" class="details">Edit</a>
+                <a class="delete">Delete</a>
+              </div>
+              <div class="controls" ng-hide="resource.userId===User.details._id">
+                <a href="/resource/{{resource._id}}" class="details">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

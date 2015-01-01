@@ -1,7 +1,7 @@
 'use strict';
 /*global angular:false*/
 angular.module('workspaceApp')
-  .controller('DashboardCtrl', function ($scope, $http, $window, $timeout, Socket, User, Alert, Session, Team, Org) {
+  .controller('DashboardCtrl', function ($scope, $http, $window, $timeout, Socket, User, Alert, Session, Team, Org, Nav) {
     Socket.setIds({
       org:undefined,
       team:undefined,
@@ -10,6 +10,7 @@ angular.module('workspaceApp')
     $scope.Session = Session;
     $scope.Team = Team;
     $scope.Org = Org;
+    Nav.pageTitle = 'PɅRKS';
     var loadData = function loadData(){
       $http.post('/api/invites/user', {
         userId:User.details._id,
@@ -36,6 +37,9 @@ angular.module('workspaceApp')
       $http.post('/api/invite/accept', invite).success(function(){
         $scope.inviteToken = undefined;
         loadData();
+        Session.fetchSessions();
+        Team.fetchTeams();
+        Org.fetchOrgs();
         Alert.log('Invite accepted');
       });
     };

@@ -34,7 +34,14 @@ app.set('port', process.env.C9 ? process.env.PORT : 23232)
 }))
 .use(passport.initialize())
 .use(passport.session())
-.use(flash());
+.use(flash())
+
+.set('phantom', 'phantomjs')
+.set('screenshots', '/tmp')
+.set('default viewport width', 1024)
+.set('default viewport height', 600)
+.set('colors', 3)
+.set('root', __dirname);
 
 var server = http.createServer(app);
 Sockets.setup(server);

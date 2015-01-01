@@ -25,7 +25,10 @@
     "jquery-ui": "~1.11.2",
     "angular-ui-sortable": "~0.13.1",
     "d3": "~3.5.2",
-    "froala": "~1.2.4"
+    "froala": "~1.2.4",
+    "ngAnimate-animate.css": "~0.1.1",
+    "tooltipster": "~3.3.0",
+    "underscore.string": "~2.4.0"
   },
   "overrides": {
     "socket.io-client": {

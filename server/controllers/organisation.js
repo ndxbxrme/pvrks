@@ -44,19 +44,22 @@ module.exports = {
               });
             }
             else {
-              var newOrg = new Org();
-              newOrg.name = req.body.name;
-              newOrg.slug = slug;
-              newOrg.image = req.body.image;
-              newOrg.color = req.body.color;
-              newOrg.users.push({
-                id: req.user._id,
-                name: user.name,
-                image: user.image,
-                role: 0
-              });
-              newOrg.save(function(err){
-                res.json(err);
+              Toolkit.randomImage(req.body.image, function(image){
+                var newOrg = new Org();
+                newOrg.name = req.body.name;
+                newOrg.slug = slug;
+                newOrg.image = image;
+                newOrg.color = req.body.color;
+                newOrg.users.push({
+                  id: req.user._id,
+                  name: user.name,
+                  image: user.image,
+                  slug: user.slug,
+                  role: 0
+                });
+                newOrg.save(function(err){
+                  res.json(err);
+                });
               });
             }
           });

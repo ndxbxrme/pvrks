@@ -1,4 +1,5 @@
 <h1>Profile</h1>
+<div ng-show="myProfile">
 <form name="profileForm" novalidate ng-submit="submit()">
   <div>
     <label>Name</label>
@@ -21,3 +22,8 @@
     <input minicolors ng-model="profileUser.color" ng-blur="submit()" />
   </div>
 </form>
+</div>
+<div ng-hide="myProfile">
+  {{profileUser.name}}
+  <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{profileUser.image}}.jpg"></img>
+</div>

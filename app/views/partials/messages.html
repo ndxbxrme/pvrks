@@ -1,8 +1,9 @@
 <div class="msgContainer" ng-class="{open:open,hasNew:message.hasNew(type)}">
     <span class="handle" ng-click="open=!open;message.resetNew(type)">
-        <span class="button icon-bubble" ng-hide="open"></span>
-        <span class="button icon-arrow-right2" ng-show="open"></span>
+        <span class="button icon-bubble" ng-hide="open" tooltip="Messages"></span>
+        <span class="button icon-arrow-right2" ng-show="open" tooltip="Close messages"></span>
     </span>
+    <span morph="{{open}}"></span>
     <h3>    
         <span ng-show="type==='org'">Organization</span>
         <span ng-show="type==='team'">Team</span>
@@ -30,7 +31,7 @@
     <span class="controls">
         <form name="messageForm" ng-submit="sendMessage()">
             <input type="text" ng-model="messageContent" />
-            <input type="submit" value="✉" />
+            <input type="submit" value="✈" class="button" />
         </form>
     </span>
 </div>

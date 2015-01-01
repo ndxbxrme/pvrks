@@ -7,16 +7,21 @@ var OrgCtrl = require('./controllers/organisation'),
     ResourceCtrl = require('./controllers/resource'),
     UserCtrl = require('./controllers/user'),
     SessionCtrl = require('./controllers/session'),
-    IdeaCtrl = require('./controllers/idea');
+    IdeaCtrl = require('./controllers/idea'),
+    ScreenshotCtrl = require('./controllers/screenshot');
 
 module.exports = function(app, passport) {
     app.get('/api/user', isLoggedIn, function(req, res) {
         res.json({
             _id:req.user._id,
             name:req.user.name || req.user.local.email,
-            image:req.user.image
+            image:req.user.image,
+            slug:req.user.slug,
+            color:req.user.color
         });
     });
+    
+    app.get('/api/screenshot', ScreenshotCtrl.getScreenshot);
     
     app.get('/api/organisations/user', isLoggedIn, OrgCtrl.findAllByUserId);
     app.post('/api/organisation/user', isLoggedIn, OrgCtrl.addOneByUserId);
@@ -43,10 +48,12 @@ module.exports = function(app, passport) {
     app.post('/api/idea/add', isLoggedIn, IdeaCtrl.addIdea);
     app.post('/api/ideas', isLoggedIn, IdeaCtrl.findAllById);
     
+    app.post('/api/resource/add/url', isLoggedIn, ScreenshotCtrl.getScreenshot)
     app.post('/api/resource/add', isLoggedIn, ResourceCtrl.addResource);
     app.post('/api/resources', isLoggedIn, ResourceCtrl.findAllById);
     
     app.get('/api/user/:userId', isLoggedIn, UserCtrl.findOneById);
+    app.get('/api/user/:slug/slug', isLoggedIn, UserCtrl.findOneBySlug);
     app.post('/api/user', isLoggedIn, UserCtrl.updateProfile);
     
     app.get('/api/users/team/:id', isLoggedIn, TeamCtrl.findAllTeamUsersById);

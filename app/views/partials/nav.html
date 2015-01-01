@@ -1,0 +1,11 @@
+<div class="nav" ng-show="user.details">
+  <div class="inner">
+    <a href="#" class="button" ng-click="logout()" tooltip="Log out"><span class="icon-switch"></span></a>
+    <a href="/" class="button" tooltip="Home"><span class="icon-home"></span></a>
+    <a href="/profile" class="profile-btn" tooltip="Profile"><img ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_46,w_46/{{user.details.image}}.jpg"></img></a>
+    <a ng-click="Invite.modalOpen = true" class="button" ng-show="Nav.canInvite" tooltip="Invite to {{Nav.inviteName}}"><span class="icon-users"></span></a>
+    <a ng-click="Resource.libraryOpen = true" class="button" ng-show="!Nav.canLibrary" tooltip="Resources"><span class="icon-library"></span></a>
+    <a class="button" ng-click="Idea.modalOpen=true" ng-show="!Nav.canIdea" tooltip="Idea"><span class="icon-light-bulb"></span></a>
+  </div>
+  <h1 ng-class="{hasSubtitle:Nav.subtitle}"><a ng-href="{{Nav.titleUrl}}" style="border-color: {{Nav.color}}">{{Nav.pageTitle}}</a><span class="subtitle">{{Nav.subtitle}}</span></h1>
+</div>

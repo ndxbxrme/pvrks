@@ -1,6 +1,7 @@
 'use strict';
 
-var _s = require('underscore.string');
+var _s = require('underscore.string'),
+    cloudinary = require('cloudinary');
 
 var doFindSlug = function doFindSlug(Obj,slug,done) {
   Obj.findOne({slug:slug})
@@ -49,6 +50,16 @@ module.exports = {
           }
         })*/
       }
-    })
+    });
+  },
+  randomImage: function(image, done) {
+    if(!image) {
+      cloudinary.uploader.upload('https://unsplash.it/200/200/?random', function(result){
+        return done(result.public_id);
+      });
+    }
+    else {
+      return done(image);
+    }
   }
 };

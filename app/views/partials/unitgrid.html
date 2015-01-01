@@ -1,21 +1,21 @@
-  <div class="unit-grid">
-    <ul ui-sortable="{update:update()}" ng-model="session.units">
-      <li ng-repeat="unit in session.units" class="{{unit.type}}">
+  <div class="unit-grid" ng-class="{insession:insession}">
+    <ul ui-sortable="{update:update(),cancel:'.unsortable',items: 'li:not(.unsortable)'}" ng-model="session.units" ng-disabled="true">
+      <li ng-repeat="unit in session.units" class="{{unit.type}} {{times[$index] < now ? 'unsortable' : ''}}">
         <div class="buttons">
           <a href="#" ng-click="edit(unit)">Edit<span class="icon-menu"></span></a>
           <a href="#" ng-click="remove(unit)">Remove<span class="icon-remove"></span></a>
         </div>
         <div class="inner">
-          <h3>{{unit.name}}</h3>
+          <h3>{{unit.name}} {{times[$index] < now ? 'Completed' : 'Pending'}}</h3>
           <div class="right">
             <div class="time">{{times[$index] | date:'shortTime'}}</div>
             <div class="duration">{{unit.duration | duration}}</div>
           </div>
         </div>
       </li>            
-    </ul>{{session.endDate | date:'short'}}
+    </ul>
     <h3 ng-show="session.totalDuration" class="text-center">Total duration {{session.totalDuration | duration}}</h3>
-    <div class="add" ng-click="add()" style="top: {{items.length * (70 + 14)}}px"><span class="icon-plus"></span></div>
+    <div class="add" ng-click="add()" style="top: {{items.length * (70 + 14)}}px" ng-hide="insession"><span class="icon-plus"></span></div>
     <div class="clickscreen" ng-show="unitSelectorOut || unitEditorOut"></div>
     <div class="unit-selector" ng-show="unitSelectorOut" ng-click="unitSelectorOut=false">
       <div class="units">

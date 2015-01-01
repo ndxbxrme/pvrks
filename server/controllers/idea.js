@@ -10,11 +10,13 @@ module.exports = {
     newIdea.userId = req.user._id;
     newIdea.username = req.user.name;
     newIdea.userimage = req.user.image;
+    newIdea.userslug = req.user.slug;
     newIdea.color = req.user.color;
     newIdea.org = req.body.org;
     newIdea.team = req.body.team;
     newIdea.session = req.body.session;
     newIdea.unit = req.body.unit;
+    newIdea.type = req.body.type;
     newIdea.save(function(err, idea){
       if(err){
         throw err;

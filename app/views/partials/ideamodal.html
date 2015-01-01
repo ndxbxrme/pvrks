@@ -1,11 +1,17 @@
-<div class="idea-modal" ng-class="{open:ideaOpen}">
-  <form name="ideaForm" ng-submit="sendIdea()">
-    <div class="inner">
-      <div idea-input="" ng-model="idea.content" class="idea-input" />
-      <div class="controls">
-        <a class="button" ng-click="sendIdea()"><span class="icon-arrow-right2"></span></a>
-        <a class="button" ng-click="closeIdea()"><span class="icon-close"></span></a>
+<div class="modal-container" ng-class="{open:Idea.modalOpen}">
+  <div class="clickscreen" ng-click="Idea.modalOpen=false"></div>
+  <div class="idea-modal">
+    <form name="ideaForm" ng-submit="sendIdea()">
+      <div class="inner">
+        <div morph="{{Idea.modalOpen}}"></div>
+        <div class="centered">
+          <div idea-input="" ng-model="idea.content" class="idea-input" />
+          <div class="controls right">
+            <a class="button" ng-click="sendIdea()"><span class="icon-arrow-right2"></span></a>
+            <!--<a class="button" ng-click="closeIdea()"><span class="icon-close"></span></a>-->
+          </div>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

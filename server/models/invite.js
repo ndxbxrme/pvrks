@@ -38,6 +38,7 @@ var inviteSchema = mongoose.Schema({
         id: mongoose.Schema.Types.ObjectId,
         name: String,
         image: String,
+        slug: String,
         role: Number,
         date: {type: Date, default: Date.now}
     }]

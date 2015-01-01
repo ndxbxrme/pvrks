@@ -115,7 +115,7 @@ angular
         controller: 'TeamCtrl',
         resolve: {loggedIn:checkLogin}
       })
-      .when('/profile', {
+      .when('/profile/:slug?', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         resolve: {loggedIn:checkLogin}
@@ -135,8 +135,27 @@ angular
         controller: 'SessionCtrl',
         resolve: {loggedIn:checkLogin}
       })
+      .when('/resource/:resourceId', {
+        templateUrl: 'views/resource.html',
+        controller: 'ResourceCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
+      .when('/resources', {
+        templateUrl: 'views/resources.html',
+        controller: 'ResourcesCtrl',
+        resolve: {loggedIn:checkLogin}
+      })
       .otherwise({
         redirectTo: '/'
       });
       $locationProvider.html5Mode(true);
+  })
+  .run(function($rootScope, $timeout, Session, Nav, Resource, Roster){
+    $rootScope.$on('$routeChangeStart', function(){
+      Session.stopChecking();
+      Resource.clear();
+      Roster.clear();
+      Nav.subtitle = '';
+      Nav.titleUrl = '';
+    });
   });

@@ -10,6 +10,7 @@ module.exports = {
     newMessage.userId = req.user._id;
     newMessage.username = req.user.name;
     newMessage.userimage = req.user.image;
+    newMessage.userslug = req.user.slug;
     newMessage.color = req.user.color;
     newMessage.side = req.user.side;
     newMessage.pm = req.body.pm;

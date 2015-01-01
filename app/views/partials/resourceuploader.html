@@ -1,41 +1,78 @@
-<div class="file-uploader" ng-class="{out:out,dragover:dragover}">
-  <div class="clickscreen" ng-click="out?close():true"></div>
-  <div class="dropper" ng-file-drop="onFileSelect($files)"
-      ng-file-drag-over-class="dragOverClass($event)" ng-click="$event.stopPropagation()">
-      <div class="close" ng-click="close()">X</div>
-      <span class="morph-shape" data-morph-active="M286,113c0,0-68.8-6-136-6c-78.2,0-137,6-137,6s2-15.802,2-50.5C15,33.999,13,12,13,12s59-6,137-6c85,0,136,6,136,6s-3,17.598-3,52C283,96.398,286,113,286,113z">
-          <svg width="120%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
-              <path d="M286,113C286,113,217.2,113,150,113C71.8,113,13,113,13,113C13,113,13,97.19800000000001,13,62.5C13,33.999,13,12,13,12C13,12,72,12,150,12C235,12,286,12,286,12C286,12,286,29.598,286,64C286,96.398,286,113,286,113C286,113,286,113,286,113"></path>
-              <defs></defs>
-          </svg>
-      </span>
-      <h1 ng-click="open()">yo guys, upload some shizzle</h1>
-      <div class="upload-target" ng-file-select="onFileSelect($files)" data-multiple="false" onclick="this.value = null" data-morph-active="m 28,18 4,0 0,4 -4,0 z m 0,-8 4,0 0,4 -4,0 z M 26,4 26,0 c 3.313,0 6,2.686 6,6 L 28,6 C 28,4.896 27.106,4 26,4 z m -2.067797,14.542373 -5.288135,0 0,5.084746 c 0,1.406075 -1.181899,2.542373 -2.644068,2.542373 -1.459525,0 -2.644068,-1.136449 -2.644068,-2.542373 l 0,-5.084746 -5.2881354,0 c -1.459524,0 -2.6440678,-1.136441 -2.6440678,-2.542373 0,-1.40339 1.184547,-2.542373 2.6440678,-2.542373 l 5.2881354,0 0,-5.0847456 c 0,-1.4033899 1.184543,-2.5423729 2.644068,-2.5423729 1.462169,0 2.644068,1.138983 2.644068,2.5423729 l 0,5.0847456 5.288135,0 c 1.462168,0 2.644068,1.138983 2.644068,2.542373 0,1.405932 -1.181898,2.542373 -2.644068,2.542373 z M 18,0 l 4,0 0,4 -4,0 z m -8,0 4,0 0,4 -4,0 z M 0,26 4,26 c 0,1.106 0.896,2 2,2 l 0,4 C 2.686,32 0,29.313 0,26 z M 4,6 0,6 C 0,2.686 2.686,0 6,0 L 6,4 C 4.896,4 4,4.896 4,6 z m 0,8 -4,0 0,-4 4,0 z m 0,8 -4,0 0,-4 4,0 z m 10,10 -4,0 0,-4 4,0 z m 8,0 -4,0 0,-4 4,0 z m 6,-6 4,0 c 0,3.313 -2.687,6 -6,6 l 0,-4 c 1.106,0 2,-0.894 2,-2 z">
-        <img class="thumbnail inline ng-isolate-scope" ng-show="result" 
-ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{result.public_id}}.jpg"></img>
-        <div class="progress-bar">
-          <div ng-show="uploading" class="progress" style="width: {{progress}}%" ng-init="progress=0"></div>
+<div class="modal-container file-uploader" ng-class="{open:Resource.modalOpen,dragover:dragover}">
+  <div class="clickscreen" ng-click="Resource.modalOpen?close():true"></div>
+  <div class="resource-modal" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)" ng-click="$event.stopPropagation()">
+    <div class="inner">
+      <div class="close button" ng-click="close()" ng-show="out"><span class="icon-close"></span>
+      </div>
+      <div morph="{{Resource.modalOpen}}"></div>
+      <div class="centered">
+        <h1 ng-click="open()">add a resource</h1>
+        <div class="controls">
+          <span class="button" ng-class="{active:type==='image'}" ng-click="type='image'" tooltip="Upload a document/image"><span class="icon-image"></span></span>
+          <span class="button" ng-class="{active:type==='webpage'}" ng-click="type='webpage'" tooltip="Upload a webpage"><span class="icon-globe"></span></span>
+          <span class="button" ng-class="{active:type==='text'}" ng-click="type='text'" tooltip="Add a text resource"><span class="icon-pencil"></span></span>
         </div>
-        <svg width="100%" height="100%" viewBox="0 0 32 32" preserveAspectRatio="none">
-          <g id="f5693df4ecba5b066a0a464e402aabe3">
-            <path id="marquee-plus" d="M28,18h4v4h-4V18z M28,10h4v4h-4V10z M26,4V0c3.313,0,6,2.686,6,6h-4
-          	C28,4.896,27.106,4,26,4z M22,18h-4v4c0,1.106-0.894,2-2,2c-1.104,0-2-0.894-2-2v-4h-4c-1.104,0-2-0.894-2-2c0-1.104,0.896-2,2-2h4
-          	v-4c0-1.104,0.896-2,2-2c1.106,0,2,0.896,2,2v4h4c1.106,0,2,0.896,2,2C24,17.106,23.106,18,22,18z M18,0h4v4h-4V0z M10,0h4v4h-4V0z
-          	 M0,26h4c0,1.106,0.896,2,2,2v4C2.686,32,0,29.313,0,26z M4,6H0c0-3.314,2.686-6,6-6v4C4.896,4,4,4.896,4,6z M4,14H0v-4h4V14z M4,22
-          	H0v-4h4V22z M14,32h-4v-4h4V32z M22,32h-4v-4h4V32z M28,26h4c0,3.313-2.687,6-6,6v-4C27.106,28,28,27.106,28,26z"></path>
-          </g>
-        </svg>
-      </div>
-      <div class="upload-form" ng-show="result">
+        <span tooltip="Drag douments/images/urls/text into here">
+          <div ng-hide="type==='text'" class="upload-target" ng-class="{uploading:uploading || processing}" ng-file-select="onFileSelect($files)" data-multiple="false" onclick="this.value = null" data-morph-active="m 28,18 4,0 0,4 -4,0 z m 0,-8 4,0 0,4 -4,0 z M 26,4 26,0 c 3.313,0 6,2.686 6,6 L 28,6 C 28,4.896 27.106,4 26,4 z m -2.067797,14.542373 -5.288135,0 0,5.084746 c 0,1.406075 -1.181899,2.542373 -2.644068,2.542373 -1.459525,0 -2.644068,-1.136449 -2.644068,-2.542373 l 0,-5.084746 -5.2881354,0 c -1.459524,0 -2.6440678,-1.136441 -2.6440678,-2.542373 0,-1.40339 1.184547,-2.542373 2.6440678,-2.542373 l 5.2881354,0 0,-5.0847456 c 0,-1.4033899 1.184543,-2.5423729 2.644068,-2.5423729 1.462169,0 2.644068,1.138983 2.644068,2.5423729 l 0,5.0847456 5.288135,0 c 1.462168,0 2.644068,1.138983 2.644068,2.542373 0,1.405932 -1.181898,2.542373 -2.644068,2.542373 z M 18,0 l 4,0 0,4 -4,0 z m -8,0 4,0 0,4 -4,0 z M 0,26 4,26 c 0,1.106 0.896,2 2,2 l 0,4 C 2.686,32 0,29.313 0,26 z M 4,6 0,6 C 0,2.686 2.686,0 6,0 L 6,4 C 4.896,4 4,4.896 4,6 z m 0,8 -4,0 0,-4 4,0 z m 0,8 -4,0 0,-4 4,0 z m 10,10 -4,0 0,-4 4,0 z m 8,0 -4,0 0,-4 4,0 z m 6,-6 4,0 c 0,3.313 -2.687,6 -6,6 l 0,-4 c 1.106,0 2,-0.894 2,-2 z">
+            <img class="thumbnail" ng-show="result && type==='image'" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150/{{result.public_id}}.jpg"></img>
+            <img class="thumbnail" ng-show="result && type==='webpage'" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_150,w_150,g_north/{{result.public_id}}.jpg"></img>
+            <div class="progress-bar">
+              <div ng-show="uploading" class="progress" style="width: {{progress}}%" ng-init="progress=0"></div>
+            </div>
+            <svg width="100%" height="100%" viewBox="0 0 32 32" preserveAspectRatio="none">
+              <g id="f5693df4ecba5b066a0a464e402aabe3">
+                <path id="marquee-plus" d="M28,18h4v4h-4V18z M28,10h4v4h-4V10z M26,4V0c3.313,0,6,2.686,6,6h-4
+              	C28,4.896,27.106,4,26,4z M22,18h-4v4c0,1.106-0.894,2-2,2c-1.104,0-2-0.894-2-2v-4h-4c-1.104,0-2-0.894-2-2c0-1.104,0.896-2,2-2h4
+              	v-4c0-1.104,0.896-2,2-2c1.106,0,2,0.896,2,2v4h4c1.106,0,2,0.896,2,2C24,17.106,23.106,18,22,18z M18,0h4v4h-4V0z M10,0h4v4h-4V0z
+              	 M0,26h4c0,1.106,0.896,2,2,2v4C2.686,32,0,29.313,0,26z M4,6H0c0-3.314,2.686-6,6-6v4C4.896,4,4,4.896,4,6z M4,14H0v-4h4V14z M4,22
+              	H0v-4h4V22z M14,32h-4v-4h4V32z M22,32h-4v-4h4V32z M28,26h4c0,3.313-2.687,6-6,6v-4C27.106,28,28,27.106,28,26z"></path>
+              </g>
+            </svg>
+          </div>
+          </span>
         <form name="uploadForm" novalidate ng-submit="sendResource()">
-          <p>Name</p>
-          <input type="text" ng-model="name" placeholder="name" class="title" />
-          <p>Tags</p>
-          <tags-input ng-model="tags" placeholder="tags" class="tags"></tags-input>
-          <br />
-          <input type="submit" value="Post it" />
+          <span ng-if="type==='image'">
+              <div class="upload-form" ng-show="result">
+                <p>Name</p>
+                <input type="text" ng-model="$parent.name" placeholder="name" class="title" />
+                <p>Tags</p>
+                <tags-input ng-model="$parent.tags" placeholder="tags" class="tags"></tags-input>
+                <p>Notes</p>
+                <textarea ng-model="$parent.content"></textarea>
+                <br />
+                <input type="submit" value="➜" class="button" />
+              </div>
+            </span>
+          <span ng-if="type==='webpage'">
+              <div class="upload-form">
+                <p>Url</p>
+                <input type="text" ng-model="$parent.url" placeholder="Url" class="url" />
+                <p>Name</p>
+                <input type="text" ng-model="$parent.name" placeholder="name" class="title" />
+                <p>Tags</p>
+                <tags-input ng-model="$parent.tags" placeholder="tags" class="tags"></tags-input>
+                <p>Notes</p>
+                <textarea ng-model="$parent.content"></textarea>
+                <br />
+                <input type="submit" value="➜" class="button" />
+              </div>
+            </span>
+          <span ng-if="type==='text'">
+              <div class="upload-form">
+                <p>Name</p>
+                <input type="text" ng-model="$parent.name" placeholder="name" class="title" />
+                <p>Tags</p>
+                <tags-input ng-model="$parent.tags" placeholder="tags" class="tags"></tags-input>
+                <p>Notes</p>
+                <textarea ng-model="$parent.content"></textarea>
+                <br />
+                <input type="submit" value="➜" class="button" />
+              </div>
+            </span>
         </form>
+        <div class="status" ng-show="uploading">{{status}}</div>
       </div>
-      <div class="status" ng-show="uploading">{{status}}</div>
+    </div>
   </div>
 </div>
+

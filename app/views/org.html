@@ -1,8 +1,8 @@
 <h1>Organization {{Org.getOrg().name}} <a href="/org/{{Org.getOrg()}}/edit">edit</a></h1>
 <div><a ng-click="sendInvite()">Send Invite</a></div>
-<h2>{{inviteToken}}</h2>
+<h2>{{inviteToken}}</h2>{{Resource.currentType}}
 <div roster="org"></div>
 <div messages="org" mid="{{Org.getOrg()._id}}"></div>
-<div resources="org" rid="{{Org.getOrg()}}"></div>
-<div resource-uploader="org" rid="{{Org.getOrg()._id}}" orgid="{{Org.getOrg()._id}}"></div>
+<div resources="org" rid="{{Org.getOrg()._id}}"></div>
+<div resource-uploader="org" rid="{{Org.getOrg()._id}}" orgid="{{Org.getOrg()._id}}" open="resourceUploaderOpen"></div>
 <br /><br /><br /><br /><br />

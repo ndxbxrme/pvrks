@@ -45,20 +45,23 @@ module.exports = {
             });
           }
           else {
-            var newTeam = new Team();
-            newTeam.name = req.body.name;
-            newTeam.slug = slug;
-            newTeam.org = req.body.org;
-            newTeam.image = req.body.image;
-            newTeam.color = req.body.color;
-            newTeam.users.push({
-              id: req.user._id,
-              name: user.name,
-              image: user.image,
-              role: 0
-            });
-            newTeam.save(function(err){
-              res.json(err);
+            Toolkit.randomImage(req.body.image, function(image){
+              var newTeam = new Team();
+              newTeam.name = req.body.name;
+              newTeam.slug = slug;
+              newTeam.org = req.body.org;
+              newTeam.image = image;
+              newTeam.color = req.body.color;
+              newTeam.users.push({
+                id: req.user._id,
+                name: user.name,
+                image: user.image,
+                slug: user.slug,
+                role: 0
+              });
+              newTeam.save(function(err){
+                res.json(err);
+              });
             });
           }
         });

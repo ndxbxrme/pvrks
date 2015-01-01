@@ -16,6 +16,7 @@ var ideaSchema = mongoose.Schema({
     userId: mongoose.Schema.Types.ObjectId,
     username: String,
     userimage: String,
+    userslug: String,
     color: String,
     org: mongoose.Schema.Types.ObjectId,
     team: mongoose.Schema.Types.ObjectId,
