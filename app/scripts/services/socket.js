@@ -10,15 +10,15 @@ angular.module('workspaceApp')
     socket.on('updateRoster', function(type){
       Roster.doReload(type);
     });
-    socket.on('message', function(message){
-      Message.addMessage(message);
+    socket.on('message', function(messages){
+      Message.updateMessages(messages);
     });
-    socket.on('resource', function(resource){
-      Resource.addResource(resource);
+    socket.on('resource', function(resources){
+      Resource.updateResources(resources);
     });
-    socket.on('idea', function(idea){
+    socket.on('idea', function(ideas){
       console.log('ey');
-      Idea.addIdea(idea);
+      Idea.updateIdeas(ideas);
     });
     socket.on('bsession', function(session){
       Session.updateSession(session);

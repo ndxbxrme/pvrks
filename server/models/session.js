@@ -5,7 +5,9 @@ var mongoose = require('mongoose');
 var sessionUnitSchema = mongoose.Schema({
     type: String,
     name: String,
-    duration: Number
+    duration: Number,
+    isolate: Boolean,
+    needsModeration: Boolean
 });
 var sessionSchema = mongoose.Schema({
     name: String,

@@ -1,9 +1,9 @@
-<div class="msgContainer" ng-class="{open:open,hasNew:message.hasNew(type)}">
-    <span class="handle" ng-click="open=!open;message.resetNew(type)">
-        <span class="button icon-bubble" ng-hide="open" tooltip="Messages"></span>
-        <span class="button icon-arrow-right2" ng-show="open" tooltip="Close messages"></span>
+<div class="msgContainer" ng-class="{open:Message.modalOpen(),hasNew:Message.hasNew(type)}">
+    <span class="handle" ng-click="Message.toggleOpen();Message.resetNew(type)">
+        <span class="button" ng-hide="Message.modalOpen()"><span class="icon-bubble" tooltip="Messages"></span></span>
+        <span class="button" ng-show="Message.modalOpen()"><span class="icon-arrow-right2" tooltip="Close messages"></span></span>
     </span>
-    <span morph="{{open}}"></span>
+    <span morph="{{Message.modalOpen()}}"></span>
     <h3>    
         <span ng-show="type==='org'">Organization</span>
         <span ng-show="type==='team'">Team</span>
@@ -11,7 +11,7 @@
         Chat
     </h3>
     <div class="scroll">
-        <div ng-repeat="msgGroup in message.getMessages(type)" class="msgGroup" ng-class="{msgRight:msgGroup.side}">
+        <div ng-repeat="msgGroup in Message.getMessages(type)" class="msgGroup" ng-class="{msgRight:msgGroup.side}">
             <img class="thumbnail inline ng-isolate-scope" ng-src="https://res.cloudinary.com/parks-brainstorm/image/upload/c_fill,h_25,w_25/{{msgGroup.userimage}}.jpg" title="{{msgGroup.username}}"></img>
             <div class="inner">
                 <svg width="100%" height="100%">
@@ -31,7 +31,7 @@
     <span class="controls">
         <form name="messageForm" ng-submit="sendMessage()">
             <input type="text" ng-model="messageContent" />
-            <input type="submit" value="✈" class="button" />
+            <input type="submit" value="➜" class="button" tooltip="Send message" />
         </form>
     </span>
 </div>

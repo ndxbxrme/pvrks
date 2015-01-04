@@ -1,1 +1,53 @@
-<p>This is the resource view.</p>
+<form name="resourceForm" ng-submit="update()">
+  <div ng-if="User.details._id===resource.userId">
+    <!--my resource-->
+    <div ng-if="resource.resourceType==='image'">
+      <div>
+        <label>Name</label>
+        <input type="text" ng-model="resource.name" />
+      </div>
+      <div>
+        <label>Tags</label>
+        <tags-input ng-model="resource.tags" placeholder="tags" class="tags"></tags-input>
+      </div>
+      <div>
+        <label>Notes</label>
+        <textarea ng-model="resource.content"></textarea>
+      </div>
+      <div>
+        <input type="submit" />
+      </div>
+      <div>
+        <img ng-src="{{resource.secureUrl}}" />
+      </div>
+    </div>
+    <div ng-if="resource.resourceType==='webpage'">
+      <div>
+        <label>Url</label>
+        <input type="text" ng-model="resource.url" ng-disabled="true" />
+      </div>
+      <div>
+        <label>Name</label>
+        <input type="text" ng-model="resource.name" />
+      </div>
+      <div>
+        <label>Tags</label>
+        <tags-input ng-model="resource.tags" placeholder="tags" class="tags"></tags-input>
+      </div>
+      <div>
+        <label>Notes</label>
+        <textarea ng-model="resource.content"></textarea>
+      </div>
+      <div>
+        <input type="submit" />
+      </div>
+      <div>
+        <img ng-src="{{resource.secureUrl}}" />
+      </div>
+    </div>
+    <div ng-if="resource.resourceType==='raw'">Raw</div>
+  </div>
+  <div ng-if="User.details._id!==resource.userId">
+    <!--someone else's resource-->
+  </div>
+</form>

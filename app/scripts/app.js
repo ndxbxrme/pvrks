@@ -157,5 +157,6 @@ angular
       Roster.clear();
       Nav.subtitle = '';
       Nav.titleUrl = '';
+      angular.element('body')[0].scrollTop = 0;
     });
   });

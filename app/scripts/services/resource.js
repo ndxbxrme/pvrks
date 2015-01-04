@@ -12,16 +12,31 @@ angular.module('workspaceApp')
         currentId,
         orgId,
         modalOpen,
-        libraryOpen;
+        libraryOpen,
+        _resource,
+        updated;
     return {
-      addResource: function (resource) {
+      updateResources: function (_resources) {
+        console.log('starting update');
         $timeout(function(){
-          console.log('adding resource');
-          resources[resource.type].push(resource);
+          angular.forEach(_resources, function(resource){
+            var foundIt;
+            for(var f=0; f<resources[resource.type].length; f++) {
+              if(resources[resource.type][f]._id===resource._id) {
+                foundIt = true;
+                resources[resource.type][f] = resource;
+                break;
+              }
+            }
+            if(!foundIt) {
+              resources[resource.type].push(resource);
+            }
+          });
+          updated = Date.now();
         });
       },
       sendResource: function(resource) {
-        $http.post('/api/resource/add', resource);
+        $http.post('/api/resource/addupdate', {resource:resource});
       },
       sendUrlResource: function(url) {
         var defer = $q.defer();
@@ -45,6 +60,17 @@ angular.module('workspaceApp')
           resources[type] = _resources;
         });
       },
+      fetchResourceById: function(id) {
+        var defer = $q.defer();
+        $http.get('/api/resource/' + id)
+        .success(function(resource) {
+          $timeout(function(){
+            _resource = resource;
+            defer.resolve(resource);
+          });
+        });
+        return defer.promise;
+      },
       getResources: function(type) {
         return resources[type];
       },
@@ -61,6 +87,9 @@ angular.module('workspaceApp')
       currentId: currentId,
       orgId: orgId,
       modalOpen: modalOpen,
-      libraryOpen: libraryOpen
+      libraryOpen: libraryOpen,
+      updated: function() {
+        return updated;
+      }
     };
   });

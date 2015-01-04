@@ -3,7 +3,7 @@
 angular.module('workspaceApp')
   .directive('sessionResources', function (Resource, User, Session, Team, Org) {
     return {
-      templateUrl: '/views/partials/sessionresources.html',
+      templateUrl: '/views/partials/librarymodal.html',
       restrict: 'EA',
       replace: true,
       scope: {

@@ -5,13 +5,29 @@ angular.module('workspaceApp')
     var ideas = [];
     var modalOpen;
     var updated;
+    var currentIdea;
+    var placeholder;
     return {
       sendIdea: function(idea) {
-        $http.post('/api/idea/add', idea);
+        idea.role = Session.getSession().role;
+        idea.needsModeration = Session.getUnit().needsModeration;
+        $http.post('/api/idea/addupdate', {idea:idea});
       },
-      addIdea: function(idea) {
+      updateIdeas: function(_ideas) {
         //todo only add ideas related to the current unit
-        ideas.push(idea);
+        angular.forEach(_ideas, function(idea){
+          var foundIdea;
+          for(var f=0; f<ideas.length; f++) {
+            if(ideas[f]._id===idea._id) {
+              foundIdea = true;
+              ideas[f] = idea;
+              break;
+            }
+          }
+          if(!foundIdea) {
+            ideas.push(idea);
+          }
+        });
         updated = Date.now();
       },
       getIdeas: function(){
@@ -34,6 +50,8 @@ angular.module('workspaceApp')
         });
       },
       modalOpen: modalOpen,
+      currentIdea: currentIdea,
+      placeholder: placeholder,
       updated: function() {
         return updated;
       }

@@ -2031,7 +2031,7 @@ var interpretDate = function(){
 	function better_split(text) {
 		text = text.replace(/([0-9]+)([a-z]+)/gi,'$1 $2') // split words and numbers
 		text = text.replace(/([a-z]+)([0-9]+)/gi,'$1 $2') // ditto
-		outarr = [];
+		var outarr = [];
 		while(text.length>0) {
 			
 			var r = RegExp("^([0-9]+ st|[0-9]+ nd|[0-9]+ rd|[0-9]+ th)","i");
@@ -2062,7 +2062,9 @@ var interpretDate = function(){
 		var last_number_pos = null;
 		for(var f=0; f<num_split.length; f++)
 		{
-			num_split[f] = num_split[f].replace(/^[0]+/,'');
+			if(num_split[f]!=0) {
+				num_split[f] = num_split[f].replace(/^[0]+/,'');
+			}
 			var char_match = num_split[f].match(/[^0-9^a-z]+/i);
 			if(char_match!=null) continue;
 			//is it a regular number? if so remember the type and ignore

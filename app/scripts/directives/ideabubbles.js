@@ -10,6 +10,7 @@ angular.module('workspaceApp')
             Idea.fetchIdeas();
             scope.$watch(function(){return Idea.updated();}, function(n, o){
                 if(n!==o) {
+                    console.log('i should update');
                     scope.nodes = Idea.getIdeas();
                     update();
                 }
@@ -27,7 +28,7 @@ angular.module('workspaceApp')
             var force = d3.layout.force()
             .gravity(0.02)
             .friction(0.9)
-            .charge(90);
+            .charge(300);
             //force.start();
             
             var drag = force.drag().on("dragstart", dragstart);
@@ -35,7 +36,8 @@ angular.module('workspaceApp')
             var body = d3.select(elem[0]);
             var svg = body.append('svg')
             .attr('width', '100%')
-            .attr('height', '100%');
+            .attr('height', '100%')
+            .style('z-index', '-1');
             function dragstart(){
                 
             }
@@ -72,15 +74,17 @@ angular.module('workspaceApp')
                 .style('opacity',0).remove();
                 
                 divs.enter().append('div')
-                .html(function(d){return d.content; })
                 .style('min-width', function(d){ return getMaxWidth(d.content) + 'px'})
-                .each(function(d){d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20;})
                 .style('opacity', 0)
                 .transition()
                 .ease('elastic')
                 .delay(function(d, i) { return initialSetup ? i * 50 : 0; })
                 .duration(750)
                 .style('opacity', 1);
+                
+                divs
+                .html(function(d){return d.content; })
+                .each(function(d){d.lastRadius = d.radius; d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20;});
                 
                 
                 var nodes = svg.selectAll('circle')
@@ -93,16 +97,20 @@ angular.module('workspaceApp')
                 .remove();
                 
                 nodes.enter().append('circle')
+                .on('dblclick', function(d) {
+                    Idea.currentIdea = d;
+                    Idea.modalOpen = true;
+                })
                 .style('stroke', function(d, i) { return d.color;})
-                .style('fill', function(d){ return d.color;})
-                .style('fill-opacity', 0.2)
-                .attr('r', 0)
+                .style('fill', function(d){ return d.color;});
+                nodes
+                .attr('r', function(d) { return d.lastRadius ? d.lastRadius : 0})
                 .transition()
                 .ease("elastic")
                 .delay(function(d, i) { return initialSetup ? i * 50 : 0; })
                 .duration(750)
                 .attr('r', function(d) {return d.radius; });
-                svg.selectAll('circle').call(drag);
+                nodes.call(drag);
                 
                 
                 

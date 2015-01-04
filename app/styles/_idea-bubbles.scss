@@ -6,7 +6,8 @@
     z-index: 300;
     overflow: hidden;
     circle {
-        stroke-width: 3px;
+        stroke-width: 2px;
+        fill-opacity: 0.1;
         &:hover {
             fill-opacity: 0.6;
         }

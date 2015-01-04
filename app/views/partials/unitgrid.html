@@ -1,12 +1,12 @@
   <div class="unit-grid" ng-class="{insession:insession}">
-    <ul ui-sortable="{update:update(),cancel:'.unsortable',items: 'li:not(.unsortable)'}" ng-model="session.units" ng-disabled="true">
-      <li ng-repeat="unit in session.units" class="{{unit.type}} {{times[$index] < now ? 'unsortable' : ''}}">
+    <ul ui-sortable="{update:update(),cancel:'.unsortable',items: 'li:not(.unsortable)', handle:'.inner'}" ng-model="session.units">
+      <li ng-repeat="unit in session.units" class="{{unit.type}} {{insession && times[$index] < now ? 'unsortable' : ''}} {{times[$index] < now ? 'completed':''}}">
         <div class="buttons">
           <a href="#" ng-click="edit(unit)">Edit<span class="icon-menu"></span></a>
           <a href="#" ng-click="remove(unit)">Remove<span class="icon-remove"></span></a>
         </div>
         <div class="inner">
-          <h3>{{unit.name}} {{times[$index] < now ? 'Completed' : 'Pending'}}</h3>
+          <h3>{{unit.name}} {{times[$index] < now}}</h3>
           <div class="right">
             <div class="time">{{times[$index] | date:'shortTime'}}</div>
             <div class="duration">{{unit.duration | duration}}</div>
@@ -19,7 +19,7 @@
     <div class="clickscreen" ng-show="unitSelectorOut || unitEditorOut"></div>
     <div class="unit-selector" ng-show="unitSelectorOut" ng-click="unitSelectorOut=false">
       <div class="units">
-          <div class="item destination" ng-click="addUnit('destination')"><span class="inner"><h3>Set destination</h3></span></div>
+        <div class="item destination" ng-click="addUnit('destination')"><span class="inner"><h3>Set destination</h3></span></div>
         <div class="item gather" ng-click="addUnit('gather')"><span class="inner"><h3>Gather resources</h3></span></div>
         <div class="item generate" ng-click="addUnit('generate')"><span class="inner"><h3>Generate ideas</h3></span></div>
         <div class="item filter" ng-click="addUnit('filter')"><span class="inner"><h3>Sort and filter</h3></span></div>

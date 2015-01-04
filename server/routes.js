@@ -45,12 +45,16 @@ module.exports = function(app, passport) {
     app.post('/api/message/add', isLoggedIn, MessageCtrl.addMessage);
     app.post('/api/messages', isLoggedIn, MessageCtrl.findAllById);
     
-    app.post('/api/idea/add', isLoggedIn, IdeaCtrl.addIdea);
+    app.post('/api/idea/addupdate', isLoggedIn, IdeaCtrl.addUpdateIdea);
     app.post('/api/ideas', isLoggedIn, IdeaCtrl.findAllById);
+    app.post('/api/ideas/update', isLoggedIn, IdeaCtrl.updateIdeas);
+    app.get('/api/idea/:ideaId/accept', isLoggedIn, IdeaCtrl.acceptIdea);
+    app.get('/api/idea/:ideaId/reject', isLoggedIn, IdeaCtrl.rejectIdea);
     
-    app.post('/api/resource/add/url', isLoggedIn, ScreenshotCtrl.getScreenshot)
-    app.post('/api/resource/add', isLoggedIn, ResourceCtrl.addResource);
+    app.post('/api/resource/add/url', isLoggedIn, ScreenshotCtrl.getScreenshot);
+    app.post('/api/resource/addupdate', isLoggedIn, ResourceCtrl.addUpdateResource);
     app.post('/api/resources', isLoggedIn, ResourceCtrl.findAllById);
+    app.get('/api/resource/:resourceId', isLoggedIn, ResourceCtrl.findOneById);
     
     app.get('/api/user/:userId', isLoggedIn, UserCtrl.findOneById);
     app.get('/api/user/:slug/slug', isLoggedIn, UserCtrl.findOneBySlug);

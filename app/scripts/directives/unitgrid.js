@@ -7,7 +7,7 @@ angular.module('workspaceApp')
       restrict: 'AE',
       replace: true,
       link: function postLink(scope, element, attrs) {
-
+        scope.now = new Date();
         scope.$watch('session.startDate', function(n){
           if(!n) {
             return;
@@ -62,7 +62,7 @@ angular.module('workspaceApp')
         };
         
         scope.remove = function(unit) {
-          scope.session.units.splice(scope.units.indexOf(unit),1);
+          scope.session.units.splice(scope.session.units.indexOf(unit),1);
         };
         
         scope.close = function() {

@@ -24,7 +24,7 @@
     }
   }
   
-  &.hasNew .handle span:before  {
+  &.hasNew .handle span span:before  {
     animation: HASNEW 6s linear infinite;
     transform-origin: 50%;
   }

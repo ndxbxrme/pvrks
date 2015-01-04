@@ -11,11 +11,11 @@ angular.module('workspaceApp')
         mid: '@'
       },
       link: function postLink(scope, element, attrs) {
-        scope.message = Message;
+        scope.Message = Message;
         var scroll = element.find('div');
         var nice = scroll.niceScroll();
         scope.$watch(function(){
-          return Message.getMessages(scope.type);
+          return Message.updated();
         }, function(){
           $timeout(function(){
             //console.log(nice.getScrollTop(),nice.page.maxh);
@@ -23,7 +23,7 @@ angular.module('workspaceApp')
               nice.setScrollTop(scroll.prop('scrollHeight'));
             //}
           }, 100);
-        },true);
+        });
         scope.$watch('mid', function(n){
           if(!n) {
             return;

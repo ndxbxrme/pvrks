@@ -17,9 +17,7 @@ var emitToUsers = function emitToUsers(users, message, data) {
   console.dir(users);
   users.forEach(function(user){
     sockets.forEach(function(socket){
-      console.log(socket.user);
       if(socket.user && socket.user._id===user.id.toString()) {
-        console.log('emitting ' + message);
         socket.emit(message, data);
       }
     });

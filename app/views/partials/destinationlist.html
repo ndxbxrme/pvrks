@@ -1,0 +1,30 @@
+<div class="destination-list">
+  <div class="moderated" ng-if="Session.getSession().role===0">
+    <ul ui-sortable="options" ng-model="accepted">
+      <li ng-repeat="idea in accepted track by idea._id" class="item" ng-dblclick="edit(idea)">
+        <div ng-bind-html="idea.content"></div>
+      </li>
+    </ul>
+  </div>
+  <div class="moderated" ng-if="Session.getSession().role>0">
+    <ul>
+      <li ng-repeat="idea in accepted track by idea._id" class="item">
+        <div ng-bind-html="idea.content"></div>
+      </li>
+    </ul>
+  </div>
+  <div class="awaiting">
+    <h3>Awaiting moderation</h3>
+    <div ng-repeat="idea in awaiting" class="item">
+      <div class="content" ng-bind-html="idea.content"></div>
+      <a class="button" ng-click="acceptIdea(idea)"><span class="icon-checkmark"></span></a>
+      <a class="button" ng-click="rejectIdea(idea)"><span class="icon-close"></span></a>
+    </div>
+  </div>
+  <div class="rejected" ng-if="Session.getSession().role>1">
+    <h3>Rejected</h3>
+    <div ng-repeat="idea in rejected" class="item">
+      <div class="content" ng-bind-html="idea.content"></div>
+    </div>
+  </div>
+</div>
