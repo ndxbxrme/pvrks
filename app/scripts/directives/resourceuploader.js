@@ -36,17 +36,7 @@ angular.module('workspaceApp')
           var url = e.dataTransfer.getData("url") ||e.dataTransfer.getData("text/uri-list");
           var text = e.dataTransfer.getData("Text");
           if(url) {
-            scope.uploading = true;
-            scope.processing = true;
-            scope.status = "Processing resource";
-            Resource.sendUrlResource(url)
-            .then(function(result){
-              scope.result = result;
-              scope.type = 'webpage';
-              scope.url = url;
-              scope.uploading = false;
-              scope.processing = false;
-            });
+            scope.sendUrl(url);
           }
           else if(text) {
             
@@ -54,6 +44,19 @@ angular.module('workspaceApp')
           e = e || event;
           e.preventDefault();
         }, false);
+        scope.sendUrl = function sendUrl(url) {
+          scope.uploading = true;
+          scope.processing = true;
+          scope.status = "Processing resource";
+          Resource.sendUrlResource(url)
+          .then(function(result){
+            scope.result = result;
+            scope.type = 'webpage';
+            scope.url = url;
+            scope.uploading = false;
+            scope.processing = false;
+          });        
+        };
         scope.onFileSelect = function($files) {
           if(!scope.uploading && $files[0]) {
             scope.uploading = true;

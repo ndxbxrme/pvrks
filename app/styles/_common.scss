@@ -95,7 +95,8 @@ a {
   top: 100%; left: 0;
   width: 100%; height: 100%;
   z-index: 4500;
-  transition: top 0.2s;
+  visibility: hidden;
+  transition: top 0.2s, visibility 0s 0.2s;
 
   .clickscreen {
     background: black;
@@ -107,6 +108,8 @@ a {
   
   &.open {
     top: 0;
+    visibility: visible;
+    transition: 0s visibility, 0.2s top;
     .clickscreen {
       top: 0;
       opacity: 0.2;

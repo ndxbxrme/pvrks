@@ -18,7 +18,6 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            min-height: 35em;
             transform: translate(-50%,-50%);
             overflow: visible;
             
@@ -27,14 +26,7 @@
                 vertical-align: top;
             }
             .centered {
-                position: absolute;
-                top: 10%;
-                /* bottom: 10%; */
-                left: 5%;
-                right: 5%;
-                /* overflow: auto; */
                 text-align: center;
-                padding-bottom: 5%;
             }
             
             textarea {
@@ -79,6 +71,7 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            margin-bottom: 1em;
             
             &.uploading {
                 animation: UPLOADING 2s linear infinite;
@@ -110,7 +103,10 @@
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 fill: rgba(0,0,0,0.2);
-                z-index: -1;
+                z-index: 1;
+            }
+            img {
+                z-index: 2;
             }
         }
         .upload-form {
