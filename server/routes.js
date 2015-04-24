@@ -12,6 +12,7 @@ var OrgCtrl = require('./controllers/organisation'),
 
 module.exports = function(app, passport) {
     app.get('/api/user', isLoggedIn, function(req, res) {
+        console.dir(req.user);
         res.json({
             _id:req.user._id,
             name:req.user.name || req.user.local.email,

@@ -15,7 +15,7 @@ angular.module('workspaceApp')
         scope.$watch('switch', function(n,o){
           if(angular.isDefined(n) && angular.isDefined(o)){
             scope.ngChange();
-          };
+          }
         });
       }
     };

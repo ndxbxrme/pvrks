@@ -6,12 +6,13 @@
     <h2>Realtime Social Brainstorming</h2>
     <div class="login">
       <form name="loginForm" novalidate ng-submit="login()">
-        <input type="text" ng-model="email" placeholder="Email" />
-        <input type="text" ng-model="password" placeholder="Password" />
-        <input type="submit" value="Log in" />
-        <input type="button" value="Sign up" ng-click="signup()" />
+        <input type="text" ng-model="email" placeholder="Email" class="email" />
+        <input type="password" ng-model="password" placeholder="Password" class="password" />
+        <input type="submit" value="Log in" class="btnLogin" />
+        <input type="button" value="Sign up" ng-click="signup()" class="btnSignup" />
       </form>
     </div>
+    <br style="clear: left" /><br />
     <a>-- Sign in with a social network --</a>
     <div class="social">
       <a href="/api/twitter" target="_self" class="z ocial-twitter">twitter</a><a class="z ocial-facebook"></a><a class="z ocial-googleplus"></a><a class="z ocial-github"></a>

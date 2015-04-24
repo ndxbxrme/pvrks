@@ -60,11 +60,12 @@ angular.module('workspaceApp')
                 }
                 return '500';
             }
-            
+            var nodes;
+            var divs;
             function update() {
                 var width = elem[0].offsetWidth;
                 var height = elem[0].offsetHeight;
-                var divs = body
+                divs = body
                 .selectAll('div')
                 .data(scope.nodes, function(d){return d._id;});
                 
@@ -84,10 +85,15 @@ angular.module('workspaceApp')
                 
                 divs
                 .html(function(d){return d.content; })
-                .each(function(d){d.lastRadius = d.radius; d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20;});
+                .each(function(d){
+                    d.lastRadius = d.radius; 
+                    d.width = this.offsetWidth;
+                    d.height = this.offsetHeight;
+                    d.radius = Math.max(this.offsetWidth, this.offsetHeight) * 12/20;
+                });
                 
                 
-                var nodes = svg.selectAll('circle')
+                nodes = svg.selectAll('circle')
                 .data(scope.nodes, function(d){return d._id;});
                 
                 nodes.exit()
@@ -103,6 +109,7 @@ angular.module('workspaceApp')
                 })
                 .style('stroke', function(d, i) { return d.color;})
                 .style('fill', function(d){ return d.color;});
+                
                 nodes
                 .attr('r', function(d) { return d.lastRadius ? d.lastRadius : 0})
                 .transition()
@@ -126,7 +133,7 @@ angular.module('workspaceApp')
             
             force.on('tick', function(e){
                 
-                svg.selectAll('circle')
+                nodes
                 .each(collide(0.5))
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
